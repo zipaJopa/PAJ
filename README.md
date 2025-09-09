@@ -1,4 +1,4 @@
-![PAI Logo](pai-logo.png)
+![PAI Logo](./pai-logo.png)
 
 # Personal AI Infrastructure (PAI)
 
