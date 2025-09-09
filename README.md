@@ -12,7 +12,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
-[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/your-pai-video-id)
+[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
 
 <p align="center">
   <a href="#-features">Features</a> •
@@ -23,10 +23,6 @@
 </p>
 
 ---
-
-<h3>
-  <code>PAI</code> is an open-source personal AI infrastructure for orchestrating your life and work<br/>
-</h3>
 
 </div>
 
