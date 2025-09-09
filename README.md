@@ -183,6 +183,6 @@ PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
 > *"This is YOUR infrastructure. Every configuration, every tool, every workflow should serve your unique life and goals. You're not using AI—you're augmenting yourself with it."*
 
-**Built with ❤️ by [Daniel Miessler](https://danielmiessler.com) • Follow along on [YouTube](https://www.youtube.com/@unsupervised-learning)**
+**by [Daniel Miessler](https://danielmiessler.com) • Follow along on [YouTube](https://www.youtube.com/@unsupervised-learning)**
 
 </div>
