@@ -161,4 +161,3 @@ My YouTube channel is: https://www.youtube.com/@unsupervised-learning
 My X account is: x.com/danielmiessler
 My LinkedIn is: https://www.linkedin.com/in/danielmiessler/
 My Instagram is: https://instagram.com/danielmiessler
-
