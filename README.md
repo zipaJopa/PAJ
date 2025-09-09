@@ -52,7 +52,7 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 ## ✨ **Features**
 
 <details open>
-<summary><b>🏗️ UFC Architecture - Your Persistent AI Brain</b></summary>
+<summary><b>🏗️ UFC Context Architecture - Your Persistent AI Brain</b></summary>
 
 ```
 ~/.claude/context/
@@ -60,8 +60,7 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 ├── 🛠️ tools/           # AI agents and capabilities  
 ├── 💰 finances/        # Financial tracking and analysis
 ├── 🏥 health/          # Wellness and medical data
-├── 📚 knowledge/       # Personal knowledge base
-└── 🎯 goals/           # Objectives and progress tracking
+└── 🎯 telos/           # Objectives and progress tracking
 ```
 
 - **Persistent Memory**: Never lose context between sessions
@@ -118,9 +117,9 @@ cp -r PAI/templates/* ~/.claude/context/
 
 ### **Prerequisites**
 
-- [Claude Code](https://claude.ai/code) - The primary AI interface
-- Text editor (any will work - it's all markdown/text)
-- Basic command line familiarity
+- [Claude Code](https://claude.ai/code) - The primary AI interface, which can be any similar system
+- Text editor (any will work - it's all Markdown/Text!)
+- Ideal: Basic command line familiarity
 
 <br/>
 
