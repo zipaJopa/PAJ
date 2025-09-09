@@ -94,22 +94,24 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 
 ## 🚀 **Getting Started**
 
-> **📢 Note:** Full examples and templates coming very soon! This repo will be continuously updated with real-world implementations from my [YouTube channel](https://www.youtube.com/@unsupervised-learning).
+> **📢 Note:** Lots more examples and templates coming soon, including the full voice implementation. This repo will be continuously updated with real-world implementations from my [YouTube channel](https://www.youtube.com/@unsupervised-learning).
 
 ### **Quick Start**
+
+One thing to note is that when you download the project, the.Claude directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions.
+
+`cd .claude`
 
 ```bash
 # 1. Clone the repository
 git clone https://github.com/danielmiessler/PAI.git
 
-# 2. Set up your UFC directory
-mkdir -p ~/.claude/context
+# 2. Check out the files (the folder is hidden with default `ls`)
 
-# 3. Copy starter templates (coming soon)
-cp -r PAI/templates/* ~/.claude/context/
+ls -lah
+cd ~/.claude/
+ls -lah
 
-# 4. Configure your first assistant
-# Start with a simple daily briefing workflow
 ```
 
 ### **Prerequisites**
