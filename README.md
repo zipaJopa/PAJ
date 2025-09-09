@@ -10,7 +10,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
-[![YouTube Channel](https://img.shields.io/badge/YouTube-Unsupervised%20Learning-red)](https://www.youtube.com/@unsupervisedlearning)
+[![YouTube Channel](https://img.shields.io/badge/YouTube-Unsupervised%20Learning-red)](https://www.youtube.com/@unsupervised-learning)
 
 <p align="center">
   <a href="#-features">Features</a> •
@@ -98,7 +98,7 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 
 ## 🚀 **Getting Started**
 
-> **📢 Note:** Full examples and templates coming very soon! This repo will be continuously updated with real-world implementations from my [YouTube channel](https://www.youtube.com/@unsupervisedlearning).
+> **📢 Note:** Full examples and templates coming very soon! This repo will be continuously updated with real-world implementations from my [YouTube channel](https://www.youtube.com/@unsupervised-learning).
 
 ### **Quick Start**
 
@@ -187,6 +187,6 @@ PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
 > *"This is YOUR infrastructure. Every configuration, every tool, every workflow should serve your unique life and goals. You're not using AI—you're augmenting yourself with it."*
 
-**Built with ❤️ by [Daniel Miessler](https://danielmiessler.com) • Follow along on [YouTube](https://www.youtube.com/@unsupervisedlearning)**
+**Built with ❤️ by [Daniel Miessler](https://danielmiessler.com) • Follow along on [YouTube](https://www.youtube.com/@unsupervised-learning)**
 
 </div>
