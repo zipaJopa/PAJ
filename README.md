@@ -10,7 +10,7 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
-[![YouTube Channel](https://img.shields.io/badge/YouTube-Unsupervised%20Learning-red)](https://www.youtube.com/@unsupervised-learning)
+[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/your-pai-video-id)
 
 <p align="center">
   <a href="#-features">Features</a> •
@@ -40,7 +40,7 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 <table>
 <tr>
 <td width="33%" align="center"><b>🧠 Life Management</b><br/>Research • Writing • Health • Finances</td>
-<td width="33%" align="center"><b>💼 Professional</b><br/>Code • Content • Analytics • Automation</td>
+<td width="33%" align="center"><b>💼 Professional</b><br/>Code • Content • Analytics • Automation<br/>Department Management • Program Management • Startups</td>
 <td width="33%" align="center"><b>🎯 Personal</b><br/>Learning • Family • Goals • Habits</td>
 </tr>
 </table>
