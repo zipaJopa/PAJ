@@ -4,7 +4,9 @@
 
 # `PAI` - Personal AI Infrastructure
 
-### 🚀 **Your Second Brain, Digital Twin, and Force Multiplier**
+### <code>PAI</code> is an open-source personal AI infrastructure for orchestrating your life and work
+
+<br />
 
 ![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
@@ -24,7 +26,6 @@
 
 <h3>
   <code>PAI</code> is an open-source personal AI infrastructure for orchestrating your life and work<br/>
-  <sup>Built on the UFC (Universal File-based Context) system for persistent, portable AI memory</sup>
 </h3>
 
 </div>
