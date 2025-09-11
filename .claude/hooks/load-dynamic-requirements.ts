@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Dynamic Context Loader Hook
+ * Dynamic Requirements Loader Hook
  * This TypeScript wrapper reads the markdown instructions and outputs them to Claude
  * This allows the markdown file to be "executed" as a hook
  */
@@ -48,7 +48,7 @@ async function main() {
     const data: HookInput = JSON.parse(input);
     
     // Read the markdown file with instructions from commands directory
-    const mdPath = '/Users/daniel/.claude/commands/load-dynamic-context.md';
+    const mdPath = '/Users/daniel/.claude/commands/load-dynamic-requirements.md';
     const mdContent = readFileSync(mdPath, 'utf-8');
     
     // Output the markdown content to stdout
@@ -56,7 +56,7 @@ async function main() {
     console.log(mdContent);
     
     // Also output a special marker to indicate this is a hook instruction
-    console.log('\n<!-- HOOK_INSTRUCTION: Dynamic context loading based on user prompt -->');
+    console.log('\n<!-- HOOK_INSTRUCTION: Dynamic requirements loading based on user prompt -->');
     console.log(`<!-- USER_PROMPT: ${data.prompt} -->`);
     
     process.exit(0);

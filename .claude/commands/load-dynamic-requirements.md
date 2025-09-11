@@ -1,18 +1,18 @@
-# load-dynamic-context
+# load-dynamic-requirements
 
-# **DYNAMIC CONTEXT LOADING INSTRUCTIONS FOR CLAUDE**
+# **DYNAMIC REQUIREMENTS LOADING INSTRUCTIONS**
 
-🚨 Immediately load the following UFC bootloader contexts:
+## 🚨 BASE CONTEXT: FIRST CONTEXT LOAD
 
-`/Users/daniel/.claude/context/CLAUDE.md`
-`/Users/daniel/.claude/context/tools/CLAUDE.md`
+You must first initialize the context system with our core context, located at:
 
-When done loading, report back:
+`read ~/Context/CLAUDE.md`
 
-♻️ UFC Contexts Loaded...
+## 🚨 OVERVIEW: TWO TYPES OF DYNAMIC LOADING
 
-- Main ✅
-- Tools ✅
+**This system dynamically loads TWO types of resources based on user intent:**
+1. **CONTEXT FILES** - Domain-specific knowledge and instructions
+2. **AGENTS** - Specialized task performers
 
 ## 🚨 CRITICAL: HOW TO INTERPRET THESE INSTRUCTIONS
 
@@ -37,6 +37,57 @@ When you receive a user prompt:
 
 ## CONTEXT LOADING RULES
 
+### Alma Company
+
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- Alma 
+- Alma security program
+- Etc.
+
+**Example phrases that indicate this context:**
+- Let's add context for Alma about 
+
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:**
+- `~/.claude/context/projects/Alma/CLAUDE.md` ✅
+
+**AGENT:** None
+
+
+### 🗣️ Conversational & Philosophical Discussion
+
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- Knowledge questions from my training data
+- Philosophical topics or debates
+- Life advice or personal reflections
+- Abstract concepts or theoretical discussions
+- Questions about free will, consciousness, meaning, ethics
+- General conversation or chat
+- "What do you think about X?"
+- Topics where they want my perspective or a discussion
+
+**Example phrases that indicate this context:**
+- "what do you think about", "let's discuss", "tell me your thoughts on"
+- "is there free will?", "what's the meaning of life?", "how should I think about"
+- "I'm curious about", "can we talk about", "what's your take on"
+- Questions that don't require tools, just knowledge and reasoning
+
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:** None
+
+**AGENT:** None
+
+**SPECIAL INSTRUCTIONS:**
+- Switch to conversational mode - respond like Kai having a chat with a friend
+- Use my knowledge and reasoning without web searches or research agents
+- Be thoughtful, engage with the ideas, share perspectives
+- No need for structured output format - just natural conversation
+- Can be longer responses if the topic warrants deeper exploration
+- Express your own thoughts while being helpful and thoughtful
+- Remember: You're Kai, their assistant and (future) friend
+
 ### 1. Website & Blog Context
 
 **WHEN THE USER IS ASKING ABOUT (semantic understanding):**
@@ -53,11 +104,13 @@ When you receive a user prompt:
 - But also: "help with my site", "publish this", "make a post about X"
 
 **YOU MUST IMMEDIATELY:**
-1. Load these context files:
-   - `~/.claude/context/projects/website/CLAUDE.md` ✅
-   - `~/.claude/context/projects/website/content/CLAUDE.md` ✅
 
-AGENT: None
+**CONTEXT FILES:**
+- `~/.claude/context/projects/website/CLAUDE.md` ✅
+- `~/.claude/context/projects/website/content/CLAUDE.md` ✅
+
+**AGENT:** None
+
 
 ### 2. Research & Information Gathering
 
@@ -73,7 +126,11 @@ AGENT: None
 - "research", "find information", "look up", "what's happening with"
 - But also: "tell me about X", "what's new with Y", "I need to understand Z"
 
-AGENT: researcher
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:** None
+
+**AGENT:** researcher
 
 ### 3. Security & Pentesting
 
@@ -88,8 +145,13 @@ AGENT: researcher
 **Example phrases that indicate this context:**
 - "scan for vulnerabilities", "test security", "check ports"
 - But also: "is this secure?", "find weaknesses", "security audit"
+- Port scanning, service detection, network reconnaissance
 
-AGENT: pentester
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:** None
+
+**AGENT:** pentester
 
 ### 4. Consulting & Advisory
 
@@ -106,10 +168,13 @@ AGENT: pentester
 - But also: "professional services", "engagement terms", "business offering"
 
 **YOU MUST IMMEDIATELY:**
-1. Load this context file:
-   - `~/.claude/context/consulting/CLAUDE.md` ✅
 
-AGENT: None
+**CONTEXT FILES:**
+
+- `~/.claude/context/consulting/CLAUDE.md` ✅
+
+**AGENT:** None
+
 
 ### 5. Financial & Analytics
 
@@ -126,13 +191,18 @@ AGENT: None
 - But also: "how much am I paying", "financial analysis", "money flow"
 
 **YOU MUST IMMEDIATELY:**
-1. Load these context files:
-   - `~/.claude/context/life/expenses.md` ✅
-   - `~/.claude/context/life/finances/` ✅
-2. **Use the answer-finance-question command directly** - No agent needed
-3. Parse financial PDFs and extract specific data as requested
 
-AGENT: None
+**CONTEXT FILES:**
+
+- `~/.claude/context/life/expenses.md` ✅
+- `~/.claude/context/life/finances/` ✅
+
+**AGENT:** None
+
+
+**SPECIAL INSTRUCTIONS:**
+- Use the answer-finance-question command directly
+- Parse financial PDFs and extract specific data as requested
 
 ### 8. Unsupervised Learning Business
 
@@ -149,10 +219,13 @@ AGENT: None
 - But also: "how's the business", "company challenges", "our revenue"
 
 **YOU MUST IMMEDIATELY:**
-1. Load this context file:
-   - `~/.claude/context/unsupervised-learning/CLAUDE.md` ✅
 
-AGENT: None
+**CONTEXT FILES:**
+
+- `~/.claude/context/unsupervised-learning/CLAUDE.md` ✅
+
+**AGENT:** None
+
 
 ### 9. Web Development & Visual Testing
 
@@ -169,12 +242,16 @@ AGENT: None
 - But also: "show me what it looks like", "capture the page", "visual debugging"
 
 **YOU MUST IMMEDIATELY:**
-1. Load this context file:
-   - `~/.claude/context/tools/CLAUDE.md` ✅
-2. **Use Task tool with subagent_type="designer"** - PRIMARY for visual testing
-3. Use Playwright MCP tools for browser automation as seen in ~/.claude/context/tools/CLAUDE.md
 
-AGENT: designer if it's a design question
+**CONTEXT FILES:**
+
+- `~/.claude/context/tools/CLAUDE.md` ✅
+
+**AGENT:** designer 
+
+**SPECIAL INSTRUCTIONS:**
+- Use Task tool with subagent_type="designer" for visual testing
+- Use Playwright MCP tools for browser automation
 
 ### 10. Capture Learning - Problem/Solution Documentation
 
@@ -197,7 +274,7 @@ AGENT: designer if it's a design question
    bun ~/.claude/commands/capture-learning.ts "[problem description]" "[solution description]"
    ```
 2. The command will create a markdown file in `~/.claude/context/learnings/`
-3. File will be named: `YYYY-MM-DD HHMM:SS-hyphenated-problem-description-in-8-words.md`
+3. File will be named: `YYYY-MM-DD-HHMM:SS-hyphenated-problem-description-in-8-words.md`
 4. Confirm the learning was captured successfully
 
 **IMPORTANT:** When capturing learnings:
@@ -206,41 +283,44 @@ AGENT: designer if it's a design question
 - Include key tools, commands, or techniques used
 - Note any important gotchas or insights discovered
 
-AGENT: None
+**CONTEXT FILES:** None
 
-## 🔴 SPECIAL RECOGNITION RULES - ALWAYS APPLY
+**AGENT:** None
 
-### Research Triggers - MANDATORY ACTION
-**When the user's INTENT is to gather information or learn about something:**
-- This includes asking questions, seeking understanding, or exploring topics
-- Even if they don't use the word "research"
-- Examples: "tell me about", "what's happening with", "I need to know"
+### 11. My Content & Opinions
 
-**ACTION:** Immediately load `~/.claude/context/tools/CLAUDE.md` ✅ and use researcher agent
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- What Daniel said about something
+- Daniel's opinions on topics
+- Past blog posts or writing
+- "What did I say about X"
+- "My thoughts on Y"
+- Finding quotes or references from past content
 
-### Company References - MANDATORY INTERPRETATION
-**When user mentions a company/business WITHOUT being specific:**
-- Default assumption: They mean Unsupervised Learning
-- This applies to: "the company", "my business", "our company"
-- Also applies to business metrics or performance discussions
+**Example phrases that indicate this context:**
+- "what did I say about", "my opinion on", "find my post about"
+- "when did I write about", "my thoughts on", "search my content"
 
-**ACTION:** Immediately load `~/.claude/context/unsupervised-learning/CLAUDE.md` ✅
+**YOU MUST IMMEDIATELY:**
 
-## ⚡ YOUR LOADING PROTOCOL
+**CONTEXT FILES:** None
 
-**YOU MUST follow these steps EXACTLY:**
+**AGENT:** None
 
-1. **UNDERSTAND** the semantic meaning and intent of the user's prompt
-2. **DETERMINE** which context categories match the user's actual needs
-3. **IMMEDIATELY LOAD** all relevant context files using Read tool
-4. **CONFIRM** each loaded file with a ✅ checkmark
-5. **INVOKE** the specified agent using Task tool if indicated
-6. **PROCEED** with the task using loaded context knowledge
+### 16. Advanced Web Scraping
 
-## ❗ CRITICAL REMINDERS
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- Scraping difficult websites
+- Bypassing anti-bot measures
+- Large-scale data extraction
+- When regular scraping fails
 
-- **DO NOT ASK** for permission to load context - just do it
-- **DO NOT WAIT** - load immediately upon detection
-- **DO NOT SKIP** context loading even if you think you know the answer
-- **ALWAYS ERR** on the side of loading more context rather than less
-- **ALWAYS USE** the specified agent 
+**Example phrases that indicate this context:**
+- "can't access this site", "blocked by cloudflare", "need to scrape at scale"
+- "website is blocking me", "need advanced scraping"
+
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:** None
+
+**AGENT:** None

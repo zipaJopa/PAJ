@@ -119,7 +119,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun /Users/daniel/.claude/hooks/load-dynamic-context.ts"
+            "command": "bun /Users/daniel/.claude/hooks/load-dynamic-requirements.ts"
           }
         ]
       }
