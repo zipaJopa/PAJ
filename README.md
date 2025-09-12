@@ -30,7 +30,15 @@
 
 #### 💥 UPDATES (September 12, 2025)
 
-1. Just uploaded my new dynamic resource  loading system to `/hooks` and `/commands`. It works by leveraging the submit-user-hook to *dynamically* load context and agents. The file is `/commands/load-dynamic-requirements.md`, which is loaded through `/hooks/load-dynamic-requirements.ts`.
+- Just uploaded my new dynamic resource loading system to `/hooks` and `/commands`
+- It works by leveraging the submit-user-hook to *dynamically* load context and agents
+- The file that handles dynamic routing is `/commands/load-dynamic-requirements.md`
+- The file is loaded through the hooks in `settings.json`, specifically the submit-user-prompt hooks
+- That hook points to `/hooks/load-dynamic-requirements.ts`, which loads `/commands/load-dynamic-requirements.md`
+
+#### 💥 UPDATES (September 10, 2025)
+
+- Initial creation of the repo and loading of the base content
 
 ## 🎯 **What is PAI?**
 
