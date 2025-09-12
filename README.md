@@ -22,6 +22,8 @@
   <a href="#-contribute">Contribute</a>
 </p>
 
+---
+
 </div>
 
 #### 💥 UPDATES (September 12, 2025)
