@@ -22,11 +22,7 @@
   <a href="#-contribute">Contribute</a>
 </p>
 
----
-
 </div>
-
-<br/>
 
 #### 💥 UPDATES (September 12, 2025)
 
