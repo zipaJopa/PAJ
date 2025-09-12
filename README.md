@@ -27,7 +27,10 @@
 </div>
 
 <br/>
-> 📢 UPDATES: Just uploaded my new dynamic resource loading system to `/hooks` and `/commands`. It works by leveraging the submit-user-hook to *dynamically* load context and agents. The file is `/commands/load-dynamic-requirements.md`, which is loaded through `/hooks/load-dynamic-requirements.ts`.
+
+#### 💥 UPDATES (September 12, 2025)
+
+1. Just uploaded my new dynamic resource  loading system to `/hooks` and `/commands`. It works by leveraging the submit-user-hook to *dynamically* load context and agents. The file is `/commands/load-dynamic-requirements.md`, which is loaded through `/hooks/load-dynamic-requirements.ts`.
 
 ## 🎯 **What is PAI?**
 
