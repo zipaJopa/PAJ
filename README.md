@@ -112,7 +112,7 @@ I use *Typescript* as my main language (instead of Python), and I use `bun` as m
 
 `brew install bun`
 
-One thing to note is that when you download the project, the `.claude` directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions.
+One thing to note is that when you download the project, the `.claude` directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions. (Or cd into `claude_directory` which is just a symlink to it)
 
 `cd .claude`
 
@@ -126,6 +126,9 @@ ls -lah
 cd ~/.claude/
 ls -lah
 
+# 3. Put your keys into your own .env file, which is not in the repo itself. Use the example as a template if needed
+
+nvim .env
 ```
 
 ### **Prerequisites**
