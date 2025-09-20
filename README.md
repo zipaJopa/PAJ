@@ -108,7 +108,11 @@ Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding 
 
 ### **Quick Start**
 
-One thing to note is that when you download the project, the.Claude directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions.
+I use *Typescript* as my main language (instead of Python), and I use `bun` as my main Javascript/Typescript system. Think: runtime, package management, etc. So if you want to use this system as-is, make sure you have `bun` installed before getting started.
+
+`brew install bun`
+
+One thing to note is that when you download the project, the `.claude` directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions.
 
 `cd .claude`
 
@@ -126,9 +130,10 @@ ls -lah
 
 ### **Prerequisites**
 
-- [Claude Code](https://claude.ai/code) - The primary AI interface, which can be any similar system
-- Text editor (any will work - it's all Markdown/Text!)
-- Ideal: Basic command line familiarity
+- [Claude Code](https://claude.ai/code) - The primary AI interface, which can ultimately be any similar system, e.g., Gemini, Codex, etc.
+- [Bun](https://bun.com/) - The node.js system we're using
+- Text editor (Neovim recommended, but any will work—it's all Markdown/Text!)
+- Ideal: Decent Command Line Interface skills
 
 <br/>
 
