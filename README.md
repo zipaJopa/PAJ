@@ -129,15 +129,17 @@ ls -lah
 # 3. Put your keys into your own .env file, which is not in the repo itself. Use the example as a template if needed
 
 nvim .env
-```
+
+# 4. Export your own PAI_HOME in your shell config. Change for your desired home
+
+PAI_HOME="/Users/daniel/"
 
 ### **Testing PAI in Custom Locations**
 
 PAI uses the `PAI_HOME` environment variable to determine its installation path. By default, it uses `~/.claude/`, but you can test PAI in any directory:
 
-```bash
 # Test PAI in a custom directory
-export PAI_HOME="/path/to/your/test/directory"
+export PAI_HOME="/path/to/directory"
 
 # The system will look for context files at ${PAI_HOME}/.claude/context/
 ```
