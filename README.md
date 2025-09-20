@@ -26,6 +26,12 @@
 
 </div>
 
+#### 💥 UPDATES (September 20, 2025)
+
+- I've now added the `/voice-server` directory under `.claude`. This should give you the same voice capabilities I have, once you set your Eleven Labs API key.
+- Closed the open PRs, including those that added a `PAI_PATH` setting to fix static paths pointing to my home directory. Thanks for the contributions!
+- Currently working on adding the missing hooks mentioned in Issues.
+
 #### 💥 UPDATES (September 12, 2025)
 
 - Just uploaded my new dynamic resource loading system to `/hooks` and `/commands`
