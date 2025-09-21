@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./pai-logo.png">
   <source media="(prefers-color-scheme: light)" srcset="./pai-logo.png">
-  <img alt="PAI Logo" src="./pai-logo.png" width="120">
+  <img alt="PAI Logo" src="./pai-logo.png" width="400">
 </picture>
 
 # **PAI** - Personal AI Infrastructure
@@ -85,20 +85,36 @@
 <div align="center">
 
 ```mermaid
-graph LR
-    A[You] --> B[PAI System]
-    B --> C[Context]
-    B --> D[Agents]
-    B --> E[Tools]
-    C --> F[Augmented You]
-    D --> F
-    E --> F
-    style A fill:#24283b,stroke:#7aa2f7,stroke-width:2px,color:#c0caf5
-    style B fill:#1a1b26,stroke:#bb9af7,stroke-width:2px,color:#c0caf5
-    style C fill:#24283b,stroke:#9ece6a,stroke-width:2px,color:#c0caf5
-    style D fill:#24283b,stroke:#ff9e64,stroke-width:2px,color:#c0caf5
-    style E fill:#24283b,stroke:#7dcfff,stroke-width:2px,color:#c0caf5
-    style F fill:#1a1b26,stroke:#f7768e,stroke-width:3px,color:#c0caf5
+graph TB
+    You[👤 You] --> PAI[🧠 PAI/Kai]
+    
+    PAI --> Work[💼 Work]
+    PAI --> Life[🏠 Life]
+    
+    Work --> Blog[📝 write-blog]
+    Work --> News[📊 get-newsletter-stats]
+    Work --> Site[🌐 get-site-analytics]
+    Work --> Consult[💼 create-consulting-document]
+    
+    Life --> Finance[💰 answer-finance-question]
+    Life --> Memory[🔍 get-life-log]
+    Life --> Alert[🔔 send-text-alert]
+    Life --> Health[🏥 track-health-metrics]
+    
+    Blog --> Output[✨ Augmented Output]
+    News --> Output
+    Site --> Output
+    Consult --> Output
+    Finance --> Output
+    Memory --> Output
+    Alert --> Output
+    Health --> Output
+    
+    style You fill:#24283b,stroke:#7aa2f7,stroke-width:2px,color:#c0caf5
+    style PAI fill:#1a1b26,stroke:#bb9af7,stroke-width:3px,color:#c0caf5
+    style Work fill:#24283b,stroke:#9ece6a,stroke-width:2px,color:#c0caf5
+    style Life fill:#24283b,stroke:#ff9e64,stroke-width:2px,color:#c0caf5
+    style Output fill:#1a1b26,stroke:#f7768e,stroke-width:3px,color:#c0caf5
 ```
 
 </div>
