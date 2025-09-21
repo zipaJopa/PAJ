@@ -12,10 +12,17 @@
 
 <br/>
 
+![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
+![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
+[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
+
+<br/>
+
 [![Stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=yellow&logoColor=white)](https://github.com/danielmiessler/PAI/stargazers)
 [![Forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=blue&logoColor=white)](https://github.com/danielmiessler/PAI/network/members)
 [![Issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=red&logoColor=white)](https://github.com/danielmiessler/PAI/issues)
-[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&logo=bookstack&logoColor=white)](https://opensource.org/licenses/MIT)
 
 <br/>
 
@@ -25,8 +32,8 @@
 <a href="https://youtu.be/iKwRWwabkEc">
   <img src="https://img.shields.io/badge/WATCH%20DEMO-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo">
 </a>
-<a href="https://claude.ai/code">
-  <img src="https://img.shields.io/badge/POWERED%20BY%20CLAUDE-6B46C1?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code">
+<a href="https://github.com/danielmiessler/PAI/discussions">
+  <img src="https://img.shields.io/badge/JOIN%20COMMUNITY-1DA1F2?style=for-the-badge&logo=discord&logoColor=white" alt="Community">
 </a>
 
 <br/>
