@@ -26,24 +26,28 @@
 
 </div>
 
-## 💥 Updates
+## 🚀 Recent Updates
 
-**September 21, 2025**
-- Cleaned up voice server code for secure command execution
-- Added PAI_HOME support to eliminate all hardcoded paths
-- Created comprehensive documentation under `~/.claude/documentation/`
-- Dynamic MCP detection using `claude mcp list` (PR #12)
-- Voice server improvements with input validation and rate limiting
+### 📅 **September 21, 2025**
+- ✨ Cleaned up voice server code for secure command execution
+- 🏠 Added PAI_HOME support to eliminate all hardcoded paths
+- 📚 Created comprehensive documentation under `~/.claude/documentation/`
+- 🔌 Dynamic MCP detection using `claude mcp list` (PR #12)
+- 🎙️ Voice server improvements with input validation and rate limiting
 
-**September 20, 2025**
-- Added `/voice-server` directory with ElevenLabs integration
-- Closed PRs fixing hardcoded path issues
-- Working on missing hooks from Issues
+---
 
-**September 12, 2025**  
-- Uploaded dynamic resource loading system to `/hooks` and `/commands`
-- Submit-user-hook dynamically loads context and agents
-- Dynamic routing via `/commands/load-dynamic-requirements.md`
+### 📅 **September 20, 2025**
+- 🗣️ Added `/voice-server` directory with ElevenLabs integration
+- 🔧 Closed PRs fixing hardcoded path issues
+- 🪝 Working on missing hooks from Issues
+
+---
+
+### 📅 **September 12, 2025**  
+- 🧠 Uploaded dynamic resource loading system to `/hooks` and `/commands`
+- ⚡ Submit-user-hook dynamically loads context and agents
+- 🗺️ Dynamic routing via `/commands/load-dynamic-requirements.md`
 
 ## 🎯 **What is PAI?**
 
