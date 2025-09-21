@@ -26,6 +26,14 @@
 
 </div>
 
+#### 💥 UPDATES (September 21, 2025)
+
+- **Security Cleanup**: Cleaned up voice server code by using spawn instead of exec and restricting CORS to localhost only
+- **PAI_HOME Support**: Updated all components to properly honor the `PAI_HOME` environment variable - no more hardcoded paths!
+- **Comprehensive Documentation**: Created full system documentation under `~/.claude/documentation/` covering architecture, UFC context system, hook system, and all agents
+- **Dynamic MCP Detection**: Statusline command now dynamically counts MCPs using `claude mcp list` instead of static configuration files (PR #12)
+- **Voice Server Improvements**: Added input validation, rate limiting, and secure command execution throughout the voice notification system
+
 #### 💥 UPDATES (September 20, 2025)
 
 - I've now added the `/voice-server` directory under `.claude`. This should give you the same voice capabilities I have, once you set your Eleven Labs API key.
