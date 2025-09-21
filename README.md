@@ -8,7 +8,7 @@
 
 # **PAI** - Personal AI Infrastructure
 
-### **🧠 Transform yourself into Human 3.0 with AI-powered augmentation**
+### **Open-source personal AI infrastructure for orchestrating your life and work**
 
 <br/>
 
@@ -80,25 +80,30 @@
 
 ## 🎯 **What is PAI?**
 
+> **Core Mission:** Augment humans with AI capabilities so they can survive and thrive in a world full of AI.
+
 <div align="center">
 
 ```mermaid
 graph LR
-    A[👤 You] --> B[🧠 PAI]
-    B --> C[📝 Context]
-    B --> D[🤖 Agents]
-    B --> E[🛠️ Tools]
-    C --> F[🎯 Enhanced You]
+    A[You] --> B[PAI System]
+    B --> C[Context]
+    B --> D[Agents]
+    B --> E[Tools]
+    C --> F[Augmented You]
     D --> F
     E --> F
-    style A fill:#f9f,stroke:#333,stroke-width:4px
-    style F fill:#9f9,stroke:#333,stroke-width:4px
-    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style A fill:#24283b,stroke:#7aa2f7,stroke-width:2px,color:#c0caf5
+    style B fill:#1a1b26,stroke:#bb9af7,stroke-width:2px,color:#c0caf5
+    style C fill:#24283b,stroke:#9ece6a,stroke-width:2px,color:#c0caf5
+    style D fill:#24283b,stroke:#ff9e64,stroke-width:2px,color:#c0caf5
+    style E fill:#24283b,stroke:#7dcfff,stroke-width:2px,color:#c0caf5
+    style F fill:#1a1b26,stroke:#f7768e,stroke-width:3px,color:#c0caf5
 ```
 
 </div>
 
-PAI transforms you into **Human 3.0** - an AI-augmented version of yourself that can:
+PAI is designed to give anyone a personal AI infrastructure that:
 
 <table>
 <tr>
@@ -123,8 +128,9 @@ Learning • Goals • Habits • Growth
 </tr>
 </table>
 
-> [!IMPORTANT]
-> **Core Mission**: Augment humans with AI capabilities so they can survive and thrive in a world full of AI.
+Based on my own personal Digital Assistant **Kai**, PAI combines a scaffolding framework with real-world examples to help you build your own AI-powered infrastructure.
+
+📖 **[Read the full blog post about PAI](https://danielmiessler.com/blog/personal-ai-infrastructure)**
 
 ---
 
@@ -361,7 +367,7 @@ get-life-log "What did we discuss at lunch on Tuesday?"
 
 <div align="center">
 
-### **Human + AI = Human 3.0**
+### **Augmentation, Not Replacement**
 
 | ❌ **Traditional AI** | ✅ **PAI Approach** |
 |---------------------|-------------------|
@@ -379,7 +385,7 @@ get-life-log "What did we discuss at lunch on Tuesday?"
 
 <div align="center">
 
-### **Join the Human 3.0 Revolution**
+### **Join the PAI Community**
 
 <a href="https://github.com/danielmiessler/PAI/issues">
   <img src="https://img.shields.io/badge/Report%20Issues-red?style=for-the-badge&logo=github&logoColor=white" alt="Issues">
