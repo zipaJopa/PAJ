@@ -293,43 +293,64 @@ PORT="8888"                        # Voice server port
 ## 🎬 **Examples**
 
 <details>
-<summary><strong>📰 Daily Intelligence Briefing</strong></summary>
+<summary><strong>📊 Newsletter Analytics</strong></summary>
 
-```typescript
-// Automated morning briefing with news, weather, calendar
-await agent.researcher.gatherDailyBriefing({
-  sources: ['tech', 'finance', 'world'],
-  format: 'executive-summary'
-});
+```bash
+# Get real-time newsletter performance stats
+get-newsletter-stats
+
+# Returns:
+# - Subscriber growth trends
+# - Open/click rates by post
+# - Top performing content
+# - Engagement visualizations
 ```
 
 </details>
 
 <details>
-<summary><strong>💰 Financial Analysis</strong></summary>
+<summary><strong>💰 Financial Intelligence</strong></summary>
 
-```typescript
-// Track expenses and generate insights
-await agent.analyst.analyzeExpenses({
-  period: 'monthly',
-  categories: ['auto', 'subscriptions', 'dining'],
-  recommendations: true
-});
+```bash
+# Answer specific financial questions
+answer-finance-question "What's my PG&E bill typically?"
+answer-finance-question "How much am I spending on subscriptions?"
+
+# Automatically:
+# - Parses bank statements & PDFs
+# - Analyzes spending patterns
+# - Tracks vendor payments
 ```
 
 </details>
 
 <details>
-<summary><strong>📝 Content Pipeline</strong></summary>
+<summary><strong>📝 Content Creation</strong></summary>
 
-```typescript
-// Research, write, and publish blog posts
-await agent.writer.createContent({
-  topic: 'AI trends 2025',
-  research: true,
-  seo: true,
-  publish: 'danielmiessler.com'
-});
+```bash
+# Write blog posts in your style
+write-blog "AI Security Trends 2025"
+
+# Automatically:
+# - Creates draft with proper formatting
+# - Generates featured images
+# - Adds SEO optimization
+# - Prepares for publishing
+```
+
+</details>
+
+<details>
+<summary><strong>🔍 Life Intelligence</strong></summary>
+
+```bash
+# Search your recorded conversations
+get-life-log "What did we discuss at lunch on Tuesday?"
+
+# Searches:
+# - Limitless.ai recordings
+# - Meeting transcripts
+# - Personal conversations
 ```
 
 </details>
