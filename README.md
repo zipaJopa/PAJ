@@ -295,7 +295,7 @@ graph TD
 | **Researcher** | Deep web research | WebSearch, WebFetch |
 | **Engineer** | Production code | Testing, Debugging |
 | **Designer** | UX/UI design | Figma, shadcn/ui |
-| **Pentester** | Security | Nmap, Burp |
+| **Pentester** | Security testing | Nmap, Burp |
 | **Architect** | System design | Diagrams, PRDs |
 
 **With:**
@@ -785,7 +785,7 @@ PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
 ### **The Path to Human 3.0**
 
-> *"Humans are what matters. AI is only useful as it is to humans. The reason I'm building all of this is so that people have a chance to compete with AI in this world that is coming."*
+> *"Humans are what matter. AI is only as useful as it is to people. A system like this is need to level the field with AI and help us get to [Human 3.0](https://danielmiessler.com/blog/how-my-projects-fit-together)."*
 
 <br/>
 
