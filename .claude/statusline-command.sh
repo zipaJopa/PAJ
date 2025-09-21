@@ -26,8 +26,12 @@ if [ -d "$claude_dir/commands" ]; then
     commands_count=$(find "$claude_dir/commands" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 fi
 
-# Count MCPs from settings.json
-mcps_count=$(claude mcp list | grep ✓ | wc -l | tr -d ' ' 2>/dev/null || echo "0")
+# Count MCPs dynamically using claude mcp list
+if command -v claude >/dev/null 2>&1; then
+    mcps_count=$(claude mcp list 2>/dev/null | grep -c '^-' || echo "0")
+else
+    mcps_count="0"
+fi
 
 # Count Services from FoundryServices directory
 services_dir="${PAI_HOME:-/Users/daniel}/Projects/FoundryServices/Services"
@@ -115,32 +119,35 @@ MCP_DEFAULT="$LINE2_PRIMARY"         # All other MCPs - standard line 2 blue
 
 RESET='\033[0m'                      # Reset all formatting
 
-# Get MCP names for line 2 with blue color scheme
+# Get MCP names dynamically for line 2 with blue color scheme
 mcp_names_formatted=""
-mcp_names_raw=$(claude mcp list 2>/dev/null | grep -v "Checking MCP server health" | cut -d':' -f1 | tr '\n' ' ')
-# Format MCP names - line 2 blue scheme with accent colors for important ones
-for mcp in $mcp_names_raw; do
-    case "$mcp" in
-        "daemon") formatted="${MCP_DAEMON}Daemon${RESET}" ;;             # Bright blue accent: Personal API
-        "stripe") formatted="${MCP_STRIPE}Stripe${RESET}" ;;             # Blue accent: Financial ops
-        # All other MCPs use line 2 blue
-        "httpx") formatted="${MCP_DEFAULT}HTTPx${RESET}" ;;
-        "brightdata") formatted="${MCP_DEFAULT}BrightData${RESET}" ;;
-        "naabu") formatted="${MCP_DEFAULT}Naabu${RESET}" ;;
-        "apify") formatted="${MCP_DEFAULT}Apify${RESET}" ;;
-        "content") formatted="${MCP_DEFAULT}Content${RESET}" ;;
-        "Ref") formatted="${MCP_DEFAULT}Ref${RESET}" ;;
-        "pai") formatted="${MCP_DEFAULT}Foundry${RESET}" ;;
-        "playwright") formatted="${MCP_DEFAULT}Playwright${RESET}" ;;
-        *) formatted="${MCP_DEFAULT}${mcp^}${RESET}" ;;                  # Capitalize first letter, line 2 blue
-    esac
-
-    if [ -z "$mcp_names_formatted" ]; then
-        mcp_names_formatted="$formatted"
-    else
-        mcp_names_formatted="$mcp_names_formatted${SEPARATOR_COLOR}, ${formatted}"
-    fi
-done
+if command -v claude >/dev/null 2>&1; then
+    # Extract MCP names from claude mcp list output (names after "- ")
+    mcp_names_raw=$(claude mcp list 2>/dev/null | grep '^-' | sed 's/^- //' | tr '\n' ' ')
+    # Format MCP names - line 2 blue scheme with accent colors for important ones
+    for mcp in $mcp_names_raw; do
+        case "$mcp" in
+            "daemon") formatted="${MCP_DAEMON}Daemon${RESET}" ;;             # Bright blue accent: Personal API
+            "stripe") formatted="${MCP_STRIPE}Stripe${RESET}" ;;             # Blue accent: Financial ops
+            # All other MCPs use line 2 blue
+            "httpx") formatted="${MCP_DEFAULT}HTTPx${RESET}" ;;
+            "brightdata") formatted="${MCP_DEFAULT}BrightData${RESET}" ;;
+            "naabu") formatted="${MCP_DEFAULT}Naabu${RESET}" ;;
+            "apify") formatted="${MCP_DEFAULT}Apify${RESET}" ;;
+            "content") formatted="${MCP_DEFAULT}Content${RESET}" ;;
+            "Ref") formatted="${MCP_DEFAULT}Ref${RESET}" ;;
+            "pai") formatted="${MCP_DEFAULT}Foundry${RESET}" ;;
+            "playwright") formatted="${MCP_DEFAULT}Playwright${RESET}" ;;
+            *) formatted="${MCP_DEFAULT}${mcp^}${RESET}" ;;                  # Capitalize first letter, line 2 blue
+        esac
+        
+        if [ -z "$mcp_names_formatted" ]; then
+            mcp_names_formatted="$formatted"
+        else
+            mcp_names_formatted="$mcp_names_formatted${SEPARATOR_COLOR}, ${formatted}"
+        fi
+    done
+fi
 
 # Output the line-based color themed statusline
 # Light blue color for directory
