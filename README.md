@@ -48,16 +48,17 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **Check back often as I'm constantly adding features**
+> **[🎉 v0.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.1)** - First official release with full architecture documentation
 
 <details open>
-<summary><strong>📅 September 21, 2025</strong></summary>
+<summary><strong>📅 September 21, 2025 - v0.1 Release</strong></summary>
 
-- ✨ **Security**: Cleaned up voice server for secure command execution
+- 🎉 **Release**: Published v0.1 - Initial public release
+- 🔒 **Voice**: Hardened the voice server
 - 🏠 **Portability**: PAI_HOME support eliminates hardcoded paths
 - 📚 **Docs**: Comprehensive documentation under `~/.claude/documentation/`
-- 🔌 **Dynamic**: MCP detection via `claude mcp list` (PR #12)
-- 🎙️ **Voice**: Enhanced server with validation and rate limiting
+- 🔌 **Dynamic**: MCP detection via `settings.json`
+- 🏗️ **Architecture**: Complete system documentation with examples
 
 </details>
 
@@ -129,7 +130,7 @@ graph TB
 
 **PAI is an open-source, full personal AI platform that's completely agnostic to who you are and what you're trying to accomplish.**
 
-This isn't just another AI tool—it's a complete infrastructure for anyone on Earth to harness AI for both business and life. Whether you're an artist transitioning to independence, a founder building a company, or someone managing complex health needs, PAI adapts to YOUR unique situation.
+Think of PAI as your personal AI that actually knows you—all your projects, your style, your data—and can handle anything you throw at it. Whether you're an artist transitioning to independence, a founder building a company, or someone managing complex health needs, PAI becomes whatever you need it to be.
 
 PAI is part of the journey toward Human 3.0—where humans are augmented by AI rather than replaced by it.
 
@@ -204,6 +205,7 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI r
 
 - **🌍 Universal**: Works for anyone, anywhere, in any profession or life situation
 - **🔓 Open Source**: No vendor lock-in, complete transparency, you own everything
+- **🤖 Platform Independent**: Core structure works with Claude, GPT, Gemini, or any AI platform
 - **🧠 Persistent Memory**: Your AI remembers every context, project, and conversation
 - **🎯 Task Agnostic**: From writing a blog to tracking medical data to running a business
 - **📁 Plain Text**: All configuration in human-readable files you can edit and understand
@@ -277,7 +279,8 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI r
 ## 🚀 **Quick Start**
 
 > [!NOTE]
-> PAI requires [Claude Code](https://claude.ai/code) and [Bun](https://bun.sh) runtime.
+> PAI works with [Claude Code](https://claude.ai/code), but the architecture supports any AI platform (GPT, Gemini, etc.)
+> Requires [Bun](https://bun.sh) JavaScript runtime for the current implementation.
 
 ### **Installation**
 
@@ -369,7 +372,15 @@ PORT="8888"                        # Voice server port
 
 ## 🎬 **Real-World Examples**
 
-### 📈 **Business & Analytics**
+> **Note:** These are examples from my personal PAI setup. Your system will have completely different commands based on your unique needs, workflows, and goals.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 💼 **Professional Examples**
+
+#### 📈 **Business & Analytics**
 
 <details>
 <summary><strong>📊 Newsletter Performance</strong></summary>
@@ -394,33 +405,34 @@ add-linear-ticket         # Development velocity
 
 </details>
 
-### 💰 **Financial Intelligence**
+#### 🔒 **Development & Security**
 
 <details>
-<summary><strong>📉 Expense Analysis</strong></summary>
+<summary><strong>🔍 Code Security</strong></summary>
 
 ```bash
-# Instant financial insights
-answer-finance-question "monthly utilities average?"
-answer-finance-question "subscription spending?"
-process-finances-data --categorize --visualize
+# Security automation
+check-for-sensitive --scan all
+design-review --security-focus
+browser-tools-setup --headers
 ```
 
 </details>
 
 <details>
-<summary><strong>📈 Financial Planning</strong></summary>
+<summary><strong>🔌 API Infrastructure</strong></summary>
 
 ```bash
-# Comprehensive financial overview
-get-finances-state
-prepare-finances-dashboard
-push-finances-state --notify
+# Personal API management
+update-daemon --endpoints
+create-cloudflare-mcp-server
+update-tools-context --integrations
+startup-context-load
 ```
 
 </details>
 
-### ✍️ **Content Creation**
+#### ✍️ **Content Creation**
 
 <details>
 <summary><strong>📝 Blog Pipeline</strong></summary>
@@ -448,7 +460,38 @@ create-mermaid-visualization --type flowchart
 
 </details>
 
-### 🧪 **Memory & Research**
+</td>
+<td width="50%" valign="top">
+
+### 🏠 **Personal Examples**
+
+#### 💰 **Financial Intelligence**
+
+<details>
+<summary><strong>📉 Expense Analysis</strong></summary>
+
+```bash
+# Instant financial insights
+answer-finance-question "monthly utilities average?"
+answer-finance-question "subscription spending?"
+process-finances-data --categorize --visualize
+```
+
+</details>
+
+<details>
+<summary><strong>📈 Financial Planning</strong></summary>
+
+```bash
+# Comprehensive financial overview
+get-finances-state
+prepare-finances-dashboard
+push-finances-state --notify
+```
+
+</details>
+
+#### 🧪 **Memory & Research**
 
 <details>
 <summary><strong>🔍 Meeting Recall</strong></summary>
@@ -475,7 +518,7 @@ query-context "machine learning notes"
 
 </details>
 
-### 🎯 **Personal Productivity**
+#### 🎯 **Personal Productivity**
 
 <details>
 <summary><strong>툿 Morning Automation</strong></summary>
@@ -503,32 +546,9 @@ update-public-content
 
 </details>
 
-### 🔒 **Development & Security**
-
-<details>
-<summary><strong>🔍 Code Security</strong></summary>
-
-```bash
-# Security automation
-check-for-sensitive --scan all
-design-review --security-focus
-browser-tools-setup --headers
-```
-
-</details>
-
-<details>
-<summary><strong>🔌 API Infrastructure</strong></summary>
-
-```bash
-# Personal API management
-update-daemon --endpoints
-create-cloudflare-mcp-server
-update-tools-context --integrations
-startup-context-load
-```
-
-</details>
+</td>
+</tr>
+</table>
 
 ---
 
