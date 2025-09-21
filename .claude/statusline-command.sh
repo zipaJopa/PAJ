@@ -26,9 +26,9 @@ if [ -d "$claude_dir/commands" ]; then
     commands_count=$(find "$claude_dir/commands" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 fi
 
-# Count MCPs dynamically using claude mcp list
-if command -v claude >/dev/null 2>&1; then
-    mcps_count=$(claude mcp list 2>/dev/null | grep -c '^-' || echo "0")
+# Count MCPs from settings.json
+if [ -f "$claude_dir/settings.json" ]; then
+    mcps_count=$(jq -r '.mcpServers | keys | length' "$claude_dir/settings.json" 2>/dev/null || echo "0")
 else
     mcps_count="0"
 fi
@@ -119,11 +119,10 @@ MCP_DEFAULT="$LINE2_PRIMARY"         # All other MCPs - standard line 2 blue
 
 RESET='\033[0m'                      # Reset all formatting
 
-# Get MCP names dynamically for line 2 with blue color scheme
+# Get MCP names for line 2 with blue color scheme
 mcp_names_formatted=""
-if command -v claude >/dev/null 2>&1; then
-    # Extract MCP names from claude mcp list output (names after "- ")
-    mcp_names_raw=$(claude mcp list 2>/dev/null | grep '^-' | sed 's/^- //' | tr '\n' ' ')
+if [ -f "$claude_dir/settings.json" ]; then
+    mcp_names_raw=$(jq -r '.mcpServers | keys[]' "$claude_dir/settings.json" 2>/dev/null | tr '\n' ' ')
     # Format MCP names - line 2 blue scheme with accent colors for important ones
     for mcp in $mcp_names_raw; do
         case "$mcp" in
