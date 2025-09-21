@@ -1,237 +1,398 @@
 <div align="center">
 
-![PAI Logo](./pai-logo.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./pai-logo.png">
+  <source media="(prefers-color-scheme: light)" srcset="./pai-logo.png">
+  <img alt="PAI Logo" src="./pai-logo.png" width="120">
+</picture>
 
-# `PAI` - Personal AI Infrastructure
+# **PAI** - Personal AI Infrastructure
 
-### <code>PAI</code> is an open-source personal AI infrastructure for orchestrating your life and work
+### **🧠 Transform yourself into Human 3.0 with AI-powered augmentation**
 
-<br />
+<br/>
 
-![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
-![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
-[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
+[![Stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=yellow&logoColor=white)](https://github.com/danielmiessler/PAI/stargazers)
+[![Forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=blue&logoColor=white)](https://github.com/danielmiessler/PAI/network/members)
+[![Issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=red&logoColor=white)](https://github.com/danielmiessler/PAI/issues)
+[![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge&logo=bookstack&logoColor=white)](https://opensource.org/licenses/MIT)
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-philosophy">Philosophy</a> •
-  <a href="#-examples">Examples</a> •
-  <a href="#-contribute">Contribute</a>
-</p>
+<br/>
 
----
+<a href="#-quick-start">
+  <img src="https://img.shields.io/badge/GET%20STARTED-8B5CF6?style=for-the-badge&logo=rocket&logoColor=white" alt="Get Started">
+</a>
+<a href="https://youtu.be/iKwRWwabkEc">
+  <img src="https://img.shields.io/badge/WATCH%20DEMO-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo">
+</a>
+<a href="https://claude.ai/code">
+  <img src="https://img.shields.io/badge/POWERED%20BY%20CLAUDE-6B46C1?style=for-the-badge&logo=anthropic&logoColor=white" alt="Claude Code">
+</a>
+
+<br/>
+<br/>
+
+**[Features](#-key-features)** • **[Quick Start](#-quick-start)** • **[Documentation](#-documentation)** • **[Examples](#-examples)** • **[Community](#-community)**
 
 </div>
 
-## 🚀 Recent Updates
-
-### 📅 **September 21, 2025**
-- ✨ Cleaned up voice server code for secure command execution
-- 🏠 Added PAI_HOME support to eliminate all hardcoded paths
-- 📚 Created comprehensive documentation under `~/.claude/documentation/`
-- 🔌 Dynamic MCP detection using `claude mcp list` (PR #12)
-- 🎙️ Voice server improvements with input validation and rate limiting
-
 ---
 
-### 📅 **September 20, 2025**
-- 🗣️ Added `/voice-server` directory with ElevenLabs integration
-- 🔧 Closed PRs fixing hardcoded path issues
-- 🪝 Working on missing hooks from Issues
+## 🚀 **Recent Updates**
+
+> [!TIP]
+> **Latest Release**: v1.0.0 - September 21, 2025
+
+<details open>
+<summary><strong>📅 September 21, 2025</strong></summary>
+
+- ✨ **Security**: Cleaned up voice server for secure command execution
+- 🏠 **Portability**: PAI_HOME support eliminates hardcoded paths
+- 📚 **Docs**: Comprehensive documentation under `~/.claude/documentation/`
+- 🔌 **Dynamic**: MCP detection via `claude mcp list` (PR #12)
+- 🎙️ **Voice**: Enhanced server with validation and rate limiting
+
+</details>
+
+<details>
+<summary><strong>📅 Previous Updates</strong></summary>
+
+**September 20, 2025**
+- 🗣️ Added `/voice-server` with ElevenLabs integration
+- 🔧 Fixed hardcoded path issues
+- 🪝 Working on missing hooks
+
+**September 12, 2025**  
+- 🧠 Dynamic resource loading system
+- ⚡ Submit-user-hook for context loading
+- 🗺️ Dynamic routing via load-dynamic-requirements
+
+</details>
 
 ---
-
-### 📅 **September 12, 2025**  
-- 🧠 Uploaded dynamic resource loading system to `/hooks` and `/commands`
-- ⚡ Submit-user-hook dynamically loads context and agents
-- 🗺️ Dynamic routing via `/commands/load-dynamic-requirements.md`
 
 ## 🎯 **What is PAI?**
 
-PAI is a project designed to give anyone in the world a personal AI infrastructure for orchestrating their personal and professional lives.
+<div align="center">
 
-Based off my own personal Digital Assistant, **Kai**, it combines a scaffolding framework with a growing set of real-world examples.
+```mermaid
+graph LR
+    A[👤 You] --> B[🧠 PAI]
+    B --> C[📝 Context]
+    B --> D[🤖 Agents]
+    B --> E[🛠️ Tools]
+    C --> F[🎯 Enhanced You]
+    D --> F
+    E --> F
+    style A fill:#f9f,stroke:#333,stroke-width:4px
+    style F fill:#9f9,stroke:#333,stroke-width:4px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+</div>
+
+PAI transforms you into **Human 3.0** - an AI-augmented version of yourself that can:
 
 <table>
 <tr>
-<td width="33%" align="center"><b>🧠 Life Management</b><br/>Research • Writing • Health • Finances</td>
-<td width="33%" align="center"><b>💼 Professional</b><br/>Code • Content • Analytics • Automation<br/>Department Management • Program Management • Startups</td>
-<td width="33%" align="center"><b>🎯 Personal</b><br/>Learning • Family • Goals • Habits</td>
+<td align="center" width="33%">
+  
+### 🧠 **Life Management**
+Research • Writing • Health • Finance
+
+</td>
+<td align="center" width="33%">
+
+### 💼 **Professional**
+Code • Analytics • Automation • Strategy
+
+</td>
+<td align="center" width="33%">
+
+### 🎯 **Personal**
+Learning • Goals • Habits • Growth
+
+</td>
 </tr>
 </table>
 
-> **💡 Core Mission:** Augment humans with AI capabilities so they can survive and thrive in a world full of AI.
+> [!IMPORTANT]
+> **Core Mission**: Augment humans with AI capabilities so they can survive and thrive in a world full of AI.
 
-<br/>
+---
 
-## ✨ **Features**
+## ⚡ **Key Features**
 
-<details open>
-<summary><b>🏗️ UFC Context Architecture - Your Persistent AI Brain</b></summary>
+<table>
+<tr>
+<td width="50%">
+
+### 🏗️ **UFC Context System**
 
 ```
 ~/.claude/context/
-├── 🧠 projects/         # Active work and initiatives
-├── 🛠️ tools/           # AI agents and capabilities  
-├── 💰 finances/        # Financial tracking and analysis
-├── 🏥 health/          # Wellness and medical data
-└── 🎯 telos/           # Objectives and progress tracking
+├── 🧠 projects/
+├── 🛠️ tools/
+├── 💰 finances/
+├── 🏥 health/
+└── 🎯 telos/
 ```
 
-- **Persistent Memory**: Never lose context between sessions
-- **Hierarchical Organization**: Intuitive file-based structure
-- **Complete Portability**: Your entire AI brain in plain text
-- **Dynamic Loading**: Context loads based on current task
+✅ Persistent memory across sessions  
+✅ Hierarchical organization  
+✅ Plain text portability  
+✅ Dynamic loading
 
-</details>
+</td>
+<td width="50%">
+
+### 🤖 **Specialized Agents**
+
+| Agent | Specialization |
+|-------|---------------|
+| 🔬 **Researcher** | Deep synthesis |
+| 💻 **Engineer** | Production code |
+| 🎨 **Designer** | UX/UI design |
+| 🔒 **Pentester** | Security testing |
+| 📐 **Architect** | System design |
+
+✅ Task-specific expertise  
+✅ Voice personalities  
+✅ Tool integration  
+✅ Parallel execution
+
+</td>
+</tr>
+</table>
 
 <details>
-<summary><b>🤖 Specialized Digital Assistants</b></summary>
-
-| Assistant | Purpose | Voice ID | Specialization |
-|-----------|---------|----------|----------------|
-| **Researcher** | Deep information synthesis | `AXdMgz6...` | Web research, analysis |
-| **Engineer** | Production code development | `kmSVBPu7...` | Full-stack, testing |
-| **Designer** | UX/UI and visual design | `ZF6FPAb...` | Interfaces, experiences |
-| **Pentester** | Security assessment | `hmMWXCj9...` | Vulnerability testing |
-| **Architect** | System design | `muZKMsID...` | Technical specifications |
-
-</details>
-
-<details>
-<summary><b>🔧 Integrated Tool Ecosystem</b></summary>
-
-- **MCP Servers**: Playwright, Stripe, Apify, and more
-- **Voice System**: Natural conversation with TTS/STT
-- **Browser Automation**: Visual testing and web interaction
-- **API Integrations**: Connect any service to your PAI
-
-</details>
+<summary><strong>🔧 Integrated Tool Ecosystem</strong></summary>
 
 <br/>
 
-## 🚀 **Getting Started**
+| Category | Tools |
+|----------|-------|
+| **🎭 Automation** | Playwright, Puppeteer, Selenium |
+| **💳 Financial** | Stripe, Square, PayPal |
+| **📊 Analytics** | Google Analytics, Mixpanel |
+| **🗣️ Voice** | ElevenLabs, OpenAI TTS |
+| **🔌 MCPs** | Custom servers for any API |
 
-> **📢 Note:** Lots more examples and templates coming soon, including the full voice implementation. This repo will be continuously updated with real-world implementations from my [YouTube channel](https://www.youtube.com/@unsupervised-learning).
+</details>
 
-### **Quick Start**
+---
 
-I use *Typescript* as my main language (instead of Python), and I use `bun` as my main Javascript/Typescript system. Think: runtime, package management, etc. So if you want to use this system as-is, make sure you have `bun` installed before getting started.
+## 🚀 **Quick Start**
 
-`brew install bun`
+> [!NOTE]
+> PAI requires [Claude Code](https://claude.ai/code) and [Bun](https://bun.sh) runtime.
 
-One thing to note is that when you download the project, the `.claude` directory is hidden by default because it's a dot directory. So cd into `.claude` when you're done with the instructions. (Or cd into `claude_directory` which is just a symlink to it)
+### **Installation**
 
-`cd .claude`
+<table>
+<tr>
+<td>
+
+**1️⃣ Install Prerequisites**
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/danielmiessler/PAI.git
+# Install Bun
+brew install bun
 
-# 2. Check out the files (the folder is hidden with default `ls`)
-
-ls -lah
-cd ~/.claude/
-ls -lah
-
-# 3. Put your keys into your own .env file, which is not in the repo itself. Use the example as a template if needed
-
-nvim .env
-
-# 4. Export your own PAI_HOME in your shell config. Change for your desired home
-
-PAI_HOME="/Users/daniel/"
-
-### **Testing PAI in Custom Locations**
-
-PAI uses the `PAI_HOME` environment variable to determine its installation path. By default, it uses `~/.claude/`, but you can test PAI in any directory:
-
-# Test PAI in a custom directory
-export PAI_HOME="/path/to/directory"
-
-# The system will look for context files at ${PAI_HOME}/.claude/context/
+# Install Claude Code
+# Visit claude.ai/code
 ```
 
-**Important Notes:**
-- Set `PAI_HOME` before starting Claude Code for the environment variable to take effect
-- The `.claude` directory structure should exist at your custom `PAI_HOME` location
-- This is particularly useful for developers testing multiple PAI configurations
+</td>
+<td>
 
-### **Prerequisites**
+**2️⃣ Clone & Configure**
 
-- [Claude Code](https://claude.ai/code) - The primary AI interface, which can ultimately be any similar system, e.g., Gemini, Codex, etc.
-- [Bun](https://bun.com/) - The node.js system we're using
-- Text editor (Neovim recommended, but any will work—it's all Markdown/Text!)
-- Ideal: Decent Command Line Interface skills
+```bash
+# Clone PAI
+git clone https://github.com/danielmiessler/PAI.git
+cd PAI
 
-<br/>
+# Configure environment
+cp .env.example ~/.env
+vim ~/.env  # Add your API keys
+```
+
+</td>
+</tr>
+<tr>
+<td>
+
+**3️⃣ Set PAI_HOME**
+
+```bash
+# Add to ~/.zshrc or ~/.bashrc
+export PAI_HOME="$HOME"
+
+# Reload shell
+source ~/.zshrc
+```
+
+</td>
+<td>
+
+**4️⃣ Launch PAI**
+
+```bash
+# Navigate to PAI
+cd ~/.claude
+
+# Start voice server (optional)
+cd voice-server && ./start.sh
+
+# Open Claude Code
+# Your PAI is ready! 🚀
+```
+
+</td>
+</tr>
+</table>
+
+### **⚙️ Environment Variables**
+
+```bash
+# Required
+PAI_HOME="/path/to/pai"           # PAI installation directory
+
+# Optional
+ELEVENLABS_API_KEY="your_key"     # Voice synthesis
+OPENAI_API_KEY="your_key"         # GPT integration
+PORT="8888"                        # Voice server port
+```
+
+---
+
+## 📚 **Documentation**
+
+<div align="center">
+
+| 📖 Guide | 🎯 Purpose | ⏱️ Time |
+|----------|------------|---------|
+| [Quick Start](./docs/quick-start.md) | Get up and running | 5 min |
+| [Architecture](./docs/architecture.md) | Understand the system | 10 min |
+| [UFC Context](./docs/ufc-context.md) | Master context management | 15 min |
+| [Agents](./docs/agents.md) | Work with AI agents | 10 min |
+| [Voice Server](./docs/voice-server.md) | Enable voice interaction | 10 min |
+
+</div>
+
+---
+
+## 🎬 **Examples**
+
+<details>
+<summary><strong>📰 Daily Intelligence Briefing</strong></summary>
+
+```typescript
+// Automated morning briefing with news, weather, calendar
+await agent.researcher.gatherDailyBriefing({
+  sources: ['tech', 'finance', 'world'],
+  format: 'executive-summary'
+});
+```
+
+</details>
+
+<details>
+<summary><strong>💰 Financial Analysis</strong></summary>
+
+```typescript
+// Track expenses and generate insights
+await agent.analyst.analyzeExpenses({
+  period: 'monthly',
+  categories: ['auto', 'subscriptions', 'dining'],
+  recommendations: true
+});
+```
+
+</details>
+
+<details>
+<summary><strong>📝 Content Pipeline</strong></summary>
+
+```typescript
+// Research, write, and publish blog posts
+await agent.writer.createContent({
+  topic: 'AI trends 2025',
+  research: true,
+  seo: true,
+  publish: 'danielmiessler.com'
+});
+```
+
+</details>
+
+---
 
 ## 💡 **Philosophy**
 
 <div align="center">
 
-### **Human 3.0: Augmentation, Not Replacement**
+### **Human + AI = Human 3.0**
+
+| ❌ **Traditional AI** | ✅ **PAI Approach** |
+|---------------------|-------------------|
+| Black box decisions | Transparent logic |
+| Vendor lock-in | Complete portability |
+| Replaces humans | Augments humans |
+| Forgets context | Persistent memory |
+| Generic responses | Personalized to you |
 
 </div>
 
-The PAI system embodies a fundamental belief: **AI should amplify human capability, not replace it.**
+---
 
-| Traditional AI | PAI Approach |
-|----------------|--------------|
-| Black box decisions | Transparent, file-based logic |
-| Vendor lock-in | Completely portable |
-| Forgets everything | Persistent memory |
-| Generic responses | Personalized to you |
-| Replaces thinking | Augments capability |
+## 🤝 **Community**
 
-<br/>
+<div align="center">
 
-## 📚 **Examples**
+### **Join the Human 3.0 Revolution**
 
-Coming soon! Each example will include:
-- Complete file structure
-- Configuration templates  
-- Step-by-step setup
-- Video walkthrough
-
-### **Planned Examples**
-- 📰 Daily Intelligence Briefing
-- 💰 Expense Tracking & Analysis
-- 📝 Content Creation Pipeline
-- 🔬 Research Assistant
-- 🏥 Health Monitoring
-- 📚 Learning System
+<a href="https://github.com/danielmiessler/PAI/issues">
+  <img src="https://img.shields.io/badge/Report%20Issues-red?style=for-the-badge&logo=github&logoColor=white" alt="Issues">
+</a>
+<a href="https://github.com/danielmiessler/PAI/discussions">
+  <img src="https://img.shields.io/badge/Discussions-blue?style=for-the-badge&logo=github&logoColor=white" alt="Discussions">
+</a>
+<a href="https://github.com/danielmiessler/PAI/pulls">
+  <img src="https://img.shields.io/badge/Pull%20Requests-green?style=for-the-badge&logo=github&logoColor=white" alt="PRs">
+</a>
 
 <br/>
-
-## 🤝 **Contribute**
-
-PAI is open source and welcomes contributions!
-
-- 🐛 [Report Issues](https://github.com/danielmiessler/PAI/issues)
-- 💡 [Suggest Features](https://github.com/danielmiessler/PAI/discussions)
-- 🔧 [Submit PRs](https://github.com/danielmiessler/PAI/pulls)
-- ⭐ Star the repo to show support!
-
 <br/>
+
+**⭐ Star this repo** to stay updated with the latest features!
+
+</div>
+
+---
 
 ## 📄 **License**
 
 PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
-<br/>
-
 ---
 
 <div align="center">
 
-### 🎓 **Remember**
+### **Transform Yourself Today**
 
-> *"This is YOUR infrastructure. Every configuration, every tool, every workflow should serve your unique life and goals. You're not using AI—you're augmenting yourself with it."*
+> *"You're not using AI—you're augmenting yourself with it."*
 
-**by [Daniel Miessler](https://danielmiessler.com) • Follow along on [YouTube](https://www.youtube.com/@unsupervised-learning)**
+<br/>
+
+**Created by [Daniel Miessler](https://danielmiessler.com)**  
+**Follow the journey on [YouTube](https://www.youtube.com/@unsupervised-learning)**
+
+<br/>
+
+<a href="#">
+  <img src="https://img.shields.io/badge/Back%20to%20Top-8B5CF6?style=for-the-badge&logo=arrow-up&logoColor=white" alt="Back to Top">
+</a>
 
 </div>
