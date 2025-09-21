@@ -8,32 +8,35 @@
 
 # **PAI** - Personal AI Infrastructure
 
-### **Open-source personal AI infrastructure for orchestrating your life and work**
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=20&pause=1000&color=8B5CF6&center=true&vCenter=true&width=800&lines=Open-source+personal+AI+infrastructure;Orchestrate+your+life+and+work+with+AI;Augment+yourself%2C+don't+be+replaced)](https://git.io/typing-svg)
 
 <br/>
 
-![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
-![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
-[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
+![Mission](https://img.shields.io/badge/MISSION-Upgrade_Humans_with_AI-8B5CF6?style=flat-square&labelColor=6B46C1)
+![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI?style=flat-square&color=FCA311&labelColor=14213D)
+[![License: MIT](https://img.shields.io/badge/LICENSE-MIT-22C55E?style=flat-square&labelColor=16A34A)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/POWERED_BY-Claude_Code-3B82F6?style=flat-square&labelColor=2563EB)](https://claude.ai/code)
+[![PAI Video](https://img.shields.io/badge/🎥_DEMO-Watch_Video-DC2626?style=flat-square&labelColor=B91C1C)](https://youtu.be/iKwRWwabkEc)
+![Profile Views](https://komarev.com/ghpvc/?username=PAI-repo&label=Repository%20Views&color=8B5CF6&style=flat-square)
 
 <br/>
 
-[![Stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=yellow&logoColor=white)](https://github.com/danielmiessler/PAI/stargazers)
-[![Forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=blue&logoColor=white)](https://github.com/danielmiessler/PAI/network/members)
-[![Issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=red&logoColor=white)](https://github.com/danielmiessler/PAI/issues)
+[![GitHub stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=FFD700&label=⭐%20STARS)](https://github.com/danielmiessler/PAI/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=00CED1&label=🔱%20FORKS)](https://github.com/danielmiessler/PAI/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=FF6B6B&label=📋%20ISSUES)](https://github.com/danielmiessler/PAI/issues)
+[![Contributors](https://img.shields.io/github/contributors/danielmiessler/PAI?style=for-the-badge&logo=github&color=9370DB&label=👥%20CONTRIBUTORS)](https://github.com/danielmiessler/PAI/graphs/contributors)
+[![Release](https://img.shields.io/github/v/release/danielmiessler/PAI?style=for-the-badge&logo=github&color=4CAF50&label=📦%20RELEASE)](https://github.com/danielmiessler/PAI/releases)
 
 <br/>
 
 <a href="#-quick-start">
-  <img src="https://img.shields.io/badge/GET%20STARTED-8B5CF6?style=for-the-badge&logo=rocket&logoColor=white" alt="Get Started">
+  <img src="https://img.shields.io/badge/🚀_GET_STARTED-37a779?style=for-the-badge&labelColor=4c1&color=37a779&logoColor=white" alt="Get Started">
 </a>
 <a href="https://youtu.be/iKwRWwabkEc">
-  <img src="https://img.shields.io/badge/WATCH%20DEMO-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Watch Demo">
+  <img src="https://img.shields.io/badge/📺_WATCH_DEMO-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=FF0000" alt="Watch Demo">
 </a>
 <a href="https://github.com/danielmiessler/PAI/discussions">
-  <img src="https://img.shields.io/badge/JOIN%20COMMUNITY-1DA1F2?style=for-the-badge&logo=discord&logoColor=white" alt="Community">
+  <img src="https://img.shields.io/badge/💬_JOIN_COMMUNITY-7289DA?style=for-the-badge&logo=discord&logoColor=white&labelColor=5865F2" alt="Community">
 </a>
 
 <br/>
@@ -42,6 +45,9 @@
 **[Features](#-key-features)** • **[Quick Start](#-quick-start)** • **[Documentation](#-documentation)** • **[Examples](#-examples)** • **[Community](#-community)**
 
 </div>
+
+> [!IMPORTANT]
+> **🔒 Security Notice**: PAI is a PUBLIC, sanitized version of a personal AI infrastructure. Never copy sensitive data, API keys, or personal information to this repository. See [SECURITY.md](./SECURITY.md) for critical guidelines.
 
 ---
 
