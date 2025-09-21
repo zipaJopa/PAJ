@@ -8,46 +8,28 @@
 
 # **PAI** - Personal AI Infrastructure
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=20&pause=1000&color=8B5CF6&center=true&vCenter=true&width=800&lines=Open-source+personal+AI+infrastructure;Orchestrate+your+life+and+work+with+AI;Augment+yourself%2C+don't+be+replaced)](https://git.io/typing-svg)
+### **Open-source personal AI infrastructure for orchestrating your life and work**
 
 <br/>
 
-![Mission](https://img.shields.io/badge/MISSION-Upgrade_Humans_with_AI-8B5CF6?style=flat-square&labelColor=6B46C1)
-![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI?style=flat-square&color=FCA311&labelColor=14213D)
-[![License: MIT](https://img.shields.io/badge/LICENSE-MIT-22C55E?style=flat-square&labelColor=16A34A)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/POWERED_BY-Claude_Code-3B82F6?style=flat-square&labelColor=2563EB)](https://claude.ai/code)
-[![PAI Video](https://img.shields.io/badge/🎥_DEMO-Watch_Video-DC2626?style=flat-square&labelColor=B91C1C)](https://youtu.be/iKwRWwabkEc)
-![Profile Views](https://komarev.com/ghpvc/?username=PAI-repo&label=Repository%20Views&color=8B5CF6&style=flat-square)
+![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
+![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
+[![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
+![Views](https://komarev.com/ghpvc/?username=danielmiessler&label=Repository%20Views&color=purple&style=flat&base=7529)
 
 <br/>
 
-[![GitHub stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=FFD700&label=⭐%20STARS)](https://github.com/danielmiessler/PAI/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=00CED1&label=🔱%20FORKS)](https://github.com/danielmiessler/PAI/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=FF6B6B&label=📋%20ISSUES)](https://github.com/danielmiessler/PAI/issues)
-[![Contributors](https://img.shields.io/github/contributors/danielmiessler/PAI?style=for-the-badge&logo=github&color=9370DB&label=👥%20CONTRIBUTORS)](https://github.com/danielmiessler/PAI/graphs/contributors)
-[![Release](https://img.shields.io/github/v/release/danielmiessler/PAI?style=for-the-badge&logo=github&color=4CAF50&label=📦%20RELEASE)](https://github.com/danielmiessler/PAI/releases)
+[![Stars](https://img.shields.io/github/stars/danielmiessler/PAI?style=for-the-badge&logo=starship&color=yellow&logoColor=white)](https://github.com/danielmiessler/PAI/stargazers)
+[![Forks](https://img.shields.io/github/forks/danielmiessler/PAI?style=for-the-badge&logo=git&color=blue&logoColor=white)](https://github.com/danielmiessler/PAI/network/members)
+[![Issues](https://img.shields.io/github/issues/danielmiessler/PAI?style=for-the-badge&logo=github&color=red&logoColor=white)](https://github.com/danielmiessler/PAI/issues)
 
-<br/>
-
-<a href="#-quick-start">
-  <img src="https://img.shields.io/badge/🚀_GET_STARTED-37a779?style=for-the-badge&labelColor=4c1&color=37a779&logoColor=white" alt="Get Started">
-</a>
-<a href="https://youtu.be/iKwRWwabkEc">
-  <img src="https://img.shields.io/badge/📺_WATCH_DEMO-FF0000?style=for-the-badge&logo=youtube&logoColor=white&labelColor=FF0000" alt="Watch Demo">
-</a>
-<a href="https://github.com/danielmiessler/PAI/discussions">
-  <img src="https://img.shields.io/badge/💬_JOIN_COMMUNITY-7289DA?style=for-the-badge&logo=discord&logoColor=white&labelColor=5865F2" alt="Community">
-</a>
-
-<br/>
 <br/>
 
 **[Features](#-key-features)** • **[Quick Start](#-quick-start)** • **[Documentation](#-documentation)** • **[Examples](#-examples)** • **[Community](#-community)**
 
 </div>
-
-> [!IMPORTANT]
-> **🔒 Security Notice**: PAI is a PUBLIC, sanitized version of a personal AI infrastructure. Never copy sensitive data, API keys, or personal information to this repository. See [SECURITY.md](./SECURITY.md) for critical guidelines.
 
 ---
 
@@ -138,7 +120,7 @@ graph TB
 
 Think of PAI as your personal AI that actually knows you—all your projects, your style, your data—and can handle anything you throw at it. Whether you're an artist transitioning to independence, a founder building a company, or someone managing complex health needs, PAI becomes whatever you need it to be.
 
-PAI is part of the journey toward Human 3.0—where humans are augmented by AI rather than replaced by it.
+PAI is part of the journey toward Human 3.0—where humans are augmented by AI to amplify their capabilities.
 
 📖 **[Learn how PAI fits into the Human 3.0 vision](https://danielmiessler.com/blog/how-my-projects-fit-together)**
 
@@ -221,64 +203,177 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI r
 
 ---
 
-## ⚡ **Key Features**
+## ⚡ **Architecture**
+
+### 🏗️ **The PAI System Architecture**
+
+```mermaid
+graph TD
+    User[👤 You] --> Hooks[🪝 Dynamic Hooks]
+    
+    Hooks --> UFC[📁 UFC Context System]
+    Hooks --> Commands[⚡ Custom Commands]
+    
+    UFC --> Projects[🧠 Projects]
+    UFC --> Life[🏠 Life Context]
+    UFC --> Work[💼 Work Context]
+    
+    Commands --> MCPs[🔌 MCP Servers]
+    Commands --> Agents[🤖 AI Agents]
+    Commands --> APIs[🌐 API Integrations]
+    
+    MCPs --> Playwright[🎭 Browser Automation]
+    MCPs --> Stripe[💳 Payment Processing]
+    MCPs --> Analytics[📊 Analytics]
+    
+    Agents --> Output[✨ Augmented Actions]
+    APIs --> Output
+    MCPs --> Output
+    
+    style User fill:#1f2937,stroke:#10b981,stroke-width:2px,color:#e5e7eb
+    style Hooks fill:#111827,stroke:#8b5cf6,stroke-width:2px,color:#e5e7eb
+    style Output fill:#111827,stroke:#ef4444,stroke-width:2px,color:#e5e7eb
+```
 
 <table>
 <tr>
-<td width="50%">
+<td width="33%" valign="top">
 
-### 🏗️ **UFC Context System**
+### 📁 **UFC Context System**
 
 ```
 ~/.claude/context/
-├── 🧠 projects/
-├── 🛠️ tools/
-├── 💰 finances/
-├── 🏥 health/
-└── 🎯 telos/
+├── projects/
+│   ├── website/
+│   ├── Alma/
+│   └── PAI/
+├── life/
+│   ├── finances/
+│   ├── health/
+│   └── expenses/
+├── work/
+│   ├── consulting/
+│   └── business/
+└── benefits/
+    └── credit-cards/
 ```
 
-✅ Persistent memory across sessions  
-✅ Hierarchical organization  
-✅ Plain text portability  
-✅ Dynamic loading
+**Features:**
+- Persistent memory
+- Plain text files
+- Dynamic loading
+- Hierarchical organization
 
 </td>
-<td width="50%">
+<td width="33%" valign="top">
+
+### ⚡ **Custom Commands**
+
+**Professional:**
+- `write-blog` - Content generation
+- `get-newsletter-stats` - Beehiiv metrics
+- `design-review` - Code analysis
+- `create-consulting-document`
+- `update-daemon` - API management
+
+**Personal:**
+- `answer-finance-question`
+- `get-life-log` - Limitless.ai integration
+- `send-text-alert` - SMS notifications
+- `track-health-metrics`
+- `capture-learning`
+
+**60+ commands** ready to use
+
+</td>
+<td width="33%" valign="top">
 
 ### 🤖 **Specialized Agents**
 
-| Agent | Specialization |
-|-------|---------------|
-| 🔬 **Researcher** | Deep synthesis |
-| 💻 **Engineer** | Production code |
-| 🎨 **Designer** | UX/UI design |
-| 🔒 **Pentester** | Security testing |
-| 📐 **Architect** | System design |
+| Agent | Purpose | Tools |
+|-------|---------|-------|
+| **Researcher** | Deep web research | WebSearch, WebFetch |
+| **Engineer** | Production code | Testing, Debugging |
+| **Designer** | UX/UI design | Figma, shadcn/ui |
+| **Pentester** | Security | Nmap, Burp |
+| **Architect** | System design | Diagrams, PRDs |
 
-✅ Task-specific expertise  
-✅ Voice personalities  
-✅ Tool integration  
-✅ Parallel execution
+**With:**
+- ElevenLabs voices
+- Task parallelization
+- Tool integration
 
 </td>
 </tr>
 </table>
 
-<details>
-<summary><strong>🔧 Integrated Tool Ecosystem</strong></summary>
+### 🪝 **Dynamic Hook System**
 
-<br/>
+<table>
+<tr>
+<td width="50%">
 
-| Category | Tools |
-|----------|-------|
-| **🎭 Automation** | Playwright, Puppeteer, Selenium |
-| **💳 Financial** | Stripe, Square, PayPal |
-| **📊 Analytics** | Google Analytics, Mixpanel |
-| **🗣️ Voice** | ElevenLabs, OpenAI TTS |
-| **🔌 MCPs** | Custom servers for any API |
+**Context Loading Hooks:**
+- `submit-user-hook` - Loads context based on intent
+- `load-dynamic-requirements` - Smart routing
+- Automatic agent selection
+- Domain-specific knowledge injection
 
-</details>
+</td>
+<td width="50%">
+
+**Integration Hooks:**
+- Pre/post command execution
+- Error handling and recovery
+- Rate limiting and validation
+- Security scanning
+
+</td>
+</tr>
+</table>
+
+### 🔌 **MCP Server Ecosystem**
+
+<table>
+<tr>
+<td width="25%">
+
+**Browser & Testing**
+- Playwright
+- Puppeteer
+- Selenium
+- Visual regression
+
+</td>
+<td width="25%">
+
+**Financial**
+- Stripe API
+- Square
+- PayPal
+- Crypto wallets
+
+</td>
+<td width="25%">
+
+**Analytics**
+- Google Analytics
+- Mixpanel
+- Beehiiv
+- Site metrics
+
+</td>
+<td width="25%">
+
+**Communication**
+- ElevenLabs TTS
+- OpenAI Voice
+- Discord
+- Email/SMS
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -366,11 +461,11 @@ PORT="8888"                        # Voice server port
 
 | 📖 Guide | 🎯 Purpose | ⏱️ Time |
 |----------|------------|---------|
-| [Quick Start](./docs/quick-start.md) | Get up and running | 5 min |
-| [Architecture](./docs/architecture.md) | Understand the system | 10 min |
-| [UFC Context](./docs/ufc-context.md) | Master context management | 15 min |
-| [Agents](./docs/agents.md) | Work with AI agents | 10 min |
-| [Voice Server](./docs/voice-server.md) | Enable voice interaction | 10 min |
+| [Quick Start](#-quick-start) | Get up and running | 5 min |
+| [Architecture](#-architecture) | Understand the system | 10 min |
+| [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
+| [Voice Server](./.claude/voice-server/README.md) | Enable voice interaction | 10 min |
+| [Commands Directory](./.claude/commands/) | Browse all commands | 15 min |
 
 </div>
 
@@ -378,13 +473,17 @@ PORT="8888"                        # Voice server port
 
 ## 🎬 **Real-World Examples**
 
+<div align="center">
+
 > **Note:** These are examples from my personal PAI setup. Your system will have completely different commands based on your unique needs, workflows, and goals.
+
+</div>
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="33%" valign="top">
 
-### 💼 **Professional Examples**
+### 💼 **Professional**
 
 #### 📈 **Business & Analytics**
 
@@ -467,9 +566,9 @@ create-mermaid-visualization --type flowchart
 </details>
 
 </td>
-<td width="50%" valign="top">
+<td width="33%" valign="top">
 
-### 🏠 **Personal Examples**
+### 🏠 **Personal**
 
 #### 💰 **Financial Intelligence**
 
@@ -553,6 +652,99 @@ update-public-content
 </details>
 
 </td>
+<td width="33%" valign="top">
+
+### 🎨 **Creative & Other Fields**
+
+#### 🎭 **Artist Workflow**
+
+<details>
+<summary><strong>🎨 Creative Portfolio</strong></summary>
+
+```bash
+# Manage artistic work
+track-project-progress "oil painting series"
+generate-artist-statement --style contemporary
+update-portfolio-website --new-pieces
+schedule-gallery-submission --deadline friday
+```
+
+</details>
+
+<details>
+<summary><strong>📷 Photography Business</strong></summary>
+
+```bash
+# End-to-end photography workflow
+process-shoot-metadata --wedding-2024-09
+generate-client-gallery --password-protected
+send-invoice --client johnson-wedding
+backup-raw-files --cloud-storage
+```
+
+</details>
+
+#### 🎵 **Musician Setup**
+
+<details>
+<summary><strong>🎤 Music Production</strong></summary>
+
+```bash
+# Creative music workflow
+track-song-ideas --voice-memo-to-text
+generate-chord-progressions --key-of-c
+schedule-studio-time --next-available
+export-stems --for-mixing
+```
+
+</details>
+
+#### 🌿 **Health & Wellness Coach**
+
+<details>
+<summary><strong>🏋️ Client Management</strong></summary>
+
+```bash
+# Wellness practice automation
+track-client-progress --weekly-checkin
+generate-meal-plans --dietary-restrictions
+send-motivation-message --personalized
+schedule-follow-up --in-two-weeks
+```
+
+</details>
+
+#### 📚 **Academic Researcher**
+
+<details>
+<summary><strong>🔬 Research Pipeline</strong></summary>
+
+```bash
+# Academic workflow
+search-literature --keywords "machine learning ethics"
+organize-citations --zotero-import
+generate-literature-review --outline
+track-experiment-results --statistical-analysis
+```
+
+</details>
+
+#### 🏠 **Real Estate Agent**
+
+<details>
+<summary><strong>🏡 Property Management</strong></summary>
+
+```bash
+# Real estate automation
+analyze-market-trends --neighborhood-data
+generate-property-reports --comparative-analysis
+schedule-showings --calendar-optimization
+send-client-updates --weekly-digest
+```
+
+</details>
+
+</td>
 </tr>
 </table>
 
@@ -593,7 +785,7 @@ PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
 ### **The Path to Human 3.0**
 
-> *"PAI isn't about AI replacing you—it's about becoming augmented. It's about having perfect memory, infinite analysis, and creative superpowers while remaining fundamentally human."*
+> *"Humans are what matters. AI is only useful as it is to humans. The reason I'm building all of this is so that people have a chance to compete with AI in this world that is coming."*
 
 <br/>
 
