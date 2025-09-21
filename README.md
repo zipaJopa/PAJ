@@ -3,7 +3,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./pai-logo.png">
   <source media="(prefers-color-scheme: light)" srcset="./pai-logo.png">
-  <img alt="PAI Logo" src="./pai-logo.png" width="400">
+  <img alt="PAI Logo" src="./pai-logo.png" width="1200">
 </picture>
 
 # **PAI** - Personal AI Infrastructure
@@ -119,7 +119,13 @@ graph TB
 
 </div>
 
-PAI is a unified system where a single AI assistant named Kai orchestrates every aspect of your digital life. Think of it as having a brilliant assistant who knows everything about you—your projects, finances, health data, meeting notes, and goals—all while maintaining perfect memory across every interaction.
+**PAI is an open-source, full personal AI platform that's completely agnostic to who you are and what you're trying to accomplish.**
+
+This isn't just another AI tool—it's a complete infrastructure for anyone on Earth to harness AI for both business and life. Whether you're an artist transitioning to independence, a founder building a company, or someone managing complex health needs, PAI adapts to YOUR unique situation.
+
+PAI is part of the journey toward Human 3.0—where humans are augmented by AI rather than replaced by it.
+
+📖 **[Learn how PAI fits into the Human 3.0 vision](https://danielmiessler.com/blog/how-my-projects-fit-together)**
 
 <table>
 <tr>
@@ -186,9 +192,16 @@ PAI is a unified system where a single AI assistant named Kai orchestrates every
 </tr>
 </table>
 
-Based on my own personal Digital Assistant **Kai**, PAI combines a scaffolding framework with real-world examples to help you build your own AI-powered infrastructure.
+### 🌟 **Why PAI is Different**
 
-📖 **[Read the full blog post about PAI](https://danielmiessler.com/blog/personal-ai-infrastructure)**
+- **🌍 Universal**: Works for anyone, anywhere, in any profession or life situation
+- **🔓 Open Source**: No vendor lock-in, complete transparency, you own everything
+- **🧠 Persistent Memory**: Your AI remembers every context, project, and conversation
+- **🎯 Task Agnostic**: From writing a blog to tracking medical data to running a business
+- **📁 Plain Text**: All configuration in human-readable files you can edit and understand
+- **🔌 Extensible**: Add your own commands, agents, and integrations
+
+📖 **[Read the full technical deep-dive on PAI](https://danielmiessler.com/blog/personal-ai-infrastructure)**
 
 ---
 
@@ -260,69 +273,61 @@ Based on my own personal Digital Assistant **Kai**, PAI combines a scaffolding f
 
 ### **Installation**
 
-<table>
-<tr>
-<td>
-
-**1️⃣ Install Prerequisites**
+#### **Step 1: Install Prerequisites**
 
 ```bash
-# Install Bun
+# Install Bun (JavaScript runtime)
 brew install bun
 
-# Install Claude Code
-# Visit claude.ai/code
+# Get Claude Code (AI interface)
+# Visit: https://claude.ai/code
 ```
 
-</td>
-<td>
-
-**2️⃣ Clone & Configure**
+#### **Step 2: Clone PAI Repository**
 
 ```bash
-# Clone PAI
+# Clone the PAI repository
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI
 
-# Configure environment
-cp .env.example ~/.env
-vim ~/.env  # Add your API keys
+# Note: .claude directory is hidden by default
+ls -la  # See all files including .claude
 ```
 
-</td>
-</tr>
-<tr>
-<td>
-
-**3️⃣ Set PAI_HOME**
+#### **Step 3: Configure Environment**
 
 ```bash
-# Add to ~/.zshrc or ~/.bashrc
+# Copy environment template
+cp .env.example ~/.env
+
+# Add your API keys (optional but recommended)
+vim ~/.env
+# Add: ELEVENLABS_API_KEY="your_key_here"
+# Add: OPENAI_API_KEY="your_key_here"
+```
+
+#### **Step 4: Set PAI_HOME Variable**
+
+```bash
+# Add to your shell config (~/.zshrc or ~/.bashrc)
 export PAI_HOME="$HOME"
 
-# Reload shell
-source ~/.zshrc
+# Reload your shell configuration
+source ~/.zshrc  # or source ~/.bashrc
 ```
 
-</td>
-<td>
-
-**4️⃣ Launch PAI**
+#### **Step 5: Launch PAI**
 
 ```bash
-# Navigate to PAI
+# Navigate to PAI directory
 cd ~/.claude
 
-# Start voice server (optional)
-cd voice-server && ./start.sh
+# Optional: Start voice server for audio notifications
+cd voice-server && ./install.sh && ./start.sh
 
-# Open Claude Code
-# Your PAI is ready! 🚀
+# Open Claude Code and start using PAI!
+# Your personal AI infrastructure is ready 🚀
 ```
-
-</td>
-</tr>
-</table>
 
 ### **⚙️ Environment Variables**
 
@@ -354,88 +359,168 @@ PORT="8888"                        # Voice server port
 
 ---
 
-## 🎬 **Examples**
+## 🎬 **Real-World Examples**
+
+### 📈 **Business & Analytics**
 
 <details>
-<summary><strong>📊 Newsletter Analytics</strong></summary>
+<summary><strong>📊 Newsletter Performance</strong></summary>
 
 ```bash
-# Get real-time newsletter performance stats
+# Track newsletter metrics in real-time
 get-newsletter-stats
-
-# Returns:
-# - Subscriber growth trends
-# - Open/click rates by post
-# - Top performing content
-# - Engagement visualizations
+# Returns subscriber growth, open rates, top content
 ```
 
 </details>
 
 <details>
-<summary><strong>💰 Financial Intelligence</strong></summary>
+<summary><strong>🚀 Startup Dashboard</strong></summary>
 
 ```bash
-# Answer specific financial questions
-answer-finance-question "What's my PG&E bill typically?"
-answer-finance-question "How much am I spending on subscriptions?"
+# Monitor all key metrics
+get-site-analytics        # Traffic and conversions
+get-finances-state        # Revenue tracking
+add-linear-ticket         # Development velocity
+```
 
-# Automatically:
-# - Parses bank statements & PDFs
-# - Analyzes spending patterns
-# - Tracks vendor payments
+</details>
+
+### 💰 **Financial Intelligence**
+
+<details>
+<summary><strong>📉 Expense Analysis</strong></summary>
+
+```bash
+# Instant financial insights
+answer-finance-question "monthly utilities average?"
+answer-finance-question "subscription spending?"
+process-finances-data --categorize --visualize
 ```
 
 </details>
 
 <details>
-<summary><strong>📝 Content Creation</strong></summary>
+<summary><strong>📈 Financial Planning</strong></summary>
 
 ```bash
-# Write blog posts in your style
-write-blog "AI Security Trends 2025"
+# Comprehensive financial overview
+get-finances-state
+prepare-finances-dashboard
+push-finances-state --notify
+```
 
-# Automatically:
-# - Creates draft with proper formatting
-# - Generates featured images
-# - Adds SEO optimization
-# - Prepares for publishing
+</details>
+
+### ✍️ **Content Creation**
+
+<details>
+<summary><strong>📝 Blog Pipeline</strong></summary>
+
+```bash
+# End-to-end content creation
+web-research "emerging AI trends"
+extract-knowledge --key-points
+write-blog --style personal --length 1500
+enhance-content --seo --readability
+publish-blog --schedule tomorrow
 ```
 
 </details>
 
 <details>
-<summary><strong>🔍 Life Intelligence</strong></summary>
+<summary><strong>🎨 Visual Content</strong></summary>
 
 ```bash
-# Search your recorded conversations
-get-life-log "What did we discuss at lunch on Tuesday?"
-
-# Searches:
-# - Limitless.ai recordings
-# - Meeting transcripts
-# - Personal conversations
+# Create stunning visualizations
+create-d3-visualization --data metrics.json
+create-custom-image "futuristic AI assistant"
+create-mermaid-visualization --type flowchart
 ```
 
 </details>
 
----
+### 🧪 **Memory & Research**
 
-## 💡 **Philosophy**
+<details>
+<summary><strong>🔍 Meeting Recall</strong></summary>
 
-<div align="center">
+```bash
+# Never forget a conversation
+get-life-log "investor meeting last week"
+get-life-log "product roadmap decisions"
+query-context "action items from standup"
+```
 
-### **Augmentation, Not Replacement**
+</details>
 
-| ❌ **Traditional AI** | ✅ **PAI Approach** |
-|---------------------|-------------------|
-| Black box decisions | Transparent logic |
-| Vendor lock-in | Complete portability |
-| Replaces humans | Augments humans |
-| Forgets context | Persistent memory |
-| Generic responses | Personalized to you |
+<details>
+<summary><strong>📚 Knowledge Building</strong></summary>
 
-</div>
+```bash
+# Build your second brain
+capture-learning --source conference
+extract-knowledge --summarize
+learn-from-iterations --improve
+query-context "machine learning notes"
+```
+
+</details>
+
+### 🎯 **Personal Productivity**
+
+<details>
+<summary><strong>툿 Morning Automation</strong></summary>
+
+```bash
+# Start your day right
+get-life-log "yesterday's highlights"
+query-context "today's priorities"
+send-text-alert "heading to office"
+reset-visitor-peak  # Reset daily counters
+```
+
+</details>
+
+<details>
+<summary><strong>📧 Smart Communication</strong></summary>
+
+```bash
+# Intelligent outreach
+send-email --template followup
+send-discord-alert --channel team
+add-links --resource documentation
+update-public-content
+```
+
+</details>
+
+### 🔒 **Development & Security**
+
+<details>
+<summary><strong>🔍 Code Security</strong></summary>
+
+```bash
+# Security automation
+check-for-sensitive --scan all
+design-review --security-focus
+browser-tools-setup --headers
+```
+
+</details>
+
+<details>
+<summary><strong>🔌 API Infrastructure</strong></summary>
+
+```bash
+# Personal API management
+update-daemon --endpoints
+create-cloudflare-mcp-server
+update-tools-context --integrations
+startup-context-load
+```
+
+</details>
 
 ---
 
@@ -443,7 +528,7 @@ get-life-log "What did we discuss at lunch on Tuesday?"
 
 <div align="center">
 
-### **Join the PAI Community**
+### **Help Us Give AI to the World**
 
 <a href="https://github.com/danielmiessler/PAI/issues">
   <img src="https://img.shields.io/badge/Report%20Issues-red?style=for-the-badge&logo=github&logoColor=white" alt="Issues">
@@ -472,14 +557,15 @@ PAI is MIT licensed. See [LICENSE](./LICENSE) for details.
 
 <div align="center">
 
-### **Transform Yourself Today**
+### **The Path to Human 3.0**
 
-> *"You're not using AI—you're augmenting yourself with it."*
+> *"PAI isn't about AI replacing you—it's about becoming augmented. It's about having perfect memory, infinite analysis, and creative superpowers while remaining fundamentally human."*
 
 <br/>
 
-**Created by [Daniel Miessler](https://danielmiessler.com)**  
-**Follow the journey on [YouTube](https://www.youtube.com/@unsupervised-learning)**
+**Created by [Daniel Miessler](https://danielmiessler.com)**
+
+📧 **[Newsletter](https://newsletter.danielmiessler.com)** • 📝 **[Blog](https://danielmiessler.com/blog)** • 💼 **[LinkedIn](https://linkedin.com/in/danielmiessler)** • 🎬 **[YouTube](https://www.youtube.com/@unsupervised-learning)**
 
 <br/>
 
