@@ -119,26 +119,68 @@ graph TB
 
 </div>
 
-PAI is designed to give anyone a personal AI infrastructure that:
+PAI is a unified system where a single AI assistant named Kai orchestrates every aspect of your digital life. Think of it as having a brilliant assistant who knows everything about you—your projects, finances, health data, meeting notes, and goals—all while maintaining perfect memory across every interaction.
 
 <table>
 <tr>
-<td align="center" width="33%">
-  
+<td width="33%" valign="top">
+
 ### 🧠 **Life Management**
-Research • Writing • Health • Finance
+
+**Finance Intelligence**
+- `answer-finance-question` - Analyze bank statements
+- `get-finances-state` - Track spending patterns
+- Parse PDFs for utility bills and expenses
+
+**Memory & Conversations**
+- `get-life-log` - Search recorded meetings
+- Query Limitless.ai pendant recordings
+- Find what was discussed at any event
+
+**Health Tracking**
+- Monitor wellness metrics
+- Track medical records
+- Analyze sleep and fitness data
 
 </td>
-<td align="center" width="33%">
+<td width="33%" valign="top">
 
 ### 💼 **Professional**
-Code • Analytics • Automation • Strategy
+
+**Content Creation**
+- `write-blog` - Generate posts in your style
+- `publish-blog` - Deploy to production
+- `enhance-content` - Improve existing work
+
+**Business Analytics**
+- `get-newsletter-stats` - Beehiiv metrics
+- `get-site-analytics` - Website performance
+- `create-consulting-document` - Client deliverables
+
+**Development**
+- `design-review` - Code analysis
+- `browser-tools-setup` - Automation
+- `update-daemon` - API management
 
 </td>
-<td align="center" width="33%">
+<td width="33%" valign="top">
 
-### 🎯 **Personal**
-Learning • Goals • Habits • Growth
+### 🎯 **Personal Growth**
+
+**Knowledge Capture**
+- `extract-knowledge` - Learn from content
+- `capture-learning` - Document insights
+- `web-research` - Deep investigations
+
+**Communication**
+- `send-email` - Automated outreach
+- `send-text-alert` - SMS notifications
+- `send-discord-alert` - Team updates
+
+**Productivity**
+- `add-linear-ticket` - Task management
+- `create-mermaid-visualization` - Idea mapping
+- `query-context` - Access any stored knowledge
 
 </td>
 </tr>
