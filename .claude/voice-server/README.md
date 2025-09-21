@@ -1,195 +1,258 @@
-# PAIVoice - Personal AI Voice Framework
+# PAI Voice Server
 
-PAIVoice is a flexible voice notification framework for Personal AI (PAI) systems on macOS. It provides natural-sounding voice notifications using ElevenLabs AI voices or fallback to macOS's built-in text-to-speech.
+A voice notification server for the Personal AI Infrastructure (PAI) system that provides text-to-speech notifications using ElevenLabs API or macOS's built-in `say` command as fallback.
 
-## 🎯 Purpose
+> **Quick Start**: See [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide.
 
-This framework enables ANY Personal AI system to:
-- Send voice notifications to users
-- Provide audio feedback for completed tasks
-- Create more engaging AI interactions
-- Work with any AI assistant (not limited to a specific name or personality)
+## 🎯 Features
 
-## 🚀 Features
+- **ElevenLabs Integration**: High-quality AI voices for notifications
+- **Fallback Support**: Uses macOS `say` command when ElevenLabs is not configured
+- **Multiple Voice Support**: Different voices for different AI agents
+- **macOS Service**: Runs automatically in the background
+- **Menu Bar Indicator**: Visual status indicator in macOS menu bar
+- **Simple HTTP API**: Easy integration with any tool or script
 
-- **AI Voice Support**: Natural voices via ElevenLabs API
-- **Fallback Mode**: Works without API key using macOS 'say' command
-- **Menu Bar Icon**: Visual status indicator with quick controls
-- **Service Management**: Runs as a background service
-- **Simple API**: Easy HTTP endpoints for notifications
-- **Customizable**: Choose your own voice and personality
+## 📋 Prerequisites
 
-## 📦 Quick Setup
+- macOS (tested on macOS 11+)
+- [Bun](https://bun.sh) runtime installed
+- ElevenLabs API key (optional, for AI voices)
 
-### 1. Install Prerequisites
+## 🚀 Quick Start
+
+### 1. Install Bun (if not already installed)
 ```bash
-# Install Bun (JavaScript runtime)
 curl -fsSL https://bun.sh/install | bash
 ```
 
-### 2. Configure API Keys (Optional)
+### 2. Configure API Key (Optional but Recommended)
+Add your ElevenLabs API key to `~/.env`:
 ```bash
-# Add to ~/.env for AI voices
-echo "ELEVENLABS_API_KEY=your_key_here" >> ~/.env
-echo "ELEVENLABS_VOICE_ID=voice_id_here" >> ~/.env
+echo "ELEVENLABS_API_KEY=your_api_key_here" >> ~/.env
+echo "ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR" >> ~/.env
 ```
 
-Get a free API key from [ElevenLabs](https://elevenlabs.io) (10,000 chars/month free)
+> Get your free API key at [elevenlabs.io](https://elevenlabs.io) (10,000 characters/month free)
 
-### 3. Install as Service
+### 3. Install Voice Server
 ```bash
-cd ~/.claude/voice-server/macos-service
+cd ~/.claude/voice-server
 ./install.sh
 ```
 
-### 4. Add Menu Bar Icon (Optional)
+This will:
+- Install dependencies
+- Create a macOS LaunchAgent for auto-start
+- Start the voice server on port 8888
+- Verify the installation
+- Optionally install menu bar indicator (requires SwiftBar/BitBar)
+
+## 🛠️ Service Management
+
+### Start Server
 ```bash
-cd ~/.claude/voice-server/macos-service/menubar
-./install-menubar.sh
+./start.sh
+# or
+launchctl load ~/Library/LaunchAgents/com.pai.voice-server.plist
 ```
 
-## 🎙️ Usage
+### Stop Server
+```bash
+./stop.sh
+# or
+launchctl unload ~/Library/LaunchAgents/com.pai.voice-server.plist
+```
 
-### Send a Notification
+### Restart Server
+```bash
+./restart.sh
+```
+
+### Check Status
+```bash
+./status.sh
+```
+
+### Uninstall
+```bash
+./uninstall.sh
+```
+This will stop the service and remove the LaunchAgent.
+
+## 📡 API Usage
+
+### Send a Voice Notification
 ```bash
 curl -X POST http://localhost:8888/notify \
   -H "Content-Type: application/json" \
   -d '{
-    "title": "Your PAI Name",
     "message": "Task completed successfully",
+    "voice_id": "jqcCZkN6Knx8BJ5TBdYR",
     "voice_enabled": true
   }'
 ```
 
-### PAI Assistant Notification
-```bash
-curl -X POST http://localhost:8888/pai \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Assistant",
-    "message": "I've finished analyzing your data"
-  }'
-```
+### Parameters
+- `message` (required): The text to speak
+- `voice_id` (optional): ElevenLabs voice ID to use
+- `voice_enabled` (optional): Whether to speak the notification (default: true)
+- `title` (optional): Notification title (default: "PAI Notification")
 
-## 🔧 Customization
-
-### Choose Your Voice
-
-Popular ElevenLabs voice IDs:
-- `jqcCZkN6Knx8BJ5TBdYR` - Friendly assistant (default)
-- `21m00Tcm4TlvDq8ikWAM` - Rachel (calm, professional)
-- `AZnzlk1XvdvUeBnXmlld` - Domi (energetic)
-- `EXAVITQu4vr4xnSDxMaL` - Bella (warm, friendly)
-
-Set in `~/.env`:
-```bash
-ELEVENLABS_VOICE_ID=your_chosen_voice_id
-```
-
-### Customize for Your PAI
-
-The framework is designed to work with ANY Personal AI system:
-- Use your PAI's name in the `title` field
-- Customize messages to match your PAI's personality
-- Integrate with your existing AI tools and workflows
-
-## 📡 API Endpoints
-
-- `POST /notify` - General notification with optional voice
-- `POST /pai` - PAI-specific notification (always with voice)
-- `GET /health` - Service health check
-
-### Request Format
-```json
-{
-  "title": "Your PAI Name",
-  "message": "Notification text",
-  "voice_enabled": true,
-  "voice_id": "optional_voice_override"
-}
-```
-
-## 🛠️ Service Management
-
-```bash
-# Control the service
-./macos-service/voice-server-ctl.sh status
-./macos-service/voice-server-ctl.sh start
-./macos-service/voice-server-ctl.sh stop
-./macos-service/voice-server-ctl.sh restart
-
-# View logs
-./macos-service/voice-server-ctl.sh logs
-
-# Test the service
-./macos-service/voice-server-ctl.sh test
-```
-
-## 📊 Menu Bar Icon
-
-The menu bar icon shows:
-- 🎙️ = Server running
-- 🔇 = Server stopped
-
-Click for quick access to controls and status.
-
-## 🔒 Security
-
-- API keys stored locally in `~/.env`
-- Service runs as user (not root)
-- Only accepts local connections
-- No data sent except to ElevenLabs (if configured)
-
-## 📁 Project Structure
-
-```
-voice-server/
-├── server.ts                 # Main server code
-├── start.sh                  # Manual start script
-├── macos-service/           
-│   ├── com.paivoice.server.plist  # Service configuration
-│   ├── install.sh           # Service installer
-│   ├── uninstall.sh         # Service remover
-│   ├── voice-server-ctl.sh  # Service control
-│   ├── validate-setup.sh    # Setup validator
-│   └── menubar/             # Menu bar icon
-└── README.md                # This file
-```
-
-## 🤝 Integration Examples
-
-### With Python AI Agent
-```python
-import requests
-
-def send_voice_notification(message):
-    requests.post('http://localhost:8888/pai', json={
-        'title': 'My AI Assistant',
-        'message': message
-    })
-
-# Use in your AI workflow
-send_voice_notification("Analysis complete. Found 3 insights.")
-```
-
-### With Node.js/Bun
+### Available Voice IDs
 ```javascript
-async function notify(message) {
-  await fetch('http://localhost:8888/pai', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      title: 'AI Helper',
-      message: message
-    })
-  });
-}
+// PAI System Agents
+Kai:        jqcCZkN6Knx8BJ5TBdYR  // Main assistant
+Researcher: AXdMgz6evoL7OPd7eU12  // Research agent
+Engineer:   kmSVBPu7loj4ayNinwWM  // Engineering agent
+Designer:   ZF6FPAbjXT4488VcRRnw  // Design agent
+Pentester:  hmMWXCj9K7N5mCPcRkfC  // Security agent
+Architect:  muZKMsIDGYtIkjjiUS82  // Architecture agent
+Writer:     gfRt6Z3Z8aTbpLfexQ7N  // Content agent
 ```
+
+## 🖥️ Menu Bar Indicator
+
+The voice server includes an optional menu bar indicator that shows the server status.
+
+### Installing the Menu Bar
+
+1. **Install SwiftBar** (recommended) or BitBar:
+```bash
+brew install --cask swiftbar
+# OR
+brew install --cask bitbar
+```
+
+2. **Run the menu bar installer**:
+```bash
+cd ~/.claude/voice-server/menubar
+./install-menubar.sh
+```
+
+### Menu Bar Features
+- **Visual Status**: 🎙️ (running) or 🎙️⚫ (stopped)
+- **Quick Controls**: Start/Stop/Restart server from menu
+- **Status Info**: Shows voice type (ElevenLabs/macOS Say)
+- **Quick Test**: Test voice with one click
+- **View Logs**: Access server logs directly
+
+### Manual Installation
+If you prefer manual installation:
+1. Copy `menubar/pai-voice.5s.sh` to your SwiftBar/BitBar plugins folder
+2. Make it executable: `chmod +x pai-voice.5s.sh`
+3. Refresh SwiftBar/BitBar
+
+## 🔧 Configuration
+
+### Environment Variables
+Create or edit `~/.env` in your home directory:
+
+```bash
+# Required for ElevenLabs voices (optional)
+ELEVENLABS_API_KEY=your_api_key_here
+
+# Default voice ID (optional, defaults to Kai)
+ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR
+
+# Server port (optional, defaults to 8888)
+PORT=8888
+```
+
+### Finding Your Voice ID
+1. Go to [ElevenLabs Voice Library](https://elevenlabs.io/voice-library)
+2. Select a voice you like
+3. Click "Use" and copy the Voice ID
+4. Update `ELEVENLABS_VOICE_ID` in your `~/.env`
+
+## 🐛 Troubleshooting
+
+### Server won't start
+```bash
+# Check if port 8888 is already in use
+lsof -i :8888
+
+# Kill any existing process
+lsof -ti :8888 | xargs kill -9
+
+# Restart the server
+./restart.sh
+```
+
+### No voice output
+```bash
+# Check if ElevenLabs key is configured
+grep ELEVENLABS_API_KEY ~/.env
+
+# Test with fallback (macOS say)
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Testing voice output"}'
+
+# Check server logs
+tail -f ~/Library/Logs/pai-voice-server.log
+```
+
+### Service not auto-starting
+```bash
+# Check LaunchAgent status
+launchctl list | grep pai.voice
+
+# Reload LaunchAgent
+launchctl unload ~/Library/LaunchAgents/com.pai.voice-server.plist
+launchctl load ~/Library/LaunchAgents/com.pai.voice-server.plist
+
+# Check for errors
+tail -f ~/Library/Logs/pai-voice-server.log
+```
+
+## 📁 File Structure
+```
+~/.claude/voice-server/
+├── server.ts              # Main server code
+├── install.sh             # Installation script
+├── start.sh              # Start server
+├── stop.sh               # Stop server
+├── restart.sh            # Restart server
+├── status.sh             # Check server status
+├── uninstall.sh          # Uninstall service
+├── README.md             # This file
+└── menubar/
+    ├── pai-voice.5s.sh   # Menu bar status script
+    └── install-menubar.sh # Menu bar installer
+
+~/Library/LaunchAgents/
+└── com.pai.voice-server.plist  # macOS service definition
+
+~/Library/Logs/
+└── pai-voice-server.log        # Server logs
+```
+
+## 🔐 Security Notes
+
+- **No hardcoded API keys**: All sensitive data is read from `~/.env`
+- **Local only**: Server only listens on localhost (127.0.0.1)
+- **User-specific**: Each user maintains their own API keys
+- **Safe for public repos**: No sensitive data in the codebase
+
+## 🤝 Integration with PAI System
+
+This voice server integrates with the PAI (Personal AI Infrastructure) system to provide voice notifications when:
+- Tasks are completed
+- Agents finish their work
+- Important events occur
+- User notifications are needed
+
+The PAI hooks automatically send notifications to this server when configured.
 
 ## 📝 License
 
-Open source - Customize for your needs!
+Part of the PAI (Personal AI Infrastructure) system.
 
-## 🙏 Credits
+## 🆘 Support
 
-Built as a framework for Personal AI systems, inspired by the need for better human-AI interaction through voice.
+For issues or questions:
+1. Check the troubleshooting section above
+2. Review logs at `~/Library/Logs/pai-voice-server.log`
+3. Ensure your ElevenLabs API key is valid
+4. Try the fallback mode (without API key) to isolate issues

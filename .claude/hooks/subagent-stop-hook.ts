@@ -8,8 +8,10 @@ const AGENT_VOICE_IDS: Record<string, string> = {
   pentester: 'hmMWXCj9K7N5mCPcRkfC',
   engineer: 'kmSVBPu7loj4ayNinwWM',
   designer: 'ZF6FPAbjXT4488VcRRnw',
+  architect: 'muZKMsIDGYtIkjjiUS82',
   writer: 'gfRt6Z3Z8aTbpLfexQ7N',
-  default: 'AXdMgz6evoL7OPd7eU12'
+  kai: 'jqcCZkN6Knx8BJ5TBdYR',
+  default: 'jqcCZkN6Knx8BJ5TBdYR'
 };
 
 async function delay(ms: number): Promise<void> {
@@ -211,6 +213,7 @@ async function main() {
   
   // Prepare the notification
   const fullMessage = completionMessage; // Message is already prepared with agent name
+  const agentName = finalAgentType.charAt(0).toUpperCase() + finalAgentType.slice(1);
   
   // Send to notification server
   try {

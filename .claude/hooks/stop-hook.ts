@@ -8,6 +8,7 @@ const VOICES = {
   pentester: 'hmMWXCj9K7N5mCPcRkfC', 
   engineer: 'kmSVBPu7loj4ayNinwWM',
   designer: 'ZF6FPAbjXT4488VcRRnw',
+  architect: 'muZKMsIDGYtIkjjiUS82',
   writer: 'gfRt6Z3Z8aTbpLfexQ7N',
   kai: 'jqcCZkN6Knx8BJ5TBdYR'
 };
@@ -118,7 +119,7 @@ async function main() {
 
   // Generate the announcement
   let message = '';
-  let voiceId = VOICES.kai;
+  let voiceId = VOICES.kai; // Default to Kai's voice
   
   if (agentType && taskResult) {
     // AGENT DID THE TASK - Look for [AGENT:type] I completed something

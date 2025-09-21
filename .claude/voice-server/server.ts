@@ -4,8 +4,7 @@
  */
 
 import { serve } from "bun";
-import { exec } from "child_process";
-import { promisify } from "util";
+import { spawn } from "child_process";
 import { writeFile, unlink } from "fs/promises";
 import { tmpdir } from "os";
 import { join } from "path";
@@ -24,12 +23,11 @@ if (existsSync(envPath)) {
   });
 }
 
-const execAsync = promisify(exec);
 const PORT = parseInt(process.env.PORT || "8888");
 
 // ElevenLabs configuration - MUST be set in ~/.env
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
-const ELEVENLABS_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || "jqcCZkN6Knx8BJ5TBdYR";
+const ELEVENLABS_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || process.env.DEFAULT_VOICE_ID || "jqcCZkN6Knx8BJ5TBdYR";
 
 if (!ELEVENLABS_API_KEY) {
   console.error("⚠️  Warning: ELEVENLABS_API_KEY not found in ~/.env");
@@ -38,8 +36,42 @@ if (!ELEVENLABS_API_KEY) {
   console.error("   ELEVENLABS_API_KEY=your_api_key_here");
 }
 
+// Sanitize input for shell commands
+function sanitizeForShell(input: string): string {
+  // Remove any characters that could be used for command injection
+  // Allow only alphanumeric, spaces, and basic punctuation
+  return input.replace(/[^a-zA-Z0-9\s.,!?\-']/g, '').trim().substring(0, 500);
+}
+
+// Validate and sanitize user input
+function validateInput(input: any): { valid: boolean; error?: string } {
+  if (!input || typeof input !== 'string') {
+    return { valid: false, error: 'Invalid input type' };
+  }
+  
+  // Limit message length
+  if (input.length > 500) {
+    return { valid: false, error: 'Message too long (max 500 characters)' };
+  }
+  
+  // Check for potentially malicious patterns
+  const dangerousPatterns = [
+    /[;&|><`\$\(\)\{\}\[\]\\]/,  // Shell metacharacters
+    /\.\.\//,  // Path traversal
+    /<script/i,  // Script injection
+  ];
+  
+  for (const pattern of dangerousPatterns) {
+    if (pattern.test(input)) {
+      return { valid: false, error: 'Invalid characters in input' };
+    }
+  }
+  
+  return { valid: true };
+}
+
 // Generate voice using ElevenLabs
-async function generateVoice(text, voiceId = null) {
+async function generateVoice(text: string, voiceId: string | null = null): Promise<string | null> {
   // If no API key, return null to trigger fallback
   if (!ELEVENLABS_API_KEY) {
     return null;
@@ -86,29 +118,100 @@ async function generateVoice(text, voiceId = null) {
   }
 }
 
+// Spawn a process safely
+function spawnSafe(command: string, args: string[]): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const proc = spawn(command, args);
+    
+    proc.on('error', (error) => {
+      console.error(`Error spawning ${command}:`, error);
+      reject(error);
+    });
+    
+    proc.on('exit', (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`${command} exited with code ${code}`));
+      }
+    });
+  });
+}
+
 // Send macOS notification with voice
-async function sendNotification(title, message, voiceEnabled = true, voiceId = null) {
+async function sendNotification(title: string, message: string, voiceEnabled = true, voiceId: string | null = null) {
+  // Validate inputs
+  const titleValidation = validateInput(title);
+  const messageValidation = validateInput(message);
+  
+  if (!titleValidation.valid) {
+    throw new Error(`Invalid title: ${titleValidation.error}`);
+  }
+  
+  if (!messageValidation.valid) {
+    throw new Error(`Invalid message: ${messageValidation.error}`);
+  }
+  
+  // Sanitize inputs for shell commands
+  const safeTitle = sanitizeForShell(title);
+  const safeMessage = sanitizeForShell(message);
+
   if (voiceEnabled) {
-    const audioFile = await generateVoice(message, voiceId);
+    const audioFile = await generateVoice(safeMessage, voiceId);
     
     if (audioFile) {
-      execAsync(`afplay "${audioFile}"`).then(() => {
-        unlink(audioFile).catch(() => {});
-      }).catch(() => {
-        console.error("Failed to play ElevenLabs audio");
-        execAsync(`say "${message}"`).catch(() => {});
-      });
+      // Use spawn for safer audio playback
+      try {
+        await spawnSafe('/usr/bin/afplay', [audioFile]);
+        await unlink(audioFile).catch(() => {});
+      } catch (error) {
+        console.error("Failed to play ElevenLabs audio:", error);
+        // Fallback to say command
+        try {
+          await spawnSafe('/usr/bin/say', [safeMessage]);
+        } catch (e) {
+          console.error("Failed to speak message:", e);
+        }
+      }
     } else {
-      execAsync(`say "${message}"`).catch(() => {
-        console.error("Failed to speak message");
-      });
+      // Use spawn for say command
+      try {
+        await spawnSafe('say', [safeMessage]);
+      } catch (error) {
+        console.error("Say command error:", error);
+      }
     }
   }
   
-  const escapedMessage = message.replace(/'/g, "'\\''").replace(/"/g, '\\"');
-  const escapedTitle = title.replace(/'/g, "'\\''").replace(/"/g, '\\"');
-  const script = `display notification "${escapedMessage}" with title "${escapedTitle}" sound name ""`;
-  await execAsync(`osascript -e '${script}'`);
+  // Use spawn for osascript with proper escaping
+  try {
+    const script = `display notification "${safeMessage}" with title "${safeTitle}" sound name ""`;
+    await spawnSafe('/usr/bin/osascript', ['-e', script]);
+  } catch (error) {
+    console.error("Notification display error:", error);
+  }
+}
+
+// Rate limiting
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 10; // 10 requests per minute
+const RATE_WINDOW = 60000; // 1 minute in milliseconds
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const record = requestCounts.get(ip);
+  
+  if (!record || now > record.resetTime) {
+    requestCounts.set(ip, { count: 1, resetTime: now + RATE_WINDOW });
+    return true;
+  }
+  
+  if (record.count >= RATE_LIMIT) {
+    return false;
+  }
+  
+  record.count++;
+  return true;
 }
 
 // Start HTTP server
@@ -117,14 +220,29 @@ const server = serve({
   async fetch(req) {
     const url = new URL(req.url);
     
+    // Get client IP for rate limiting (localhost only)
+    const clientIp = req.headers.get('x-forwarded-for') || 'localhost';
+    
+    // Restrict CORS to localhost only for security
     const corsHeaders = {
-      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Origin": "http://localhost",
       "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type"
     };
     
     if (req.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders, status: 204 });
+    }
+    
+    // Check rate limit
+    if (!checkRateLimit(clientIp)) {
+      return new Response(
+        JSON.stringify({ status: "error", message: "Rate limit exceeded" }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 429 
+        }
+      );
     }
     
     if (url.pathname === "/notify" && req.method === "POST") {
@@ -135,7 +253,12 @@ const server = serve({
         const voiceEnabled = data.voice_enabled !== false;
         const voiceId = data.voice_id || null;
         
-        console.log(`📨 Received notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId}`);
+        // Validate voice ID if provided
+        if (voiceId && typeof voiceId !== 'string') {
+          throw new Error('Invalid voice_id');
+        }
+        
+        console.log(`📨 Received notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId})`);
         
         await sendNotification(title, message, voiceEnabled, voiceId);
         
@@ -146,12 +269,13 @@ const server = serve({
             status: 200 
           }
         );
-      } catch (error) {
+      } catch (error: any) {
+        console.error("Notification error:", error);
         return new Response(
-          JSON.stringify({ status: "error", message: error.message }),
+          JSON.stringify({ status: "error", message: error.message || "Internal server error" }),
           { 
             headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 500 
+            status: error.message?.includes('Invalid') ? 400 : 500 
           }
         );
       }
@@ -165,7 +289,7 @@ const server = serve({
         
         console.log(`🤖 PAI notification: "${title}" - "${message}"`);
         
-        await sendNotification(title, message, true);
+        await sendNotification(title, message, true, null);
         
         return new Response(
           JSON.stringify({ status: "success", message: "PAI notification sent" }),
@@ -174,12 +298,13 @@ const server = serve({
             status: 200 
           }
         );
-      } catch (error) {
+      } catch (error: any) {
+        console.error("PAI notification error:", error);
         return new Response(
-          JSON.stringify({ status: "error", message: error.message }),
+          JSON.stringify({ status: "error", message: error.message || "Internal server error" }),
           { 
             headers: { ...corsHeaders, "Content-Type": "application/json" },
-            status: 500 
+            status: error.message?.includes('Invalid') ? 400 : 500 
           }
         );
       }
@@ -187,7 +312,7 @@ const server = serve({
     
     if (url.pathname === "/health") {
       return new Response(
-        JSON.stringify({ status: "healthy", port: PORT }),
+        JSON.stringify({ status: "healthy", port: PORT, elevenlabs: !!ELEVENLABS_API_KEY }),
         { 
           headers: { ...corsHeaders, "Content-Type": "application/json" },
           status: 200 
@@ -209,3 +334,4 @@ if (ELEVENLABS_API_KEY) {
   console.log(`🎙️  Using macOS 'say' command (no ElevenLabs API key)`);
 }
 console.log(`📡 POST to http://localhost:${PORT}/notify`);
+console.log(`🔒 Security: CORS restricted to localhost, rate limiting enabled`);

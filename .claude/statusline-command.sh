@@ -12,10 +12,10 @@ dir_name=$(basename "$current_dir")
 
 # Count items from specified directories
 # - Services count from ~/Projects/FoundryServices/Services
-# - Commands from ~/.claude/commands/
+# - Commands from ${PAI_HOME}/.claude/commands/
 # - MCPs from settings.json
-# - Patterns from ~/.config/fabric/patterns
-claude_dir="/Users/daniel/.claude"
+# - Patterns from ${PAI_HOME}/.config/fabric/patterns
+claude_dir="${PAI_HOME:-/Users/daniel}/.claude"
 commands_count=0
 mcps_count=0
 fobs_count=0
@@ -32,13 +32,13 @@ if [ -f "$claude_dir/settings.json" ]; then
 fi
 
 # Count Services from FoundryServices directory
-services_dir="/Users/daniel/Projects/FoundryServices/Services"
+services_dir="${PAI_HOME:-/Users/daniel}/Projects/FoundryServices/Services"
 if [ -d "$services_dir" ]; then
     fobs_count=$(find "$services_dir" -type f -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 fi
 
 # Count Fabric patterns from ~/.config/fabric/patterns
-fabric_patterns_dir="/Users/daniel/.config/fabric/patterns"
+fabric_patterns_dir="${PAI_HOME:-/Users/daniel}/.config/fabric/patterns"
 if [ -d "$fabric_patterns_dir" ]; then
     fabric_count=$(find "$fabric_patterns_dir" -maxdepth 1 -type d ! -path "$fabric_patterns_dir" 2>/dev/null | wc -l | tr -d ' ')
 fi
@@ -92,6 +92,8 @@ BRIGHT_RED='\033[38;2;247;118;142m'      # #f7768e - Bright red for errors
 # LINE 1 - MOSTLY PURPLE (#bb9af7)
 LINE1_PRIMARY="$BRIGHT_PURPLE"       # Primary purple for most line 1 content
 LINE1_ACCENT='\033[38;2;160;130;210m' # Slightly different purple shade for variety
+MODEL_PURPLE='\033[38;2;138;99;210m'  # Different purple for model name - deeper violet
+KAI_PURPLE='\033[38;2;147;112;219m'   # Different purple for "Kai" - medium violet
 
 # LINE 2 - MOSTLY DARK BLUE 
 LINE2_PRIMARY="$DARK_BLUE"           # Primary dark blue for most line 2 content
@@ -149,7 +151,7 @@ fi
 DIR_COLOR='\033[38;2;135;206;250m'  # Light sky blue for directory
 
 # LINE 1 - MOSTLY PURPLE: Complete first line with all counts (services, commands, MCPs, patterns)
-printf "${LINE1_PRIMARY}Kai here${RESET}${LINE1_PRIMARY}, running on ${LINE1_ACCENT}🧠 ${model_name}${RESET}${LINE1_PRIMARY} in ${DIR_COLOR}📁 ${dir_name}${RESET}${LINE1_PRIMARY}, wielding: ${RESET}${LINE1_PRIMARY}🔧 ${fobs_count} Services${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}⚙️ ${commands_count} Commands${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}🔌 ${mcps_count} MCPs${RESET}${LINE1_PRIMARY}, and ${RESET}${LINE1_PRIMARY}📚 ${fabric_count} Patterns${RESET}\n"
+printf "${KAI_PURPLE}Kai${RESET}${LINE1_PRIMARY} here, running on ${MODEL_PURPLE}🧠 ${model_name}${RESET}${LINE1_PRIMARY} in ${DIR_COLOR}📁 ${dir_name}${RESET}${LINE1_PRIMARY}, wielding: ${RESET}${LINE1_PRIMARY}🔧 ${fobs_count} Services${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}⚙️ ${commands_count} Commands${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}🔌 ${mcps_count} MCPs${RESET}${LINE1_PRIMARY}, and ${RESET}${LINE1_PRIMARY}📚 ${fabric_count} Patterns${RESET}\n"
 
 # LINE 2 - MOSTLY DARK BLUE: MCP names list  
 printf "${LINE2_PRIMARY}🔌 MCPs${RESET}${LINE2_PRIMARY}${SEPARATOR_COLOR}: ${RESET}${mcp_names_formatted}${RESET}\n"
