@@ -26,31 +26,24 @@
 
 </div>
 
-#### 💥 UPDATES (September 21, 2025)
+## 💥 Updates
 
-- **Security Cleanup**: Cleaned up voice server code by using spawn instead of exec and restricting CORS to localhost only
-- **PAI_HOME Support**: Updated all components to properly honor the `PAI_HOME` environment variable - no more hardcoded paths!
-- **Comprehensive Documentation**: Created full system documentation under `~/.claude/documentation/` covering architecture, UFC context system, hook system, and all agents
-- **Dynamic MCP Detection**: Statusline command now dynamically counts MCPs using `claude mcp list` instead of static configuration files (PR #12)
-- **Voice Server Improvements**: Added input validation, rate limiting, and secure command execution throughout the voice notification system
+**September 21, 2025**
+- Cleaned up voice server code for secure command execution
+- Added PAI_HOME support to eliminate all hardcoded paths
+- Created comprehensive documentation under `~/.claude/documentation/`
+- Dynamic MCP detection using `claude mcp list` (PR #12)
+- Voice server improvements with input validation and rate limiting
 
-#### 💥 UPDATES (September 20, 2025)
+**September 20, 2025**
+- Added `/voice-server` directory with ElevenLabs integration
+- Closed PRs fixing hardcoded path issues
+- Working on missing hooks from Issues
 
-- I've now added the `/voice-server` directory under `.claude`. This should give you the same voice capabilities I have, once you set your Eleven Labs API key.
-- Closed the open PRs, including those that added a `PAI_PATH` setting to fix static paths pointing to my home directory. Thanks for the contributions!
-- Currently working on adding the missing hooks mentioned in Issues.
-
-#### 💥 UPDATES (September 12, 2025)
-
-- Just uploaded my new dynamic resource loading system to `/hooks` and `/commands`
-- It works by leveraging the submit-user-hook to *dynamically* load context and agents
-- The file that handles dynamic routing is `/commands/load-dynamic-requirements.md`
-- The file is loaded through the hooks in `settings.json`, specifically the submit-user-prompt hooks
-- That hook points to `/hooks/load-dynamic-requirements.ts`, which loads `/commands/load-dynamic-requirements.md`
-
-#### 💥 UPDATES (September 10, 2025)
-
-- Initial creation of the repo and loading of the base content
+**September 12, 2025**  
+- Uploaded dynamic resource loading system to `/hooks` and `/commands`
+- Submit-user-hook dynamically loads context and agents
+- Dynamic routing via `/commands/load-dynamic-requirements.md`
 
 ## 🎯 **What is PAI?**
 
