@@ -48,7 +48,7 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **Latest Release**: v1.0.0 - September 21, 2025
+> **Check back often as I'm constantly adding features**
 
 <details open>
 <summary><strong>📅 September 21, 2025</strong></summary>
