@@ -82,6 +82,14 @@
 
 > **Core Mission:** Augment humans with AI capabilities so they can survive and thrive in a world full of AI.
 
+### 🌍 **The Problem**
+
+**It doesn't matter how powerful AI becomes if it's not in the hands of everyone on Earth.**
+
+Right now, AI is trapped behind corporate APIs, expensive subscriptions, and complex interfaces that only developers can use. Meanwhile, billions of people who could benefit from AI augmentation—artists, teachers, small business owners, researchers, parents—are left behind.
+
+PAI exists to solve this. This project's goal is to give the most powerful AI capabilities, in the form of a complete platform, to everyone on Earth. Not just the tech elite. Not just the wealthy. Everyone.
+
 <div align="center">
 
 ```mermaid
