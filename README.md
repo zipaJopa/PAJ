@@ -200,10 +200,12 @@ PAI is part of the journey toward Human 3.0—where humans are augmented by AI t
 </tr>
 </table>
 
-### 🌟 **Why PAI is Different**
+### 🌟 **Why This System is Different**
 
+> *This system is designed from the very beginning to be available to anybody and to grow and scale with you throughout your life.*
+
+- **🔓 Open Framework**: No vendor lock-in, complete transparency, you own everything
 - **🌍 Universal**: Works for anyone, anywhere, in any profession or life situation
-- **🔓 Open Source**: No vendor lock-in, complete transparency, you own everything
 - **🤖 Platform Independent**: Core structure works with Claude, GPT, Gemini, or any AI platform
 - **🧠 Persistent Memory**: Your AI remembers every context, project, and conversation
 - **🎯 Task Agnostic**: From writing a blog to tracking medical data to running a business
