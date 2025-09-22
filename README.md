@@ -277,7 +277,6 @@ graph TD
 - 📄 Plain text files - human readable
 - ⚡ Dynamic loading based on context
 - 📂 Hierarchical organization
-- 🔒 Private and secure
 
 </td>
 </tr>
