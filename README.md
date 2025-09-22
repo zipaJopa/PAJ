@@ -405,7 +405,7 @@ graph TD
 ## 🚀 **Quick Start**
 
 > [!NOTE]
-> PAI works with [Claude Code](https://claude.ai/code), but the architecture supports any AI platform (GPT, Gemini, etc.)
+> PAI was originally built with [Claude Code](https://claude.ai/code), but the architecture supports any AI platform (GPT, Gemini, etc.)
 > Requires [Bun](https://bun.sh) JavaScript runtime for the current implementation.
 
 ### **Installation**
