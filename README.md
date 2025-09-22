@@ -12,12 +12,12 @@
 
 <br/>
 
-![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-purple)
+![Static Badge](https://img.shields.io/badge/mission-upgrade_humans_using_AI-8B5CF6)
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielmiessler/PAI)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
 [![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
-![Views](https://komarev.com/ghpvc/?username=danielmiessler&label=Repository%20Views&color=purple&style=flat&base=7529)
+![Views](https://komarev.com/ghpvc/?username=danielmiessler-PAI&label=Repository%20Views&color=8B5CF6&style=flat)
 
 <br/>
 
@@ -36,9 +36,20 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.1)** - First official release with full architecture documentation
+> **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
 
 <details open>
+<summary><strong>📅 September 22, 2025 - v0.2 Release</strong></summary>
+
+- 🔗 **Human 3.0**: Added link to projects fit together blog post
+- 📊 **Badges**: Fixed purple color and stats display issues
+- 📝 **Documentation**: Improved table formatting and structure
+- ✨ **Polish**: Enhanced README readability and navigation
+- 🔧 **Fixes**: Minor formatting and display improvements
+
+</details>
+
+<details>
 <summary><strong>📅 September 21, 2025 - v0.1 Release</strong></summary>
 
 - 🎉 **Release**: Published v0.1 - Initial public release
