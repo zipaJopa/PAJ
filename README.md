@@ -284,6 +284,9 @@ graph TD
 
 ### ⚡ **Custom Commands**
 
+> [!NOTE]
+> **These are examples from my setup. Your PAI will have completely different commands based on YOUR unique needs. The possibilities are infinite!**
+
 <table>
 <tr>
 <td width="50%">
@@ -312,6 +315,9 @@ graph TD
 **🚀 60+ commands** ready to use out of the box
 
 ### 🤖 **Specialized Agents**
+
+> [!IMPORTANT]
+> **These agents are examples. You'll create your own specialized agents for YOUR specific workflows - artists might have creative agents, doctors might have diagnostic agents, teachers might have curriculum agents. The system adapts to YOU.**
 
 | Agent | Purpose | Tools | Use Case |
 |:------|:--------|:------|:---------|
@@ -494,7 +500,8 @@ PORT="8888"                        # Voice server port
 
 <div align="center">
 
-> **Note:** These are examples from my personal PAI setup. Your system will have completely different commands based on your unique needs, workflows, and goals.
+> [!IMPORTANT]
+> **These are examples from my personal PAI setup. Your system will have completely different commands based on YOUR unique needs, workflows, and goals. The beauty of PAI is that it becomes whatever YOU need it to be.**
 
 </div>
 
