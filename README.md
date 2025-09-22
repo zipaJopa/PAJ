@@ -246,11 +246,11 @@ graph TD
     style Output fill:#111827,stroke:#ef4444,stroke-width:2px,color:#e5e7eb
 ```
 
+### 📁 **UFC Context System**
+
 <table>
 <tr>
-<td width="33%" valign="top">
-
-### 📁 **UFC Context System**
+<td width="50%">
 
 ```
 ~/.claude/context/
@@ -269,54 +269,63 @@ graph TD
     └── credit-cards/
 ```
 
+</td>
+<td width="50%">
+
 **Features:**
-- Persistent memory
-- Plain text files
-- Dynamic loading
-- Hierarchical organization
-
-</td>
-<td width="33%" valign="top">
-
-### ⚡ **Custom Commands**
-
-**Professional:**
-- `write-blog` - Content generation
-- `get-newsletter-stats` - Beehiiv metrics
-- `design-review` - Code analysis
-- `create-consulting-document`
-- `update-daemon` - API management
-
-**Personal:**
-- `answer-finance-question`
-- `get-life-log` - Limitless.ai integration
-- `send-text-alert` - SMS notifications
-- `track-health-metrics`
-- `capture-learning`
-
-**60+ commands** ready to use
-
-</td>
-<td width="33%" valign="top">
-
-### 🤖 **Specialized Agents**
-
-| Agent | Purpose | Tools |
-|-------|---------|-------|
-| **Researcher** | Deep web research | WebSearch, WebFetch |
-| **Engineer** | Production code | Testing, Debugging |
-| **Designer** | UX/UI design | Figma, shadcn/ui |
-| **Pentester** | Security testing | Nmap, Burp |
-| **Architect** | System design | Diagrams, PRDs |
-
-**With:**
-- ElevenLabs voices
-- Task parallelization
-- Tool integration
+- ✅ Persistent memory across sessions
+- 📄 Plain text files - human readable
+- ⚡ Dynamic loading based on context
+- 📂 Hierarchical organization
+- 🔒 Private and secure
 
 </td>
 </tr>
 </table>
+
+### ⚡ **Custom Commands**
+
+<table>
+<tr>
+<td width="50%">
+
+**💼 Professional:**
+- `write-blog` - Content generation
+- `get-newsletter-stats` - Beehiiv metrics  
+- `design-review` - Code analysis
+- `create-consulting-document` - Client docs
+- `update-daemon` - API management
+
+</td>
+<td width="50%">
+
+**🏠 Personal:**
+- `answer-finance-question` - Financial insights
+- `get-life-log` - Limitless.ai integration
+- `send-text-alert` - SMS notifications
+- `track-health-metrics` - Wellness tracking
+- `capture-learning` - Knowledge capture
+
+</td>
+</tr>
+</table>
+
+**🚀 60+ commands** ready to use out of the box
+
+### 🤖 **Specialized Agents**
+
+| Agent | Purpose | Tools | Use Case |
+|:------|:--------|:------|:---------|
+| **🔍 Researcher** | Deep web research | WebSearch, WebFetch | Information gathering |
+| **⚙️ Engineer** | Production code | Testing, Debugging | Software development |
+| **🎨 Designer** | UX/UI design | Figma, shadcn/ui | Interface creation |
+| **🔒 Pentester** | Security testing | Nmap, Burp | Vulnerability assessment |
+| **🏗️ Architect** | System design | Diagrams, PRDs | Technical planning |
+
+**Enhanced with:**
+- 🎙️ ElevenLabs voice synthesis
+- ⚡ Task parallelization
+- 🔌 Deep tool integration
 
 ### 🪝 **Dynamic Hook System**
 
@@ -324,8 +333,8 @@ graph TD
 <tr>
 <td width="50%">
 
-**Context Loading Hooks:**
-- `submit-user-hook` - Loads context based on intent
+**📥 Context Loading Hooks:**
+- `submit-user-hook` - Loads context by intent
 - `load-dynamic-requirements` - Smart routing
 - Automatic agent selection
 - Domain-specific knowledge injection
@@ -333,9 +342,9 @@ graph TD
 </td>
 <td width="50%">
 
-**Integration Hooks:**
+**🔧 Integration Hooks:**
 - Pre/post command execution
-- Error handling and recovery
+- Error handling and recovery  
 - Rate limiting and validation
 - Security scanning
 
@@ -347,39 +356,39 @@ graph TD
 
 <table>
 <tr>
-<td width="25%">
+<td>
 
-**Browser & Testing**
-- Playwright
-- Puppeteer
-- Selenium
+**🌐 Browser & Testing**
+- Playwright automation
+- Puppeteer control
+- Selenium testing
 - Visual regression
 
 </td>
-<td width="25%">
+<td>
 
-**Financial**
+**💳 Financial**  
 - Stripe API
-- Square
-- PayPal
+- Square payments
+- PayPal integration
 - Crypto wallets
 
 </td>
-<td width="25%">
+<td>
 
-**Analytics**
+**📊 Analytics**
 - Google Analytics
-- Mixpanel
-- Beehiiv
+- Mixpanel tracking
+- Beehiiv stats
 - Site metrics
 
 </td>
-<td width="25%">
+<td>
 
-**Communication**
+**💬 Communication**
 - ElevenLabs TTS
 - OpenAI Voice
-- Discord
+- Discord bots
 - Email/SMS
 
 </td>
