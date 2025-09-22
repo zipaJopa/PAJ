@@ -17,7 +17,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
 [![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
-![Views](https://komarev.com/ghpvc/?username=danielmiessler-PAI&label=Repository%20Views&color=8B5CF6&style=flat)
+![Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fdanielmiessler%2FPAI&count_bg=%238B5CF6&title_bg=%23555555&icon=github.svg&icon_color=%23E7E7E7&title=Repository+Views&edge_flat=false)
 
 <br/>
 
