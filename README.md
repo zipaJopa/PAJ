@@ -17,7 +17,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Powered%20by-Claude%20Code-blue)](https://claude.ai/code)
 [![PAI Video](https://img.shields.io/badge/🎥_Watch-PAI_Video-6B46C1)](https://youtu.be/iKwRWwabkEc)
-[![Profile views](https://komarev.com/ghpvc/?username=danielmiessler&color=8B5CF6&style=flat&label=Profile+Views)](https://github.com/danielmiessler)
 
 <br/>
 
