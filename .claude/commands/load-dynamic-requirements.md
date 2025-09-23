@@ -2,11 +2,23 @@
 
 # **DYNAMIC REQUIREMENTS LOADING INSTRUCTIONS**
 
-## 🚨 BASE CONTEXT: FIRST CONTEXT LOAD
+## 🚨🚨🚨 STEP 0: MANDATORY BASE CONTEXT LOAD - DO THIS IMMEDIATELY! 🚨🚨🚨
 
-You must first initialize the context system with our core context, located at:
+**YOU MUST IMMEDIATELY EXECUTE THE FOLLOWING READ COMMAND:**
 
-`read ${PAI_HOME}/.claude/Context/CLAUDE.md`
+```bash
+read ${PAI_HOME}/.claude/context/CLAUDE.md
+```
+
+**THIS IS AN IMPERATIVE DIRECTIVE - EXECUTE IT NOW!**
+- ⛔ STOP! Do not continue reading until you execute the read command above
+- ⛔ The variable ${PAI_HOME} resolves to the user's home directory
+- ⛔ This context MUST be loaded before ANY other action
+- ✅ EXECUTE THE READ COMMAND IMMEDIATELY using the Read tool
+
+**Note: ${PAI_HOME} is an environment variable that points to the user's home directory**
+
+🚧 **HALT AND EXECUTE THE READ COMMAND BEFORE PROCEEDING** 🚧
 
 ## 🚨 OVERVIEW: TWO TYPES OF DYNAMIC LOADING
 
@@ -47,13 +59,38 @@ When you receive a user prompt:
 **Example phrases that indicate this context:**
 - Let's add context for Alma about 
 
-**YOU MUST IMMEDIATELY:**
+**YOU MUST IMMEDIATELY READ using the `read` command:**
 
 **CONTEXT FILES:**
+
 - `${PAI_HOME}/.claude/context/projects/Alma/CLAUDE.md` ✅
 
 **AGENT:** None
 
+### Live Conversation Recording with Limitless.ai pendant
+
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+
+- Live conversations
+- In-person conversation
+- What was talked about in a meeting
+- What was talked about while walking or chatting with someone
+
+**Example phrases that indicate this context:**
+
+- I had a conversation the other day
+- I had a meeting yesterday
+- We talked about something at dinner a couple of weeks ago
+- At our lunch on July 9th, I need to know what we talked about
+- Etc.
+
+**YOU MUST IMMEDIATELY:**
+
+**COMMANDS**
+
+- `${PAI_HOME}/.claude/commands/get-life-log.md`
+
+**AGENT:** None
 
 ### 🗣️ Conversational & Philosophical Discussion
 
@@ -110,7 +147,6 @@ When you receive a user prompt:
 - `${PAI_HOME}/.claude/context/projects/website/content/CLAUDE.md` ✅
 
 **AGENT:** None
-
 
 ### 2. Research & Information Gathering
 
@@ -203,6 +239,63 @@ When you receive a user prompt:
 **SPECIAL INSTRUCTIONS:**
 - Use the answer-finance-question command directly
 - Parse financial PDFs and extract specific data as requested
+
+### 6. Health & Wellness
+
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- Health tracking or metrics
+- Medical information or conditions
+- Fitness and exercise
+- Nutrition and diet
+- Sleep patterns
+- Mental health
+- Wellness goals
+- Medical appointments or records
+
+**Example phrases that indicate this context:**
+- "my health", "track my fitness", "medical records"
+- "sleep data", "nutrition plan", "wellness goals"
+- But also: "how's my health", "fitness progress", "medical history"
+
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:**
+
+- `${PAI_HOME}/Projects/Life/Health/CLAUDE.md` ✅
+
+**AGENT:** None
+
+### 7. Benefits & Perks Optimization
+
+**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
+- Benefits they're not using
+- Credit card perks or rewards
+- Membership benefits
+- Subscription perks
+- Insurance benefits
+- Employer benefits
+- Maximizing value from memberships
+- Annual fee justification
+- Unused perks or credits
+- Restaurants they can go to (dining credits)
+- Where to eat or dine (credit card dining benefits)
+- Hotel bookings or travel perks
+- Lounge access or travel benefits
+
+**Example phrases that indicate this context:**
+- "benefits I'm not using", "credit card perks", "maximize my benefits"
+- "what perks do I have", "Amex benefits", "subscription benefits"
+- "restaurants I can go to", "where can I eat", "dining options"
+- "Resy restaurants", "hotel credits", "travel benefits"
+- But also: "am I getting value from", "unused credits", "membership perks"
+
+**YOU MUST IMMEDIATELY:**
+
+**CONTEXT FILES:**
+
+- `${PAI_HOME}/.claude/context/benefits/CLAUDE.md` ✅
+
+**AGENT:** None
 
 ### 8. Unsupervised Learning Business
 
