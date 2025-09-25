@@ -40,10 +40,15 @@
 <details open>
 <summary><strong>📅 September 25, 2025 - DA Environment Variable</strong></summary>
 
-- 🤖 **DA Variable**: Added configurable Digital Assistant name via `DA` environment variable
-- 🎨 **Statusline**: Updated statusline to dynamically display assistant name from `$DA` variable
-- 🔊 **Session Hook**: Modified session-start-hook to use `$DA` for voice announcements
-- ⚙️ **Configuration**: Add `export DA="YourAssistantName"` to `.zshrc` (defaults to "Assistant")
+- 🤖 **DA Variable**: Separated Digital Assistant name and color configuration
+- 🎨 **DA_COLOR Variable**: Color now configurable via `DA_COLOR` environment variable
+- 📝 **Clean Separation**: `DA` handles the name, `DA_COLOR` handles the display color
+- 🎨 **Color Options**: purple (default), blue, green, cyan, magenta, yellow, red, orange
+- ⚙️ **Configuration**: Add to `.zshrc`:
+  ```bash
+  export DA="YourAssistantName"    # Defaults to "Assistant"
+  export DA_COLOR="purple"         # Choose your color
+  ```
 
 </details>
 
