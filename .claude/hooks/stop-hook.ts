@@ -51,24 +51,28 @@ async function main() {
     process.exit(0);
   }
 
-  // Parse the JSON lines to find the last Task tool usage
+  // Parse the JSON lines to find what happened in this session
   const lines = transcript.trim().split('\n');
-  let taskDescription = '';
+
+  // First, check if the LAST assistant message contains a Task tool or a COMPLETED line
+  let isAgentTask = false;
   let taskResult = '';
   let agentType = '';
-  
-  // Look for Task tool usage and result
+
+  // Find the last assistant message
   for (let i = lines.length - 1; i >= 0; i--) {
     try {
       const entry = JSON.parse(lines[i]);
-      
-      // Look for Task tool_use
+
       if (entry.type === 'assistant' && entry.message?.content) {
+        // Check if this assistant message contains a Task tool_use
+        let foundTask = false;
         for (const content of entry.message.content) {
           if (content.type === 'tool_use' && content.name === 'Task') {
-            taskDescription = content.input?.description || '';
+            // This is an agent task - find its result
+            foundTask = true;
             agentType = content.input?.subagent_type || '';
-            
+
             // Find the corresponding tool_result
             for (let j = i + 1; j < lines.length; j++) {
               const resultEntry = JSON.parse(lines[j]);
@@ -76,6 +80,7 @@ async function main() {
                 for (const resultContent of resultEntry.message.content) {
                   if (resultContent.type === 'tool_result' && resultContent.tool_use_id === content.id) {
                     taskResult = resultContent.content;
+                    isAgentTask = true;
                     break;
                   }
                 }
@@ -85,8 +90,10 @@ async function main() {
             break;
           }
         }
+
+        // We found the last assistant message, stop looking
+        break;
       }
-      if (taskDescription && taskResult) break;
     } catch (e) {
       // Skip invalid JSON
     }
@@ -95,8 +102,8 @@ async function main() {
   // Generate the announcement
   let message = '';
   let voiceId = VOICES.kai; // Default to Kai's voice
-  
-  if (agentType && taskResult) {
+
+  if (isAgentTask && taskResult) {
     // AGENT DID THE TASK - Look for their COMPLETED line
     const completedMatch = taskResult.match(/🎯\s*COMPLETED:\s*(.+?)$/im);
 
@@ -116,7 +123,7 @@ async function main() {
 
       console.error(`🎯 AGENT COMPLETION: ${message}`);
     }
-    
+
   } else {
     // I (KAI) DID THE TASK - Look for my COMPLETED line
     const lastResponse = lines[lines.length - 1];
