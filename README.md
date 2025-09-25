@@ -43,7 +43,7 @@
 - 🤖 **DA Variable**: Added configurable Digital Assistant name via `DA` environment variable
 - 🎨 **Statusline**: Updated statusline to dynamically display assistant name from `$DA` variable
 - 🔊 **Session Hook**: Modified session-start-hook to use `$DA` for voice announcements
-- ⚙️ **Configuration**: Add `export DA="YourAssistantName"` to `.zshrc` to customize
+- ⚙️ **Configuration**: Add `export DA="YourAssistantName"` to `.zshrc` (defaults to "Assistant")
 
 </details>
 

@@ -26,7 +26,7 @@ async function sendNotification(title: string, message: string, priority: string
 
 async function main() {
   try {
-    const daName = process.env.DA || 'Kai';
+    const daName = process.env.DA || 'Assistant';
     const message = `${daName} here, ready to go.`;
     await sendNotification(`${daName} Systems Initialized`, message, 'low');
     process.exit(0);

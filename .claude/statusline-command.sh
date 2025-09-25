@@ -3,8 +3,9 @@
 # Read JSON input from stdin
 input=$(cat)
 
-# Get Digital Assistant name from environment (default to Kai if not set)
-DA_NAME="${DA:-Kai}"
+# Get Digital Assistant name from environment
+# Default to "Assistant" if not set - configure via export DA="YourName" in .zshrc
+DA_NAME="${DA:-Assistant}"
 
 # Extract data from JSON input
 current_dir=$(echo "$input" | jq -r '.workspace.current_dir')
@@ -144,7 +145,7 @@ BRIGHT_RED='\033[38;2;247;118;142m'
 LINE1_PRIMARY="$BRIGHT_PURPLE"
 LINE1_ACCENT='\033[38;2;160;130;210m'
 MODEL_PURPLE='\033[38;2;138;99;210m'
-KAI_PURPLE='\033[38;2;147;112;219m'
+DA_PURPLE='\033[38;2;147;112;219m'  # Digital Assistant name color
 
 LINE2_PRIMARY="$DARK_BLUE"
 LINE2_ACCENT='\033[38;2;110;150;210m'
@@ -190,7 +191,7 @@ done
 
 # Output the full 3-line statusline
 # LINE 1 - PURPLE theme with all counts
-printf "${KAI_PURPLE}${DA_NAME}${RESET}${LINE1_PRIMARY} here, running on ${MODEL_PURPLE}🧠 ${model_name}${RESET}${LINE1_PRIMARY} in ${DIR_COLOR}📁 ${dir_name}${RESET}${LINE1_PRIMARY}, wielding: ${RESET}${LINE1_PRIMARY}🔧 ${fobs_count} Services${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}⚙️ ${commands_count} Commands${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}🔌 ${mcps_count} MCPs${RESET}${LINE1_PRIMARY}, and ${RESET}${LINE1_PRIMARY}📚 ${fabric_count} Patterns${RESET}\n"
+printf "${DA_PURPLE}${DA_NAME}${RESET}${LINE1_PRIMARY} here, running on ${MODEL_PURPLE}🧠 ${model_name}${RESET}${LINE1_PRIMARY} in ${DIR_COLOR}📁 ${dir_name}${RESET}${LINE1_PRIMARY}, wielding: ${RESET}${LINE1_PRIMARY}🔧 ${fobs_count} Services${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}⚙️ ${commands_count} Commands${RESET}${LINE1_PRIMARY}, ${RESET}${LINE1_PRIMARY}🔌 ${mcps_count} MCPs${RESET}${LINE1_PRIMARY}, and ${RESET}${LINE1_PRIMARY}📚 ${fabric_count} Patterns${RESET}\n"
 
 # LINE 2 - BLUE theme with MCP names
 printf "${LINE2_PRIMARY}🔌 MCPs${RESET}${LINE2_PRIMARY}${SEPARATOR_COLOR}: ${RESET}${mcp_names_formatted}${RESET}\n"
