@@ -1,5 +1,7 @@
 # Kai — The Personal AI Infrastructure (PAI) System
 
+**Pronunciation:** PAI is pronounced "pie" 🥧
+
 ## 📢 PUBLIC REPOSITORY NOTICE
 
 **This is the PUBLIC version of PAI - a template for others to build their own personal AI infrastructure.**
