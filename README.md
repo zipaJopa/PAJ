@@ -38,6 +38,16 @@
 > **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
 
 <details open>
+<summary><strong>📅 September 25, 2025 - DA Environment Variable</strong></summary>
+
+- 🤖 **DA Variable**: Added configurable Digital Assistant name via `DA` environment variable
+- 🎨 **Statusline**: Updated statusline to dynamically display assistant name from `$DA` variable
+- 🔊 **Session Hook**: Modified session-start-hook to use `$DA` for voice announcements
+- ⚙️ **Configuration**: Add `export DA="YourAssistantName"` to `.zshrc` to customize
+
+</details>
+
+<details>
 <summary><strong>📅 September 22, 2025 - v0.2 Release</strong></summary>
 
 - 🔗 **Human 3.0**: Added link to projects fit together blog post

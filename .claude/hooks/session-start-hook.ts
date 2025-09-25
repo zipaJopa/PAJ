@@ -12,7 +12,7 @@ async function sendNotification(title: string, message: string, priority: string
         message,
         voice_enabled: true,
         priority,
-        voice_id: 'jqcCZkN6Knx8BJ5TBdYR'  // Kai's voice ID
+        voice_id: 'jqcCZkN6Knx8BJ5TBdYR'  // Assistant's voice ID
       }),
     });
     
@@ -26,8 +26,9 @@ async function sendNotification(title: string, message: string, priority: string
 
 async function main() {
   try {
-    const message = `Kai here, ready to go.`;
-    await sendNotification('Kai Systems Initialized', message, 'low');
+    const daName = process.env.DA || 'Kai';
+    const message = `${daName} here, ready to go.`;
+    await sendNotification(`${daName} Systems Initialized`, message, 'low');
     process.exit(0);
   } catch (error) {
     console.error('SessionStart hook error:', error);
