@@ -13,32 +13,7 @@ const VOICES = {
   kai: 'jqcCZkN6Knx8BJ5TBdYR'
 };
 
-function summarizeTask(description: string, content: string): string {
-  // Look at the task description and content to create a 6-word summary
-  const words = [];
-  
-  // Extract key terms from description
-  if (description) {
-    const descWords = description.toLowerCase()
-      .replace(/[^\w\s]/g, ' ')
-      .split(/\s+/)
-      .filter(w => w.length > 2 && !['the', 'and', 'for', 'with', 'task', 'test'].includes(w));
-    words.push(...descWords.slice(0, 3));
-  }
-  
-  // Extract key terms from content
-  if (content) {
-    const contentWords = content.toLowerCase()
-      .replace(/[^\w\s]/g, ' ')
-      .split(/\s+/)
-      .filter(w => w.length > 3 && !['completed', 'task', 'test', 'analysis', 'system'].includes(w));
-    words.push(...contentWords.slice(0, 3));
-  }
-  
-  // Take first 6 unique words
-  const uniqueWords = [...new Set(words)].slice(0, 6);
-  return uniqueWords.join(' ');
-}
+// Removed summarizeTask function - no longer needed
 
 async function main() {
   // Get input
@@ -122,29 +97,24 @@ async function main() {
   let voiceId = VOICES.kai; // Default to Kai's voice
   
   if (agentType && taskResult) {
-    // AGENT DID THE TASK - Look for [AGENT:type] I completed something
-    const agentMatch = taskResult.match(/\[AGENT:(\w+)\]\s*I\s+completed\s+(.+?)(?:\n|$)/is);
-    
-    if (agentMatch) {
-      const agentType = agentMatch[1].toLowerCase();
-      let completedText = agentMatch[2].trim();
-      
-      // Clean up but keep the full completion message
-      completedText = completedText.replace(/[^\w\s+]/g, ' ').replace(/\s+/g, ' ').trim();
-      
-      const agentName = agentType.charAt(0).toUpperCase() + agentType.slice(1);
-      message = `${agentName} completed ${completedText}`;
-      voiceId = VOICES[agentType] || VOICES.kai;
-      
+    // AGENT DID THE TASK - Look for their COMPLETED line
+    const completedMatch = taskResult.match(/🎯\s*COMPLETED:\s*(.+?)$/im);
+
+    if (completedMatch) {
+      // Get exactly what the agent said after COMPLETED:
+      let completedText = completedMatch[1].trim();
+
+      // Remove markdown formatting
+      completedText = completedText
+        .replace(/\*+/g, '')  // Remove asterisks
+        .replace(/\[AGENT:\w+\]\s*/i, '') // Remove agent tags
+        .trim();
+
+      // Send exactly what was in the agent's COMPLETED line
+      message = completedText;
+      voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
+
       console.error(`🎯 AGENT COMPLETION: ${message}`);
-    } else {
-      // Fallback to old method if no proper completion found
-      const summary = summarizeTask(taskDescription, taskResult);
-      const agentName = agentType.charAt(0).toUpperCase() + agentType.slice(1);
-      message = `${agentName} completed ${summary}`;
-      voiceId = VOICES[agentType] || VOICES.kai;
-      
-      console.error(`🎯 AGENT COMPLETION (fallback): ${message}`);
     }
     
   } else {
@@ -154,38 +124,30 @@ async function main() {
       const entry = JSON.parse(lastResponse);
       if (entry.type === 'assistant' && entry.message?.content) {
         const content = entry.message.content.map(c => c.text || '').join(' ');
-        
-        console.error(`🔍 KAI CONTENT: "${content.substring(0, 200)}..."`);
-        
-        // Look for the COMPLETED line - multiple patterns
-        const completedPatterns = [
-          /🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/i,
-          /\*\*🎯\s*COMPLETED:\*\*\s*(.+?)(?:\n|$)/i,
-          /COMPLETED:\s*(.+?)(?:\n|$)/i
-        ];
-        
-        let completedMatch = null;
-        for (const pattern of completedPatterns) {
-          completedMatch = content.match(pattern);
-          if (completedMatch) break;
-        }
-        
+
+        // Look for the COMPLETED line and extract EXACTLY what's after the colon
+        const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)$/im);
+
         if (completedMatch) {
+          // Get the raw text after the colon
           let completedText = completedMatch[1].trim();
-          
-          // The COMPLETED line is already a perfect summary - use it entirely
-          // Just clean up any weird characters but keep the full message
-          completedText = completedText.replace(/[^\w\s+]/g, ' ').replace(/\s+/g, ' ').trim();
-          
+
+          // Remove any markdown formatting but keep the actual message
+          completedText = completedText
+            .replace(/\*+/g, '')  // Remove asterisks
+            .trim();
+
+          // Send exactly what was in the COMPLETED line
           message = completedText;
-          
+
           console.error(`🎯 KAI COMPLETION: ${message}`);
         } else {
-          message = 'Kai completed task';
+          // No COMPLETED line found - don't send anything
+          console.error('⚠️ No COMPLETED line found');
         }
       }
     } catch (e) {
-      message = 'Kai completed task';
+      console.error('⚠️ Error parsing response:', e);
     }
   }
 
@@ -195,9 +157,8 @@ async function main() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        message: message,
-        voice_id: voiceId,
-        voice_enabled: true
+        message: message,  // Changed from 'text' to 'message' to match server expectation
+        voice_id: voiceId  // Changed from 'voiceId' to 'voice_id' to match server expectation
       })
     }).catch(() => {});
   }

@@ -39,13 +39,15 @@
 > **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
 
 <details open>
-<summary><strong>📅 September 25, 2025 - Voice Output Format</strong></summary>
+<summary><strong>📅 September 25, 2025 - Voice Output Format & Bug Fix</strong></summary>
 
 - 🎯 **Mandatory Format**: Enforced structured response format for voice integration
 - 🔊 **Voice System**: Fixed voice notification system breaking due to inconsistent output
+- 🐛 **Field Name Fix**: Fixed stop-hook.ts sending wrong field names (`text`/`voiceId` → `message`/`voice_id`)
 - 📋 **Response Structure**: All responses now use mandatory emoji headers with COMPLETED line
-- 🪝 **Hook Integration**: COMPLETED line properly triggers voice notifications
+- 🪝 **Hook Integration**: COMPLETED line properly triggers voice notifications with correct field names
 - ⚡ **Consistency**: Format applies to all responses, even simple answers
+- 📝 **Documentation**: Added comprehensive voice-system.md documentation
 - 📝 **Context Updates**: Updated both local and PAI CLAUDE.md files with strict enforcement
 
 </details>
