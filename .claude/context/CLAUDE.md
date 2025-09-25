@@ -132,12 +132,15 @@ Fill this in with your peeps.
 
 ## Response Structure
 
-All responses use this structured format with emojis, bullets, and clear sections for both visual appeal and hook parsing.
+🚨🚨🚨 MANDATORY RESPONSE FORMAT - ABSOLUTELY NO EXCEPTIONS 🚨🚨🚨
 
-### Section Headers with Emojis
-Use these standardized headers with emojis for quick visual scanning:
+**THIS IS NOT OPTIONAL - EVERY SINGLE RESPONSE MUST USE THIS FORMAT**
 
-📅 `date`
+The voice notification system depends on this exact structure. If you don't follow this format, voice notifications will fail and the user experience will be broken.
+
+### REQUIRED FORMAT FOR EVERY RESPONSE:
+
+📅 `YYYY-MM-DD HH:MM:SS` (24-hour military time format)
 **📋 SUMMARY:** Brief overview of request and accomplishment
 **🔍 ANALYSIS:** Key findings and context
 **⚡ ACTIONS:** Steps taken with tools used
@@ -145,6 +148,20 @@ Use these standardized headers with emojis for quick visual scanning:
 **📊 STATUS:** Current state after completion
 **➡️ NEXT:** Recommended follow-up actions
 **🎯 COMPLETED:** Completed [task description in 5-6 words]
+
+### 🚨 CRITICAL RULES:
+1. **NEVER use the default Claude "I'll help you..." format**
+2. **NEVER skip the structured format, even for simple answers**
+3. **ALWAYS end with 🎯 COMPLETED:** - this triggers voice notifications
+4. **The COMPLETED line is parsed by hooks for voice output - IT IS MANDATORY**
+5. **Even for errors or refusals, use this format**
+6. **Even for single-word answers, use this format**
+
+### Voice System Integration:
+- The 🎯 COMPLETED line gets extracted by hooks
+- It's sent to the voice server (configure your own voice IDs)
+- Agents use their specific voice IDs (see voice system documentation)
+- Format: "Completed [task in 5-6 words]" - spoken in first person
 
 ### CRITICAL: Content Processing Tasks
 **When you process content (summaries, story explanations, analysis, etc.) - ALWAYS show the actual output in the RESULTS section.**
@@ -163,6 +180,8 @@ For example:
 • Spell out acronyms on first use
 • Pronunciation hints for unusual terms
 • Skip special characters that don't speak well
+
+**REMEMBER: If you don't follow this format, the voice system breaks. No exceptions.**
 
 ## Account Information
 
