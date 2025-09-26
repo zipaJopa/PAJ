@@ -80,7 +80,7 @@ PAI/
 
 PAI uses environment variables for configuration:
 
-- `PAI_HOME`: Base directory for PAI installation
+- `PAI_DIR`: PAI configuration directory
 - `CLAUDE_CONFIG_DIR`: Claude configuration directory
 - `ELEVENLABS_API_KEY`: API key for voice synthesis
 - `PORT`: Voice server port (default: 8888)
@@ -108,8 +108,8 @@ PAI uses environment variables for configuration:
 git clone https://github.com/yourusername/PAI.git
 cd PAI
 
-# Set PAI_HOME
-export PAI_HOME="$(pwd)"
+# Set PAI_DIR
+export PAI_DIR="$HOME/.claude"
 
 # Install voice server (optional)
 cd .claude/voice-server
@@ -156,7 +156,7 @@ Common issues and solutions:
 
 | Issue | Solution |
 |-------|----------|
-| Context not loading | Check `${PAI_HOME}/.claude/context/` |
+| Context not loading | Check `${PAI_DIR}/context/` |
 | Voice not working | Verify ElevenLabs API key in `~/.env` |
 | Hooks not triggering | Ensure hook scripts are executable |
 | Port conflicts | Change PORT in `~/.env` |

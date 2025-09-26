@@ -37,7 +37,7 @@ echo "ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR" >> ~/.env
 
 ### 3. Install Voice Server
 ```bash
-cd ~/.claude/voice-server
+cd ${PAI_DIR}/voice-server
 ./install.sh
 ```
 
@@ -126,7 +126,7 @@ brew install --cask bitbar
 
 2. **Run the menu bar installer**:
 ```bash
-cd ~/.claude/voice-server/menubar
+cd ${PAI_DIR}/voice-server/menubar
 ./install-menubar.sh
 ```
 
@@ -208,7 +208,7 @@ tail -f ~/Library/Logs/pai-voice-server.log
 
 ## 📁 File Structure
 ```
-~/.claude/voice-server/
+${PAI_DIR}/voice-server/
 ├── server.ts              # Main server code
 ├── install.sh             # Installation script
 ├── start.sh              # Start server

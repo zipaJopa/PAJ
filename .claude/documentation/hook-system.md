@@ -55,7 +55,7 @@ User Output
 
 # Access environment variables
 USER_PROMPT="$1"
-CONTEXT_DIR="${PAI_HOME}/.claude/context"
+CONTEXT_DIR="${PAI_DIR}/context"
 
 # Perform actions
 echo "Processing prompt: $USER_PROMPT"
@@ -73,7 +73,7 @@ exit 0
 
 Hooks must be:
 1. **Executable**: `chmod +x hook-name`
-2. **Located in**: `${PAI_HOME}/.claude/hooks/`
+2. **Located in**: `${PAI_DIR}/hooks/`
 3. **Named correctly**: Exact hook name without extension
 4. **Return proper exit codes**: 0 for success, non-zero to block
 
@@ -87,18 +87,18 @@ Hooks must be:
 # Dynamically loads context based on user intent
 
 PROMPT="$1"
-PAI_HOME="${PAI_HOME:-$HOME}"
+PAI_DIR="${PAI_DIR:-$HOME/.claude}"
 
 # Load UFC context system
-if [[ -f "${PAI_HOME}/.claude/hooks/load-dynamic-requirements" ]]; then
-    source "${PAI_HOME}/.claude/hooks/load-dynamic-requirements"
+if [[ -f "${PAI_DIR}/hooks/load-dynamic-requirements" ]]; then
+    source "${PAI_DIR}/hooks/load-dynamic-requirements"
 fi
 
 # Analyze intent and load context
 case "$PROMPT" in
     *website*|*blog*|*site*)
         echo "Loading website context..."
-        cat "${PAI_HOME}/.claude/context/projects/website/CLAUDE.md"
+        cat "${PAI_DIR}/context/projects/website/CLAUDE.md"
         ;;
     *research*|*investigate*)
         echo "Launching researcher agent..."
@@ -142,9 +142,9 @@ done
 if [[ "$TOOL_NAME" == "Edit" ]] || [[ "$TOOL_NAME" == "Write" ]]; then
     FILE_PATH=$(echo "$TOOL_PARAMS" | grep -o '"file_path":"[^"]*"' | cut -d'"' -f4)
     
-    # Ensure path is within PAI_HOME
-    if [[ ! "$FILE_PATH" =~ ^${PAI_HOME} ]]; then
-        echo "WARNING: File operation outside PAI_HOME"
+    # Ensure path is within PAI_DIR
+    if [[ ! "$FILE_PATH" =~ ^${PAI_DIR} ]]; then
+        echo "WARNING: File operation outside PAI_DIR"
     fi
 fi
 
@@ -252,7 +252,7 @@ if [ "$USER" != "authorized_user" ]; then
 fi
 
 # Only run in certain directories
-if [ "$PWD" != "${PAI_HOME}/Projects" ]; then
+if [ "$PWD" != "${HOME}/Projects" ]; then
     exit 0
 fi
 ```
@@ -273,7 +273,7 @@ trap 'echo "Hook failed: $?"' ERR
 
 ### 3. Logging
 ```bash
-LOG_FILE="${PAI_HOME}/Library/Logs/hooks.log"
+LOG_FILE="${HOME}/Library/Logs/hooks.log"
 echo "[$(date)] Hook executed: $0" >> "$LOG_FILE"
 ```
 
@@ -289,7 +289,7 @@ Hooks have access to these environment variables:
 
 | Variable | Description |
 |----------|-------------|
-| `PAI_HOME` | PAI installation directory |
+| `PAI_DIR` | PAI configuration directory |
 | `USER_PROMPT` | Current user prompt |
 | `TOOL_NAME` | Tool being called |
 | `TOOL_PARAMS` | Tool parameters |
@@ -311,7 +311,7 @@ export HOOK_DEBUG=true
 #!/bin/bash
 if [ "$HOOK_DEBUG" = "true" ]; then
     set -x  # Enable trace
-    exec 2>>"${PAI_HOME}/Library/Logs/hook_debug.log"
+    exec 2>>"${HOME}/Library/Logs/hook_debug.log"
 fi
 ```
 
@@ -371,10 +371,10 @@ webhook_notify "https://api.example.com/hooks" "$EVENT_DATA"
 
 ### Hook Not Executing
 
-1. **Check permissions**: `ls -la ${PAI_HOME}/.claude/hooks/`
+1. **Check permissions**: `ls -la ${PAI_DIR}/hooks/`
 2. **Verify name**: Must match exactly
 3. **Test directly**: `./hook-name test`
-4. **Check logs**: `tail -f ${PAI_HOME}/Library/Logs/hooks.log`
+4. **Check logs**: `tail -f ${HOME}/Library/Logs/hooks.log`
 
 ### Hook Blocking Operations
 
@@ -407,8 +407,8 @@ SAFE_INPUT=$(sanitize "$USER_INPUT")
 
 ```bash
 # Restrict file operations
-if [[ ! "$FILE_PATH" =~ ^${PAI_HOME} ]]; then
-    echo "Access denied: Outside PAI_HOME"
+if [[ ! "$FILE_PATH" =~ ^${PAI_DIR} ]]; then
+    echo "Access denied: Outside PAI_DIR"
     exit 1
 fi
 ```

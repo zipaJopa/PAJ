@@ -7,20 +7,20 @@ The PAI Voice System provides text-to-speech capabilities for Kai and all agents
 
 ### Core Components
 
-1. **Voice Server** (`${PAI_HOME}/.claude/voice-server/server.ts`)
+1. **Voice Server** (`${PAI_DIR}/voice-server/server.ts`)
    - Bun-based HTTP server running on port 8888
    - Handles text-to-speech requests via ElevenLabs API
    - Falls back to macOS 'say' command if ElevenLabs not configured
    - Provides notification display alongside voice output
 
-2. **Stop Hook** (`${PAI_HOME}/.claude/hooks/stop-hook.ts`)
+2. **Stop Hook** (`${PAI_DIR}/hooks/stop-hook.ts`)
    - Triggers after every Claude Code response
    - Parses completion messages from transcripts
    - Extracts text from COMPLETED lines
    - Sends appropriate voice requests to the voice server
    - Handles both Kai's direct work and agent completions
 
-3. **Agent Configurations** (`${PAI_HOME}/.claude/agents/*.md`)
+3. **Agent Configurations** (`${PAI_DIR}/agents/*.md`)
    - Each agent has a unique voice ID for distinct personality
    - Voice IDs defined in agent configurations
    - No special formatting required in agent outputs
@@ -103,13 +103,13 @@ Returns server health status and configuration.
 
 **Automatic Start:**
 ```bash
-cd ${PAI_HOME}/.claude/voice-server
+cd ${PAI_DIR}/voice-server
 ./start.sh
 ```
 
 **Manual Start:**
 ```bash
-bun ${PAI_HOME}/.claude/voice-server/server.ts
+bun ${PAI_DIR}/voice-server/server.ts
 ```
 
 **Verify Server Running:**
@@ -120,7 +120,7 @@ curl http://localhost:8888/health
 ## Stop Hook Implementation
 
 ### Current Working Implementation
-The stop hook (`${PAI_HOME}/.claude/hooks/stop-hook.ts`) processes completion messages with this logic:
+The stop hook (`${PAI_DIR}/hooks/stop-hook.ts`) processes completion messages with this logic:
 
 1. **Parse Transcript**: Reads Claude Code conversation transcript
 2. **Find Completions**: Looks for Task tool usage (agents) or COMPLETED lines (Kai)
@@ -135,13 +135,13 @@ The voice server expects these exact field names:
 
 ## Claude Code Hook Configuration
 
-### Settings Setup (`${PAI_HOME}/.claude/settings.json`)
+### Settings Setup (`${PAI_DIR}/settings.json`)
 ```json
 {
   "hooks": {
     "stop": [
       {
-        "command": "bun ${PAI_HOME}/.claude/hooks/stop-hook.ts"
+        "command": "bun ${PAI_DIR}/hooks/stop-hook.ts"
       }
     ]
   }
@@ -189,7 +189,7 @@ Every response from Kai and agents MUST include:
    - Stop hook must send `voice_id` not `voiceId`
 
 4. **Review Stop Hook**
-   - Verify hook is executable: `ls -la ${PAI_HOME}/.claude/hooks/stop-hook.ts`
+   - Verify hook is executable: `ls -la ${PAI_DIR}/hooks/stop-hook.ts`
    - Check hook is configured in settings.json
    - Review hook logs for errors
 
@@ -265,7 +265,7 @@ curl -X POST http://localhost:8888/notify \
 
 **Solutions**:
 1. Verify response format includes COMPLETED line
-2. Start voice server: `cd ${PAI_HOME}/.claude/voice-server && ./start.sh`
+2. Start voice server: `cd ${PAI_DIR}/voice-server && ./start.sh`
 3. Check settings.json has stop hook configured
 4. Test with fallback 'say' command by removing API key temporarily
 

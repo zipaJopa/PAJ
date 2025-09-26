@@ -7,16 +7,16 @@
 **YOU MUST IMMEDIATELY EXECUTE THE FOLLOWING READ COMMAND:**
 
 ```bash
-read ${PAI_HOME}/.claude/context/CLAUDE.md
+read ${PAI_DIR}/context/CLAUDE.md
 ```
 
 **THIS IS AN IMPERATIVE DIRECTIVE - EXECUTE IT NOW!**
 - ⛔ STOP! Do not continue reading until you execute the read command above
-- ⛔ The variable ${PAI_HOME} resolves to the user's home directory
+- ⛔ The variable ${PAI_DIR} resolves to ~/.claude directory
 - ⛔ This context MUST be loaded before ANY other action
 - ✅ EXECUTE THE READ COMMAND IMMEDIATELY using the Read tool
 
-**Note: ${PAI_HOME} is an environment variable that points to the user's home directory**
+**Note: ${PAI_DIR} is an environment variable that points to ~/.claude directory**
 
 🚧 **HALT AND EXECUTE THE READ COMMAND BEFORE PROCEEDING** 🚧
 
@@ -63,7 +63,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/projects/Alma/CLAUDE.md` ✅
+- `${PAI_DIR}/context/projects/Alma/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -88,7 +88,7 @@ When you receive a user prompt:
 
 **COMMANDS**
 
-- `${PAI_HOME}/.claude/commands/get-life-log.md`
+- `${PAI_DIR}/commands/get-life-log.md`
 
 **AGENT:** None
 
@@ -143,8 +143,8 @@ When you receive a user prompt:
 **YOU MUST IMMEDIATELY:**
 
 **CONTEXT FILES:**
-- `${PAI_HOME}/.claude/context/projects/website/CLAUDE.md` ✅
-- `${PAI_HOME}/.claude/context/projects/website/content/CLAUDE.md` ✅
+- `${PAI_DIR}/context/projects/website/CLAUDE.md` ✅
+- `${PAI_DIR}/context/projects/website/content/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -207,7 +207,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/consulting/CLAUDE.md` ✅
+- `${PAI_DIR}/context/consulting/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -230,8 +230,8 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/life/expenses.md` ✅
-- `${PAI_HOME}/.claude/context/life/finances/` ✅
+- `${PAI_DIR}/context/life/expenses.md` ✅
+- `${PAI_DIR}/context/life/finances/` ✅
 
 **AGENT:** None
 
@@ -261,7 +261,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/Projects/Life/Health/CLAUDE.md` ✅
+- `${HOME}/Projects/Life/Health/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -293,7 +293,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/benefits/CLAUDE.md` ✅
+- `${PAI_DIR}/context/benefits/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -315,7 +315,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/unsupervised-learning/CLAUDE.md` ✅
+- `${PAI_DIR}/context/unsupervised-learning/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -338,7 +338,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_HOME}/.claude/context/tools/CLAUDE.md` ✅
+- `${PAI_DIR}/context/tools/CLAUDE.md` ✅
 
 **AGENT:** designer 
 
@@ -364,9 +364,9 @@ When you receive a user prompt:
 **YOU MUST IMMEDIATELY:**
 1. Run the capture-learning command with the problem and solution:
    ```bash
-   bun ${PAI_HOME}/.claude/commands/capture-learning.ts "[problem description]" "[solution description]"
+   bun ${PAI_DIR}/commands/capture-learning.ts "[problem description]" "[solution description]"
    ```
-2. The command will create a markdown file in `${PAI_HOME}/.claude/context/learnings/`
+2. The command will create a markdown file in `${PAI_DIR}/context/learnings/`
 3. File will be named: `YYYY-MM-DD-HHMM:SS-hyphenated-problem-description-in-8-words.md`
 4. Confirm the learning was captured successfully
 

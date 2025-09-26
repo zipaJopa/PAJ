@@ -27,8 +27,8 @@ cd ~/PAI
 
 ```bash
 # Add to your shell profile (~/.zshrc or ~/.bashrc)
-export PAI_HOME="$HOME/PAI"  # Or your installation path
-export PATH="$PAI_HOME/bin:$PATH"
+export PAI_DIR="$HOME/.claude"  # PAI infrastructure directory
+export PATH="$HOME/bin:$PATH"
 
 # Reload shell
 source ~/.zshrc  # or ~/.bashrc
@@ -38,12 +38,12 @@ source ~/.zshrc  # or ~/.bashrc
 
 ```bash
 # Create essential directories
-mkdir -p "${PAI_HOME}/.claude/context"
-mkdir -p "${PAI_HOME}/.claude/hooks"
-mkdir -p "${PAI_HOME}/.claude/commands"
-mkdir -p "${PAI_HOME}/Projects"
-mkdir -p "${PAI_HOME}/Library/Logs"
-mkdir -p "${PAI_HOME}/Documentation"
+mkdir -p "${PAI_DIR}/context"
+mkdir -p "${PAI_DIR}/hooks"
+mkdir -p "${PAI_DIR}/commands"
+mkdir -p "$HOME/Projects"
+mkdir -p "$HOME/Library/Logs"
+mkdir -p "$HOME/Documentation"
 ```
 
 ### 4. Configure Environment File
@@ -52,7 +52,7 @@ Create `~/.env` with your settings:
 
 ```bash
 # Essential Configuration
-PAI_HOME=/path/to/your/PAI
+PAI_DIR=$HOME/.claude
 
 # Optional: Voice Server
 ELEVENLABS_API_KEY=your_api_key_here
@@ -68,13 +68,13 @@ ANTHROPIC_API_KEY=your_key_here
 
 ### 1. Create Main Context File
 
-Create `${PAI_HOME}/.claude/context/CLAUDE.md`:
+Create `${PAI_DIR}/context/CLAUDE.md`:
 
 ```markdown
 # PAI System Context
 
 ## System Information
-- PAI_HOME: ${PAI_HOME}
+- PAI_DIR: ${PAI_DIR}
 - Platform: macOS
 - User: ${USER}
 
@@ -93,20 +93,20 @@ You are an AI assistant enhanced with PAI (Personal AI Infrastructure).
 
 ### 2. Setup UFC Hook System
 
-Create the main hook file `${PAI_HOME}/.claude/hooks/user-prompt-submit-hook`:
+Create the main hook file `${PAI_DIR}/hooks/user-prompt-submit-hook`:
 
 ```bash
 #!/bin/bash
 # UFC Dynamic Context Loader
 
 PROMPT="$1"
-PAI_HOME="${PAI_HOME:-$HOME}"
+PAI_DIR="${PAI_DIR:-$HOME/.claude}"
 
 # Simple intent matching for demonstration
 case "$PROMPT" in
     *website*|*blog*)
         echo "Loading website context..."
-        cat "${PAI_HOME}/.claude/context/projects/website/CLAUDE.md" 2>/dev/null
+        cat "${PAI_DIR}/context/projects/website/CLAUDE.md" 2>/dev/null
         ;;
     *research*)
         echo "AGENT: researcher"
@@ -121,14 +121,14 @@ exit 0
 
 Make it executable:
 ```bash
-chmod +x "${PAI_HOME}/.claude/hooks/user-prompt-submit-hook"
+chmod +x "${PAI_DIR}/hooks/user-prompt-submit-hook"
 ```
 
 ### 3. Install Voice Server (Optional)
 
 ```bash
 # Navigate to voice server
-cd "${PAI_HOME}/.claude/voice-server"
+cd "${PAI_DIR}/voice-server"
 
 # Install dependencies
 bun install
@@ -149,13 +149,13 @@ Create project-specific contexts:
 
 ```bash
 # Create a project context
-mkdir -p "${PAI_HOME}/.claude/context/projects/myproject"
-cat > "${PAI_HOME}/.claude/context/projects/myproject/CLAUDE.md" << EOF
+mkdir -p "${PAI_DIR}/context/projects/myproject"
+cat > "${PAI_DIR}/context/projects/myproject/CLAUDE.md" << EOF
 # My Project Context
 
 ## Project Details
 - Name: My Project
-- Path: ${PAI_HOME}/Projects/myproject
+- Path: ${HOME}/Projects/myproject
 - Type: Web Application
 
 ## Technical Stack
@@ -173,7 +173,7 @@ EOF
 
 #### Tool Validation Hook
 
-Create `${PAI_HOME}/.claude/hooks/tool-use-hook`:
+Create `${PAI_DIR}/hooks/tool-use-hook`:
 
 ```bash
 #!/bin/bash
@@ -183,7 +183,7 @@ TOOL="$1"
 PARAMS="$2"
 
 # Log tool usage
-echo "[$(date)] Tool: $TOOL" >> "${PAI_HOME}/Library/Logs/tools.log"
+echo "[$(date)] Tool: $TOOL" >> "${HOME}/Library/Logs/tools.log"
 
 # Validate dangerous operations
 if [[ "$TOOL" == "Bash" ]] && [[ "$PARAMS" =~ "rm -rf" ]]; then
@@ -196,7 +196,7 @@ exit 0
 
 #### Notification Hook
 
-Create `${PAI_HOME}/.claude/hooks/post-execution-hook`:
+Create `${PAI_DIR}/hooks/post-execution-hook`:
 
 ```bash
 #!/bin/bash
@@ -216,7 +216,7 @@ exit 0
 
 ### 3. Custom Commands
 
-Create custom command `${PAI_HOME}/.claude/commands/status.sh`:
+Create custom command `${PAI_DIR}/commands/status.sh`:
 
 ```bash
 #!/bin/bash
@@ -224,10 +224,10 @@ Create custom command `${PAI_HOME}/.claude/commands/status.sh`:
 
 echo "PAI System Status"
 echo "================="
-echo "PAI_HOME: ${PAI_HOME}"
-echo "Contexts: $(find ${PAI_HOME}/.claude/context -name "*.md" | wc -l)"
-echo "Hooks: $(find ${PAI_HOME}/.claude/hooks -type f | wc -l)"
-echo "Projects: $(ls -1 ${PAI_HOME}/Projects 2>/dev/null | wc -l)"
+echo "PAI_DIR: ${PAI_DIR}"
+echo "Contexts: $(find ${PAI_DIR}/context -name "*.md" | wc -l)"
+echo "Hooks: $(find ${PAI_DIR}/hooks -type f | wc -l)"
+echo "Projects: $(ls -1 ${HOME}/Projects 2>/dev/null | wc -l)"
 
 # Check voice server
 if curl -s http://localhost:8888/health > /dev/null 2>&1; then
@@ -263,7 +263,7 @@ curl -X POST http://localhost:8888/notify \
 
 ```bash
 # Test hook directly
-${PAI_HOME}/.claude/hooks/user-prompt-submit-hook "test website"
+${PAI_DIR}/hooks/user-prompt-submit-hook "test website"
 
 # Check output
 echo $?  # Should be 0
@@ -275,10 +275,10 @@ echo $?  # Should be 0
 
 ```bash
 # 1. Create project directory
-mkdir -p "${PAI_HOME}/Projects/newproject"
+mkdir -p "${HOME}/Projects/newproject"
 
 # 2. Create context file
-cat > "${PAI_HOME}/.claude/context/projects/newproject/CLAUDE.md" << EOF
+cat > "${PAI_DIR}/context/projects/newproject/CLAUDE.md" << EOF
 # New Project Context
 [Project specific information]
 EOF
@@ -291,7 +291,7 @@ EOF
 
 ```bash
 # Research agent context
-cat > "${PAI_HOME}/.claude/context/agents/researcher.md" << EOF
+cat > "${PAI_DIR}/context/agents/researcher.md" << EOF
 # Researcher Agent Context
 Focus on finding accurate, recent information
 Cite sources when possible
@@ -302,14 +302,14 @@ EOF
 
 ```bash
 # Create automation hook
-cat > "${PAI_HOME}/.claude/hooks/automation-hook" << EOF
+cat > "${PAI_DIR}/hooks/automation-hook" << EOF
 #!/bin/bash
 # Automated tasks
 if [[ "\$1" =~ "daily report" ]]; then
     generate_daily_report
 fi
 EOF
-chmod +x "${PAI_HOME}/.claude/hooks/automation-hook"
+chmod +x "${PAI_DIR}/hooks/automation-hook"
 ```
 
 ## Troubleshooting
@@ -318,13 +318,13 @@ chmod +x "${PAI_HOME}/.claude/hooks/automation-hook"
 
 ```bash
 # Check hook permissions
-ls -la "${PAI_HOME}/.claude/hooks/"
+ls -la "${PAI_DIR}/hooks/"
 
 # Test hook manually
-"${PAI_HOME}/.claude/hooks/user-prompt-submit-hook" "test prompt"
+"${PAI_DIR}/hooks/user-prompt-submit-hook" "test prompt"
 
-# Check PAI_HOME is set
-echo $PAI_HOME
+# Check PAI_DIR is set
+echo $PAI_DIR
 ```
 
 ### Voice Server Issues
@@ -334,10 +334,10 @@ echo $PAI_HOME
 lsof -i :8888
 
 # View logs
-tail -f "${PAI_HOME}/Library/Logs/pai-voice-server.log"
+tail -f "${HOME}/Library/Logs/pai-voice-server.log"
 
 # Restart service
-cd "${PAI_HOME}/.claude/voice-server"
+cd "${PAI_DIR}/voice-server"
 ./restart.sh
 ```
 
@@ -345,13 +345,13 @@ cd "${PAI_HOME}/.claude/voice-server"
 
 ```bash
 # Check if executable
-chmod +x "${PAI_HOME}/.claude/hooks/"*
+chmod +x "${PAI_DIR}/hooks/"*
 
 # Enable debug mode
 export HOOK_DEBUG=true
 
 # Check logs
-tail -f "${PAI_HOME}/Library/Logs/hooks.log"
+tail -f "${HOME}/Library/Logs/hooks.log"
 ```
 
 ## Next Steps
@@ -377,7 +377,7 @@ tail -f "${PAI_HOME}/Library/Logs/hooks.log"
 
 ```bash
 # Check system status
-"${PAI_HOME}/.claude/commands/status.sh"
+"${PAI_DIR}/commands/status.sh"
 
 # Reload context
 source ~/.zshrc
@@ -386,25 +386,25 @@ source ~/.zshrc
 curl -X POST http://localhost:8888/notify -d '{"message":"test"}'
 
 # View logs
-tail -f "${PAI_HOME}/Library/Logs/"*.log
+tail -f "${HOME}/Library/Logs/"*.log
 ```
 
 ### File Locations
 
 | Component | Location |
 |-----------|----------|
-| Main Context | `${PAI_HOME}/.claude/context/CLAUDE.md` |
-| Hooks | `${PAI_HOME}/.claude/hooks/` |
-| Commands | `${PAI_HOME}/.claude/commands/` |
-| Projects | `${PAI_HOME}/Projects/` |
-| Logs | `${PAI_HOME}/Library/Logs/` |
-| Voice Server | `${PAI_HOME}/.claude/voice-server/` |
+| Main Context | `${PAI_DIR}/context/CLAUDE.md` |
+| Hooks | `${PAI_DIR}/hooks/` |
+| Commands | `${PAI_DIR}/commands/` |
+| Projects | `${HOME}/Projects/` |
+| Logs | `${HOME}/Library/Logs/` |
+| Voice Server | `${PAI_DIR}/voice-server/` |
 
 ### Environment Variables
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `PAI_HOME` | PAI installation directory | `$HOME` |
+| `PAI_DIR` | PAI configuration directory | `$HOME/.claude` |
 | `ELEVENLABS_API_KEY` | Voice synthesis API | None |
 | `PORT` | Voice server port | 8888 |
 | `HOOK_DEBUG` | Enable hook debugging | false |
@@ -414,7 +414,7 @@ tail -f "${PAI_HOME}/Library/Logs/"*.log
 - Check the [Documentation](./README.md)
 - Review [Troubleshooting Guide](#troubleshooting)
 - File issues on GitHub
-- Check logs in `${PAI_HOME}/Library/Logs/`
+- Check logs in `${HOME}/Library/Logs/`
 
 ---
 

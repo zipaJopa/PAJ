@@ -84,7 +84,7 @@
 - 🎉 **Release**: Published v0.1 - Initial public release
 - 🔒 **Voice**: Hardened the voice server
 - 🏠 **Portability**: PAI_HOME support eliminates hardcoded paths
-- 📚 **Docs**: Comprehensive documentation under `~/.claude/documentation/`
+- 📚 **Docs**: Comprehensive documentation under `${PAI_DIR}/documentation/`
 - 🔌 **Dynamic**: MCP detection via `settings.json`
 - 🏗️ **Architecture**: Complete system documentation with examples
 
@@ -284,7 +284,7 @@ graph TD
 <td width="50%">
 
 ```
-~/.claude/context/
+${PAI_DIR}/context/
 ├── projects/
 │   ├── website/
 │   ├── Alma/
@@ -488,7 +488,7 @@ source ~/.zshrc  # or source ~/.bashrc
 
 ```bash
 # Navigate to PAI directory
-cd ~/.claude
+cd ${PAI_DIR}
 
 # Optional: Start voice server for audio notifications
 cd voice-server && ./install.sh && ./start.sh

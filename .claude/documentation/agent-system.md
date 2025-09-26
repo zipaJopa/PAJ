@@ -233,7 +233,7 @@ You can explicitly request a specific agent:
 Each agent can have specific context:
 
 ```
-${PAI_HOME}/.claude/context/agents/
+${PAI_DIR}/context/agents/
 ├── researcher.md
 ├── engineer.md
 ├── designer.md
@@ -370,7 +370,7 @@ Each agent has access to specific tools:
 
 ```bash
 # Check intent matching
-grep "AGENT:" ${PAI_HOME}/Library/Logs/ufc.log
+grep "AGENT:" ${HOME}/Library/Logs/ufc.log
 
 # Manually specify agent
 "Please use the engineer agent to..."
@@ -383,7 +383,7 @@ grep "AGENT:" ${PAI_HOME}/Library/Logs/ufc.log
 export AGENT_DEBUG=true
 
 # Check agent logs
-tail -f ${PAI_HOME}/Library/Logs/agent-*.log
+tail -f ${HOME}/Library/Logs/agent-*.log
 ```
 
 ### Agent Errors
@@ -405,7 +405,7 @@ Create your own specialized agent:
 
 ```bash
 # 1. Define agent in context
-cat > ${PAI_HOME}/.claude/context/agents/custom.md << EOF
+cat > ${PAI_DIR}/context/agents/custom.md << EOF
 # Custom Agent
 Specialized for specific domain...
 EOF

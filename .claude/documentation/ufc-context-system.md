@@ -41,7 +41,7 @@ Pattern Match:
   - "research" → Research agent
 ↓
 Context Load:
-  - ${PAI_HOME}/.claude/context/projects/website/CLAUDE.md
+  - ${PAI_DIR}/context/projects/website/CLAUDE.md
   - Agent: researcher
 ```
 
@@ -57,7 +57,7 @@ Context files are loaded based on semantic triggers defined in the hook system:
     phrases: ["update my site", "fix navigation", "publish article"]
   },
   action: {
-    loadContext: ["${PAI_HOME}/.claude/context/projects/website/CLAUDE.md"],
+    loadContext: ["${PAI_DIR}/context/projects/website/CLAUDE.md"],
     agent: null
   }
 }
@@ -88,15 +88,15 @@ Special instructions for the AI...
 
 ### Creating Context Files
 
-1. **Global Context**: `${PAI_HOME}/.claude/context/CLAUDE.md`
+1. **Global Context**: `${PAI_DIR}/context/CLAUDE.md`
    - Loaded for all conversations
    - Contains system-wide settings
 
-2. **Project Context**: `${PAI_HOME}/.claude/context/projects/*/CLAUDE.md`
+2. **Project Context**: `${PAI_DIR}/context/projects/*/CLAUDE.md`
    - Project-specific knowledge
    - Loaded based on intent
 
-3. **Domain Context**: `${PAI_HOME}/.claude/context/domains/*/CLAUDE.md`
+3. **Domain Context**: `${PAI_DIR}/context/domains/*/CLAUDE.md`
    - Specialized domain knowledge
    - Technical references
 
@@ -105,8 +105,8 @@ Special instructions for the AI...
 ### 1. Website & Blog Context
 **Triggers**: website, blog, site, homepage, navigation
 **Files**: 
-- `${PAI_HOME}/.claude/context/projects/website/CLAUDE.md`
-- `${PAI_HOME}/.claude/context/projects/website/content/CLAUDE.md`
+- `${PAI_DIR}/context/projects/website/CLAUDE.md`
+- `${PAI_DIR}/context/projects/website/content/CLAUDE.md`
 
 ### 2. Research Context
 **Triggers**: research, investigate, find information, latest news
@@ -126,12 +126,12 @@ Special instructions for the AI...
 ### 5. Financial Context
 **Triggers**: expenses, bills, budget, spending
 **Files**:
-- `${PAI_HOME}/.claude/context/life/expenses.md`
-- `${PAI_HOME}/.claude/context/life/finances/`
+- `${PAI_DIR}/context/life/expenses.md`
+- `${PAI_DIR}/context/life/finances/`
 
 ### 6. Health Context
 **Triggers**: health, fitness, medical, wellness
-**Files**: `${PAI_HOME}/Projects/Life/Health/CLAUDE.md`
+**Files**: `${HOME}/Projects/Life/Health/CLAUDE.md`
 
 ## Agent System Integration
 
@@ -188,7 +188,7 @@ INTENT=$(analyze_intent "$USER_PROMPT")
 # Load appropriate context
 case "$INTENT" in
   "website")
-    load_context "${PAI_HOME}/.claude/context/projects/website/CLAUDE.md"
+    load_context "${PAI_DIR}/context/projects/website/CLAUDE.md"
     ;;
   "research")
     launch_agent "researcher"
@@ -228,7 +228,7 @@ Contexts can inherit from others:
 
 ```markdown
 # Child Context
-extends: ${PAI_HOME}/.claude/context/base/CLAUDE.md
+extends: ${PAI_DIR}/context/base/CLAUDE.md
 
 ## Additional Knowledge
 ...
@@ -243,7 +243,7 @@ condition:
   - file_exists: "package.json"
   - directory: "src/"
 then:
-  load: "${PAI_HOME}/.claude/context/javascript/CLAUDE.md"
+  load: "${PAI_DIR}/context/javascript/CLAUDE.md"
 ```
 
 ### Context Variables
@@ -280,7 +280,7 @@ export UFC_DEBUG=true
 
 View debug output:
 ```bash
-tail -f ${PAI_HOME}/Library/Logs/ufc-debug.log
+tail -f ${HOME}/Library/Logs/ufc-debug.log
 ```
 
 ### Common Issues

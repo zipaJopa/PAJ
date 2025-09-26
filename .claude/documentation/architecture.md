@@ -56,7 +56,7 @@ The hook system provides event-driven automation throughout the AI interaction l
 - **Tool hooks**: Intercept and modify tool calls
 - **Post-execution hooks**: Run after commands complete
 
-**Location:** `${PAI_HOME}/.claude/hooks/`
+**Location:** `${PAI_DIR}/hooks/`
 
 ### 2. UFC Context System
 
@@ -67,7 +67,7 @@ Universal Flexible Context (UFC) is the intelligent context management system th
 - **Dynamic Loading**: Loads context files on-demand
 - **Project Awareness**: Maintains project-specific contexts
 
-**Location:** `${PAI_HOME}/.claude/context/`
+**Location:** `${PAI_DIR}/context/`
 
 ### 3. Agent System
 
@@ -128,26 +128,29 @@ Intent Analysis → Pattern Matching → Context Selection → Dynamic Loading
 ## Directory Structure
 
 ```
-${PAI_HOME}/
-├── .claude/
-│   ├── context/              # UFC context files
-│   │   ├── CLAUDE.md        # Main context
-│   │   ├── projects/        # Project-specific contexts
-│   │   ├── life/            # Personal contexts
-│   │   └── tools/           # Tool contexts
-│   ├── hooks/               # Event hooks
-│   │   ├── user-prompt-submit-hook
-│   │   ├── tool-use-hook
-│   │   └── post-execution-hook
-│   ├── commands/            # Custom commands
-│   │   └── *.sh            # Command scripts
-│   └── voice-server/        # Voice notification service
-│       ├── server.ts       # Server implementation
-│       └── menubar/        # Menu bar integration
-├── Documentation/           # System documentation
-├── Projects/               # User projects
-└── Library/               # System libraries
-    └── Logs/              # System logs
+${PAI_DIR}/
+├── context/              # UFC context files
+│   ├── CLAUDE.md        # Main context
+│   ├── projects/        # Project-specific contexts
+│   ├── life/            # Personal contexts
+│   └── tools/           # Tool contexts
+├── hooks/               # Event hooks
+│   ├── user-prompt-submit-hook
+│   ├── tool-use-hook
+│   └── post-execution-hook
+├── commands/            # Custom commands
+│   └── *.sh            # Command scripts
+├── voice-server/        # Voice notification service
+│   ├── server.ts       # Server implementation
+│   └── menubar/        # Menu bar integration
+├── documentation/       # System documentation
+└── statusline-command.sh
+
+${HOME}/
+├── Documentation/       # User documentation
+├── Projects/           # User projects
+└── Library/           # System libraries
+    └── Logs/          # System logs
 ```
 
 ## Communication Protocols
@@ -202,19 +205,19 @@ Hooks communicate through:
 
 ### 1. Adding Context
 Create new context files in:
-- `${PAI_HOME}/.claude/context/` - Global contexts
-- `${PAI_HOME}/Projects/*/CLAUDE.md` - Project contexts
+- `${PAI_DIR}/context/` - Global contexts
+- `${HOME}/Projects/*/CLAUDE.md` - Project contexts
 
 ### 2. Adding Hooks
 Create executable scripts in:
-- `${PAI_HOME}/.claude/hooks/` - Event hooks
+- `${PAI_DIR}/hooks/` - Event hooks
 
 ### 3. Adding Agents
 Define new agents in UFC context system configuration.
 
 ### 4. Adding Commands
 Create command scripts in:
-- `${PAI_HOME}/.claude/commands/` - Custom commands
+- `${PAI_DIR}/commands/` - Custom commands
 
 ## Performance Considerations
 

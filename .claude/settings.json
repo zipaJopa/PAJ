@@ -2,7 +2,9 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "MCP_API_KEY": "REDACTED",
-    "DISABLE_INTERLEAVED_THINKING": "true"
+    "DISABLE_INTERLEAVED_THINKING": "true",
+    "DA": "Kai",
+    "PAI_DIR": "~/.claude"
   },
   "permissions": {
     "allow": [
@@ -119,7 +121,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun ${PAI_HOME:-~}/.claude/hooks/load-dynamic-requirements.ts"
+            "command": "bun ${PAI_DIR}/hooks/load-dynamic-requirements.ts"
           }
         ]
       }
@@ -129,7 +131,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun ${PAI_HOME:-~}/.claude/hooks/session-start-hook.ts"
+            "command": "bun ${PAI_DIR}/hooks/session-start-hook.ts"
           }
         ]
       }
@@ -139,7 +141,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun ${PAI_HOME:-~}/.claude/hooks/stop-hook.ts"
+            "command": "bun ${PAI_DIR}/hooks/stop-hook.ts"
           }
         ]
       }
@@ -149,7 +151,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun ${PAI_HOME:-~}/.claude/hooks/subagent-stop-hook.ts"
+            "command": "bun ${PAI_DIR}/hooks/subagent-stop-hook.ts"
           }
         ]
       }
@@ -160,7 +162,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bun ${PAI_HOME:-~}/.claude/hooks/context-compression-hook.ts"
+            "command": "bun ${PAI_DIR}/hooks/context-compression-hook.ts"
           }
         ]
       }
@@ -168,7 +170,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "bash ${PAI_HOME:-~}/.claude/statusline-command.sh"
+    "command": "bash ${PAI_DIR}/statusline-command.sh"
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754071370324

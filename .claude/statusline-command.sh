@@ -20,7 +20,7 @@ LOCK_FILE="/tmp/.claude_ccusage.lock"
 CACHE_AGE=30   # 30 seconds for more real-time updates
 
 # Count items from specified directories
-claude_dir="${PAI_HOME:-/Users/daniel}/.claude"
+claude_dir="${PAI_DIR:-$HOME/.claude}"
 commands_count=0
 mcps_count=0
 fobs_count=0
@@ -42,13 +42,13 @@ else
 fi
 
 # Count Services (optimized - count .md files directly)
-services_dir="${PAI_HOME:-/Users/daniel}/Projects/FoundryServices/Services"
+services_dir="${HOME}/Projects/FoundryServices/Services"
 if [ -d "$services_dir" ]; then
     fobs_count=$(ls -1 "$services_dir/"*.md 2>/dev/null | wc -l | tr -d ' ')
 fi
 
 # Count Fabric patterns (optimized - count subdirectories)
-fabric_patterns_dir="${PAI_HOME:-/Users/daniel}/.config/fabric/patterns"
+fabric_patterns_dir="${HOME}/.config/fabric/patterns"
 if [ -d "$fabric_patterns_dir" ]; then
     # Count immediate subdirectories only
     fabric_count=$(find "$fabric_patterns_dir" -maxdepth 1 -type d -not -path "$fabric_patterns_dir" 2>/dev/null | wc -l | tr -d ' ')
