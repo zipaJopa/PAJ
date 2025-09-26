@@ -44,7 +44,7 @@ function generateTabTitle(prompt: string): string {
 
   // If we don't have enough words, add generic ones
   if (titleWords.length === 0) {
-    titleWords.push('Assistant');
+    titleWords.push('Kai');
   }
   if (titleWords.length === 1) {
     titleWords.push('Task');
@@ -60,8 +60,22 @@ function generateTabTitle(prompt: string): string {
  * Set Kitty terminal tab title
  */
 function setKittyTabTitle(title: string): void {
-  // Use OSC escape sequence to set tab/window title with checkmark
-  process.stdout.write(`\x1b]0;✓ ${title}\x07`);
+  // Use OSC escape sequences to set both tab and window title with checkmark
+  // Send to stderr to bypass potential output filtering
+
+  // OSC 0 sets both icon and window title
+  process.stderr.write(`\x1b]0;✓ ${title}\x07`);
+
+  // OSC 2 sets window title specifically
+  process.stderr.write(`\x1b]2;✓ ${title}\x07`);
+
+  // Kitty-specific tab title sequence
+  process.stderr.write(`\x1b]30;✓ ${title}\x07`);
+
+  // Also flush stderr to ensure immediate output
+  if (process.stderr.isTTY) {
+    process.stderr.write('');
+  }
 }
 
 // Simple voice mappings
@@ -72,7 +86,7 @@ const VOICES = {
   designer: 'ZF6FPAbjXT4488VcRRnw',
   architect: 'muZKMsIDGYtIkjjiUS82',
   writer: 'gfRt6Z3Z8aTbpLfexQ7N',
-  assistant: 'jqcCZkN6Knx8BJ5TBdYR'  // Default assistant voice
+  kai: 'jqcCZkN6Knx8BJ5TBdYR'
 };
 
 // Intelligent response generator - prioritizes custom COMPLETED messages
@@ -253,7 +267,7 @@ async function main() {
 
   // Generate the announcement
   let message = '';
-  let voiceId = VOICES.assistant; // Default to assistant's voice
+  let voiceId = VOICES.kai; // Default to Kai's voice
 
   if (isAgentTask && taskResult) {
     // AGENT DID THE TASK - Look for their CUSTOM COMPLETED or COMPLETED line
@@ -273,7 +287,7 @@ async function main() {
       const wordCount = customText.split(/\s+/).length;
       if (customText && wordCount <= 8) {
         message = customText;
-        voiceId = VOICES[agentType.toLowerCase()] || VOICES.assistant;
+        voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
         console.error(`🗣️ AGENT CUSTOM VOICE: ${message}`);
       } else {
         // Custom completed too long, fall back to regular COMPLETED
@@ -284,7 +298,7 @@ async function main() {
             .replace(/\[AGENT:\w+\]\s*/i, '')
             .trim();
           message = generateIntelligentResponse(lastUserQuery, taskResult, completedText);
-          voiceId = VOICES[agentType.toLowerCase()] || VOICES.assistant;
+          voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
           console.error(`🎯 AGENT FALLBACK (custom too long): ${message}`);
         }
       }
@@ -304,14 +318,14 @@ async function main() {
 
         // Generate intelligent response for agent tasks
         message = generateIntelligentResponse(lastUserQuery, taskResult, completedText);
-        voiceId = VOICES[agentType.toLowerCase()] || VOICES.assistant;
+        voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
 
         console.error(`🎯 AGENT INTELLIGENT: ${message}`);
       }
     }
 
   } else {
-    // I (ASSISTANT) DID THE TASK - Look for my CUSTOM COMPLETED or COMPLETED line
+    // I (KAI) DID THE TASK - Look for my CUSTOM COMPLETED or COMPLETED line
     const lastResponse = lines[lines.length - 1];
     try {
       const entry = JSON.parse(lastResponse);
@@ -339,7 +353,7 @@ async function main() {
             if (completedMatch) {
               let completedText = completedMatch[1].trim();
               message = generateIntelligentResponse(lastUserQuery, content, completedText);
-              console.error(`🎯 ASSISTANT FALLBACK (custom too long): ${message}`);
+              console.error(`🎯 KAI FALLBACK (custom too long): ${message}`);
             }
           }
         } else {
@@ -353,7 +367,7 @@ async function main() {
             // Generate intelligent response
             message = generateIntelligentResponse(lastUserQuery, content, completedText);
 
-            console.error(`🎯 ASSISTANT INTELLIGENT: ${message}`);
+            console.error(`🎯 KAI INTELLIGENT: ${message}`);
           } else {
             // No COMPLETED line found - don't send anything
             console.error('⚠️ No COMPLETED line found');
@@ -369,6 +383,10 @@ async function main() {
   if (lastUserQuery) {
     const tabTitle = generateTabTitle(lastUserQuery);
     setKittyTabTitle(tabTitle);
+    // Debug log to confirm hook execution
+    console.error(`🏷️ Tab title set to: ${tabTitle}`);
+  } else {
+    console.error('⚠️ No user query found for tab title');
   }
 
   if (message) {
