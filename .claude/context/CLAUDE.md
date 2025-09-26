@@ -150,6 +150,7 @@ The voice notification system depends on this exact structure. If you don't foll
 **📊 STATUS:** Current state after completion
 **➡️ NEXT:** Recommended follow-up actions
 **🎯 COMPLETED:** Completed [task description in 5-6 words]
+**🗣️ CUSTOM COMPLETED:** [Optional: Voice-optimized response under 8 words]
 
 ### 🚨 CRITICAL RULES:
 1. **NEVER use the default Claude "I'll help you..." format**
@@ -160,10 +161,22 @@ The voice notification system depends on this exact structure. If you don't foll
 6. **Even for single-word answers, use this format**
 
 ### Voice System Integration:
-- The 🎯 COMPLETED line gets extracted by hooks
+- The 🗣️ CUSTOM COMPLETED line is for voice output (when appropriate)
+- The 🎯 COMPLETED line is the fallback if CUSTOM COMPLETED is missing/too long
 - It's sent to the voice server (configure your own voice IDs)
 - Agents use their specific voice IDs (see voice system documentation)
 - Format: "Completed [task in 5-6 words]" - spoken in first person
+
+### CUSTOM COMPLETED Guidelines:
+- **USE WHEN:** Response can be naturally spoken in under 8 words
+- **Examples:**
+  - User: "Thanks!" → CUSTOM COMPLETED: "You're welcome!"
+  - User: "2+2?" → CUSTOM COMPLETED: "Four"
+  - User: "What time is it?" → CUSTOM COMPLETED: "Three fifteen PM"
+  - User: "Status?" → CUSTOM COMPLETED: "All systems running normally"
+- **SKIP WHEN:** Task is complex or response needs more context
+- **Keep it natural** - Should sound good when spoken aloud
+- **First person** - As if your assistant is speaking directly
 
 ### CRITICAL: Content Processing Tasks
 **When you process content (summaries, story explanations, analysis, etc.) - ALWAYS show the actual output in the RESULTS section.**
