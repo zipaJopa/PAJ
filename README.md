@@ -35,13 +35,23 @@
 
 ## 🚀 **Recent Updates**
 
-> [!WARNING]
-> **Configuration Required:** You MUST set the `PAI_DIR` environment variable to point to your PAI installation's `.claude` directory. See [Quick Start](#-quick-start) for details. This makes PAI completely installation-agnostic.
-
 > [!TIP]
 > **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
 
 <details open>
+<summary><strong>📅 September 26, 2025 - Hooks System Update</strong></summary>
+
+- 🪝 **Hooks Sanitized**: Updated all hook files to be public-ready with no sensitive data
+- 🔧 **Path Portability**: All hooks now use `${PAI_DIR}` variable for installation-agnostic paths
+- 🎯 **Session Management**: Updated session-start-hook for proper initialization
+- 🎙️ **Voice Integration**: Enhanced stop-hook with intelligent voice responses and tab titles
+- 📝 **Subagent Support**: Improved subagent-stop-hook for agent-specific voice notifications
+- 🔌 **Dynamic Loading**: Updated load-dynamic-requirements wrapper for proper context loading
+- 🚀 **Ready for Distribution**: All hooks verified clean and ready for public PAI distribution
+
+</details>
+
+<details>
 <summary><strong>📅 September 25, 2025 - Voice Output Format & Bug Fix</strong></summary>
 
 - 🎯 **Mandatory Format**: Enforced structured response format for voice integration
@@ -56,7 +66,7 @@
 </details>
 
 <details>
-<summary><strong>📅 September 25, 2025 - DA Environment Variable</strong></summary>
+<summary><strong>📅 September 24, 2025 - DA Environment Variable</strong></summary>
 
 - 🤖 **DA Variable**: Separated Digital Assistant name and color configuration
 - 🎨 **DA_COLOR Variable**: Color now configurable via `DA_COLOR` environment variable
