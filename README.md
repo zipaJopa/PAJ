@@ -36,7 +36,7 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
+> **[🎉 v0.2.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.1)** - Hooks System Update with portable installation support
 
 <details open>
 <summary><strong>📅 September 26, 2025 - Hooks System Update</strong></summary>
