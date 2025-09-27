@@ -3,10 +3,34 @@
 import { readFileSync } from 'fs';
 
 /**
- * Generate 3-word tab title from user prompt
+ * Generate 4-word tab title summarizing what was done
  */
-function generateTabTitle(prompt: string): string {
-  // Clean the prompt and extract meaningful words
+function generateTabTitle(prompt: string, completedLine?: string): string {
+  // If we have a completed line, try to use it for a better summary
+  if (completedLine) {
+    const cleanCompleted = completedLine
+      .replace(/\*+/g, '')
+      .replace(/\[.*?\]/g, '')
+      .replace(/🎯\s*COMPLETED:\s*/gi, '')
+      .trim();
+
+    // Extract meaningful words from the completed line
+    const completedWords = cleanCompleted.split(/\s+/)
+      .filter(word => word.length > 2 &&
+        !['the', 'and', 'but', 'for', 'are', 'with', 'his', 'her', 'this', 'that', 'you', 'can', 'will', 'have', 'been', 'your', 'from', 'they', 'were', 'said', 'what', 'them', 'just', 'told', 'how', 'does', 'into', 'about', 'completed'].includes(word.toLowerCase()))
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
+
+    if (completedWords.length >= 2) {
+      // Build a 4-word summary from completed line
+      const summary = completedWords.slice(0, 4);
+      while (summary.length < 4) {
+        summary.push('Done');
+      }
+      return summary.slice(0, 4).join(' ');
+    }
+  }
+
+  // Fall back to parsing the prompt
   const cleanPrompt = prompt.replace(/[^\w\s]/g, ' ').trim();
   const words = cleanPrompt.split(/\s+/).filter(word =>
     word.length > 2 &&
@@ -16,14 +40,22 @@ function generateTabTitle(prompt: string): string {
   const lowerPrompt = prompt.toLowerCase();
 
   // Find action verb if present
-  const actionVerbs = ['test', 'rename', 'fix', 'debug', 'research', 'write', 'create', 'make', 'build', 'implement', 'analyze', 'review', 'update', 'modify', 'generate', 'develop', 'design', 'deploy', 'configure', 'setup', 'install', 'remove', 'delete', 'add', 'check', 'verify', 'validate', 'optimize', 'refactor', 'enhance', 'improve', 'send', 'email', 'help'];
+  const actionVerbs = ['test', 'rename', 'fix', 'debug', 'research', 'write', 'create', 'make', 'build', 'implement', 'analyze', 'review', 'update', 'modify', 'generate', 'develop', 'design', 'deploy', 'configure', 'setup', 'install', 'remove', 'delete', 'add', 'check', 'verify', 'validate', 'optimize', 'refactor', 'enhance', 'improve', 'send', 'email', 'help', 'updated', 'fixed', 'created', 'built', 'added'];
 
   let titleWords = [];
 
   // Check for action verb
   for (const verb of actionVerbs) {
     if (lowerPrompt.includes(verb)) {
-      titleWords.push(verb.charAt(0).toUpperCase() + verb.slice(1));
+      // Convert to past tense for summary
+      let pastTense = verb;
+      if (verb === 'write') pastTense = 'Wrote';
+      else if (verb === 'make') pastTense = 'Made';
+      else if (verb === 'send') pastTense = 'Sent';
+      else if (verb.endsWith('e')) pastTense = verb.charAt(0).toUpperCase() + verb.slice(1, -1) + 'ed';
+      else pastTense = verb.charAt(0).toUpperCase() + verb.slice(1) + 'ed';
+
+      titleWords.push(pastTense);
       break;
     }
   }
@@ -33,9 +65,9 @@ function generateTabTitle(prompt: string): string {
     .filter(word => !actionVerbs.includes(word.toLowerCase()))
     .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase());
 
-  // Fill up to 3 words total
+  // Fill up to 4 words total
   for (const word of remainingWords) {
-    if (titleWords.length < 3) {
+    if (titleWords.length < 4) {
       titleWords.push(word);
     } else {
       break;
@@ -44,35 +76,53 @@ function generateTabTitle(prompt: string): string {
 
   // If we don't have enough words, add generic ones
   if (titleWords.length === 0) {
-    titleWords.push('Kai');
+    titleWords.push('Completed');
   }
   if (titleWords.length === 1) {
     titleWords.push('Task');
   }
   if (titleWords.length === 2) {
-    titleWords.push('Complete');
+    titleWords.push('Successfully');
+  }
+  if (titleWords.length === 3) {
+    titleWords.push('Done');
   }
 
-  return titleWords.slice(0, 3).join(' ');
+  return titleWords.slice(0, 4).join(' ');
 }
 
 /**
- * Set Kitty terminal tab title
+ * Set terminal tab title (works with Kitty, Ghostty, iTerm2, etc.)
  */
-function setKittyTabTitle(title: string): void {
-  // Use OSC escape sequences to set both tab and window title with checkmark
+function setTerminalTabTitle(title: string): void {
+  // Get terminal type
+  const term = process.env.TERM || '';
+
   // Send to stderr to bypass potential output filtering
 
-  // OSC 0 sets both icon and window title
-  process.stderr.write(`\x1b]0;✓ ${title}\x07`);
+  if (term.includes('ghostty')) {
+    // Ghostty-specific sequences
+    // Ghostty uses standard xterm sequences but may need different approach
+    process.stderr.write(`\x1b]2;${title}\x07`);  // Window title
+    process.stderr.write(`\x1b]0;${title}\x07`);  // Icon and window title
 
-  // OSC 2 sets window title specifically
-  process.stderr.write(`\x1b]2;✓ ${title}\x07`);
+    // Try OSC 7 for Ghostty tab titles (some terminals use this)
+    process.stderr.write(`\x1b]7;${title}\x07`);
 
-  // Kitty-specific tab title sequence
-  process.stderr.write(`\x1b]30;✓ ${title}\x07`);
+    // Also try the standard xterm way with ST terminator
+    process.stderr.write(`\x1b]2;${title}\x1b\\`);
+  } else if (term.includes('kitty')) {
+    // Kitty-specific sequences
+    process.stderr.write(`\x1b]0;${title}\x07`);
+    process.stderr.write(`\x1b]2;${title}\x07`);
+    process.stderr.write(`\x1b]30;${title}\x07`);  // Kitty-specific
+  } else {
+    // Generic sequences for other terminals
+    process.stderr.write(`\x1b]0;${title}\x07`);  // Icon and window
+    process.stderr.write(`\x1b]2;${title}\x07`);  // Window title
+  }
 
-  // Also flush stderr to ensure immediate output
+  // Flush stderr to ensure immediate output
   if (process.stderr.isTTY) {
     process.stderr.write('');
   }
@@ -157,6 +207,10 @@ function generateIntelligentResponse(userQuery: string, assistantResponse: strin
 }
 
 async function main() {
+  // Log that hook was triggered
+  const timestamp = new Date().toISOString();
+  console.error(`\n🎬 STOP-HOOK TRIGGERED AT ${timestamp}`);
+
   // Get input
   let input = '';
   const decoder = new TextDecoder();
@@ -169,26 +223,37 @@ async function main() {
       input += decoder.decode(value, { stream: true });
     }
   } catch (e) {
+    console.error(`❌ Error reading input: ${e}`);
     process.exit(0);
   }
 
-  if (!input) process.exit(0);
+  if (!input) {
+    console.error('❌ No input received');
+    process.exit(0);
+  }
 
   let transcriptPath;
   try {
     const parsed = JSON.parse(input);
     transcriptPath = parsed.transcript_path;
+    console.error(`📁 Transcript path: ${transcriptPath}`);
   } catch (e) {
+    console.error(`❌ Error parsing input JSON: ${e}`);
     process.exit(0);
   }
 
-  if (!transcriptPath) process.exit(0);
+  if (!transcriptPath) {
+    console.error('❌ No transcript_path in input');
+    process.exit(0);
+  }
 
   // Read the transcript
   let transcript;
   try {
     transcript = readFileSync(transcriptPath, 'utf-8');
+    console.error(`📜 Transcript loaded: ${transcript.split('\n').length} lines`);
   } catch (e) {
+    console.error(`❌ Error reading transcript: ${e}`);
     process.exit(0);
   }
 
@@ -268,11 +333,65 @@ async function main() {
   // Generate the announcement
   let message = '';
   let voiceId = VOICES.kai; // Default to Kai's voice
+  let kaiHasCustomCompleted = false;
 
-  if (isAgentTask && taskResult) {
-    // AGENT DID THE TASK - Look for their CUSTOM COMPLETED or COMPLETED line
+  // ALWAYS check Kai's response FIRST (even when agents are used)
+  const lastResponse = lines[lines.length - 1];
+  try {
+    const entry = JSON.parse(lastResponse);
+    if (entry.type === 'assistant' && entry.message?.content) {
+      const content = entry.message.content.map(c => c.text || '').join(' ');
 
-    // First, try to find CUSTOM COMPLETED line
+      // First, look for CUSTOM COMPLETED line (voice-optimized)
+      const customCompletedMatch = content.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
+
+      if (customCompletedMatch) {
+        // Get the custom voice response
+        let customText = customCompletedMatch[1].trim()
+          .replace(/\[.*?\]/g, '') // Remove bracketed text like [Optional: ...]
+          .replace(/\*+/g, '') // Remove asterisks
+          .trim();
+
+        // Use custom completed if it's under 8 words
+        const wordCount = customText.split(/\s+/).length;
+        if (customText && wordCount <= 8) {
+          message = customText;
+          kaiHasCustomCompleted = true;
+          console.error(`🗣️ KAI CUSTOM VOICE: ${message}`);
+        } else {
+          // Custom completed too long, fall back to regular COMPLETED
+          const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/im);
+          if (completedMatch) {
+            let completedText = completedMatch[1].trim();
+            message = generateIntelligentResponse(lastUserQuery, content, completedText);
+            console.error(`🎯 KAI FALLBACK (custom too long): ${message}`);
+          }
+        }
+      } else if (!isAgentTask) {
+        // No CUSTOM COMPLETED and no agent - look for regular COMPLETED line
+        const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/im);
+
+        if (completedMatch) {
+          // Get the raw text after the colon
+          let completedText = completedMatch[1].trim();
+
+          // Generate intelligent response
+          message = generateIntelligentResponse(lastUserQuery, content, completedText);
+
+          console.error(`🎯 KAI INTELLIGENT: ${message}`);
+        } else {
+          // No COMPLETED line found - don't send anything
+          console.error('⚠️ No COMPLETED line found');
+        }
+      }
+    }
+  } catch (e) {
+    console.error('⚠️ Error parsing Kai response:', e);
+  }
+
+  // If Kai didn't provide a CUSTOM COMPLETED and an agent was used, check agent's response
+  if (!message && isAgentTask && taskResult) {
+    // First, try to find CUSTOM COMPLETED line in agent response
     const customCompletedMatch = taskResult.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
 
     if (customCompletedMatch) {
@@ -288,7 +407,7 @@ async function main() {
       if (customText && wordCount <= 8) {
         message = customText;
         voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
-        console.error(`🗣️ AGENT CUSTOM VOICE: ${message}`);
+        console.error(`🗣️ AGENT CUSTOM VOICE (fallback): ${message}`);
       } else {
         // Custom completed too long, fall back to regular COMPLETED
         const completedMatch = taskResult.match(/🎯\s*COMPLETED:\s*(.+?)$/im);
@@ -320,75 +439,12 @@ async function main() {
         message = generateIntelligentResponse(lastUserQuery, taskResult, completedText);
         voiceId = VOICES[agentType.toLowerCase()] || VOICES.kai;
 
-        console.error(`🎯 AGENT INTELLIGENT: ${message}`);
+        console.error(`🎯 AGENT INTELLIGENT (fallback): ${message}`);
       }
-    }
-
-  } else {
-    // I (KAI) DID THE TASK - Look for my CUSTOM COMPLETED or COMPLETED line
-    const lastResponse = lines[lines.length - 1];
-    try {
-      const entry = JSON.parse(lastResponse);
-      if (entry.type === 'assistant' && entry.message?.content) {
-        const content = entry.message.content.map(c => c.text || '').join(' ');
-
-        // First, look for CUSTOM COMPLETED line (voice-optimized)
-        const customCompletedMatch = content.match(/🗣️\s*CUSTOM\s+COMPLETED:\s*(.+?)(?:\n|$)/im);
-
-        if (customCompletedMatch) {
-          // Get the custom voice response
-          let customText = customCompletedMatch[1].trim()
-            .replace(/\[.*?\]/g, '') // Remove bracketed text like [Optional: ...]
-            .replace(/\*+/g, '') // Remove asterisks
-            .trim();
-
-          // Use custom completed if it's under 8 words
-          const wordCount = customText.split(/\s+/).length;
-          if (customText && wordCount <= 8) {
-            message = customText;
-            console.error(`🗣️ CUSTOM VOICE: ${message}`);
-          } else {
-            // Custom completed too long, fall back to regular COMPLETED
-            const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/im);
-            if (completedMatch) {
-              let completedText = completedMatch[1].trim();
-              message = generateIntelligentResponse(lastUserQuery, content, completedText);
-              console.error(`🎯 KAI FALLBACK (custom too long): ${message}`);
-            }
-          }
-        } else {
-          // No CUSTOM COMPLETED, look for regular COMPLETED line
-          const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/im);
-
-          if (completedMatch) {
-            // Get the raw text after the colon
-            let completedText = completedMatch[1].trim();
-
-            // Generate intelligent response
-            message = generateIntelligentResponse(lastUserQuery, content, completedText);
-
-            console.error(`🎯 KAI INTELLIGENT: ${message}`);
-          } else {
-            // No COMPLETED line found - don't send anything
-            console.error('⚠️ No COMPLETED line found');
-          }
-        }
-      }
-    } catch (e) {
-      console.error('⚠️ Error parsing response:', e);
     }
   }
 
-  // Set the Kitty tab title based on the user query
-  if (lastUserQuery) {
-    const tabTitle = generateTabTitle(lastUserQuery);
-    setKittyTabTitle(tabTitle);
-    // Debug log to confirm hook execution
-    console.error(`🏷️ Tab title set to: ${tabTitle}`);
-  } else {
-    console.error('⚠️ No user query found for tab title');
-  }
-
+  // FIRST: Send voice notification if we have a message
   if (message) {
     // Send to voice server
     await fetch('http://localhost:8888/notify', {
@@ -399,7 +455,52 @@ async function main() {
         voice_id: voiceId  // Changed from 'voiceId' to 'voice_id' to match server expectation
       })
     }).catch(() => {});
+    console.error(`🔊 Voice notification sent: "${message}" with voice: ${voiceId}`);
   }
+
+  // LAST: Set the Kitty tab title with a 4-word summary of what was done
+  let completedText = '';
+
+  // Extract completed text for better summary
+  if (isAgentTask && taskResult) {
+    const completedMatch = taskResult.match(/🎯\s*COMPLETED:\s*(.+?)$/im);
+    if (completedMatch) {
+      completedText = completedMatch[1].trim();
+    }
+  } else {
+    // Try to get completed text from Kai's response
+    const lastResponse = lines[lines.length - 1];
+    try {
+      const entry = JSON.parse(lastResponse);
+      if (entry.type === 'assistant' && entry.message?.content) {
+        const content = entry.message.content.map(c => c.text || '').join(' ');
+        const completedMatch = content.match(/🎯\s*COMPLETED:\s*(.+?)(?:\n|$)/im);
+        if (completedMatch) {
+          completedText = completedMatch[1].trim();
+        }
+      }
+    } catch (e) {
+      // Ignore parse errors
+    }
+  }
+
+  // ALWAYS set a tab title - even if we don't have a query, make something up
+  const tabTitle = lastUserQuery
+    ? generateTabTitle(lastUserQuery, completedText)
+    : 'Task Completed Successfully Done';
+
+  console.error(`📝 User query: ${lastUserQuery || 'No query found'}`);
+  console.error(`✅ Completed: ${completedText || 'No completed text found'}`);
+
+  // Do tab title update LAST as requested
+  try {
+    setTerminalTabTitle(tabTitle);
+    console.error(`\n🏷️ STOP-HOOK SUCCESS: Tab title set to: "${tabTitle}"`);
+  } catch (e) {
+    console.error(`❌ Failed to set tab title: ${e}`);
+  }
+
+  console.error(`🎬 STOP-HOOK COMPLETED SUCCESSFULLY at ${new Date().toISOString()}\n`);
 }
 
 main().catch(() => {});

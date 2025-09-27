@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 /**
- * User Prompt Submit Hook - Voice greeting when assistant starts working
- * Triggered when user submits a request and assistant begins processing
- * Announces when assistant is starting work on the task
+ * User Prompt Submit Hook - Voice greeting when Kai starts working
+ * Triggered when user submits a request and Kai begins processing
+ * Announces when Kai is starting work on the task
  */
 
 interface NotificationPayload {
@@ -27,27 +27,27 @@ interface HookInput {
 function generateTaskSummary(prompt: string): string {
   // Clean and extract meaningful words from the prompt
   const cleanPrompt = prompt.replace(/[^\w\s]/g, ' ').trim();
-  const words = cleanPrompt.split(/\s+/).filter(word =>
-    word.length > 2 &&
+  const words = cleanPrompt.split(/\s+/).filter(word => 
+    word.length > 2 && 
     !['the', 'and', 'but', 'for', 'are', 'with', 'his', 'her', 'this', 'that', 'you', 'can', 'will', 'have', 'been', 'your', 'from', 'they', 'were', 'said', 'what', 'them', 'just', 'told', 'said'].includes(word.toLowerCase())
   );
-
+  
   const lowerPrompt = prompt.toLowerCase();
-
+  
   // Dynamic extraction based on actual content
   let actionWord = '';
   let subjectWords = [];
-
+  
   // Find the primary action verb from the actual prompt
   const actionVerbs = ['fix', 'debug', 'research', 'write', 'create', 'make', 'build', 'implement', 'analyze', 'review', 'update', 'modify', 'generate', 'develop', 'design', 'test', 'deploy', 'configure', 'setup', 'install', 'remove', 'delete', 'add', 'check', 'verify', 'validate', 'optimize', 'refactor', 'enhance', 'improve', 'send', 'email', 'help'];
-
+  
   for (const verb of actionVerbs) {
     if (lowerPrompt.includes(verb)) {
       actionWord = verb;
       break;
     }
   }
-
+  
   // If no specific action found, infer from context
   if (!actionWord) {
     if (lowerPrompt.includes('hook') || lowerPrompt.includes('static') || lowerPrompt.includes('dynamic')) {
@@ -71,42 +71,42 @@ function generateTaskSummary(prompt: string): string {
       actionWord = actionWord + 'ing';
     }
   }
-
+  
   // Extract key subject matter (skip common words, focus on nouns/topics)
-  const skipWords = ['user', 'prompt', 'thing', 'says', 'responding', 'greeting', 'properly', 'interpreting', 'section', 'those', 'things', 'some', 'that', 'have', 'your', 'need', 'dynamically', 'respond', 'describing', 'exactly', 'doing', 'basically', 'words', 'static', 'line', 'told', 'just'];
-
-  subjectWords = words.filter(word =>
+  const skipWords = ['user', 'prompt', 'thing', 'says', 'responding', 'greeting', 'properly', 'interpreting', 'section', 'those', 'things', 'some', 'that', 'have', 'your', 'need', 'dynamically', 'respond', 'describing', 'exactly', 'doing', 'basically', 'words', 'static', 'fucking', 'line', 'told', 'just'];
+  
+  subjectWords = words.filter(word => 
     !actionVerbs.includes(word.toLowerCase()) &&
     !skipWords.includes(word.toLowerCase()) &&
     !word.toLowerCase().includes(actionWord.replace('ing', '')) &&
     word.length > 2
   ).slice(0, 3);
-
+  
   // Build the dynamic summary
   let summary = actionWord;
-
+  
   // Add the most relevant subject words
   for (const word of subjectWords.slice(0, 3)) {
     summary += ' ' + word.toLowerCase();
   }
-
+  
   // If we don't have enough specific words, extract more aggressively
   if (subjectWords.length === 0) {
     const fallbackWords = prompt.split(/\s+/)
-      .filter(word =>
-        word.length > 3 &&
-        !/^(the|and|but|for|are|with|his|her|this|that|you|can|will|have|been|your|from|they|were|said|what|them|some|those|thing|says|just|told)$/i.test(word)
+      .filter(word => 
+        word.length > 3 && 
+        !/^(the|and|but|for|are|with|his|her|this|that|you|can|will|have|been|your|from|they|were|said|what|them|some|those|thing|says|just|told|fucking)$/i.test(word)
       )
       .slice(0, 3);
-
+    
     for (const word of fallbackWords) {
       summary += ' ' + word.toLowerCase();
     }
   }
-
+  
   // Clean up the summary
   summary = summary.replace(/\s+/g, ' ').trim();
-
+  
   // Make it conversational by adding "for you" or similar
   if (!summary.includes('for you') && !summary.includes('that') && !summary.includes('this')) {
     if (subjectWords.length > 0) {
@@ -115,13 +115,18 @@ function generateTaskSummary(prompt: string): string {
       summary += ' that for you';
     }
   }
-
+  
   return summary;
 }
 
+// DISABLED: Tab title setting moved to stop-hook.ts only
+// This prevents conflicts and ensures tab titles reflect completed work
+// rather than what was requested
+/*
 /**
  * Generate 3-word tab title from user prompt
  */
+/*
 function generateTabTitle(prompt: string): string {
   // Clean the prompt and extract meaningful words
   const cleanPrompt = prompt.replace(/[^\w\s]/g, ' ').trim();
@@ -161,7 +166,7 @@ function generateTabTitle(prompt: string): string {
 
   // If we don't have enough words, add generic ones
   if (titleWords.length === 0) {
-    titleWords.push('Assistant');
+    titleWords.push('Kai');
   }
   if (titleWords.length === 1) {
     titleWords.push('Task');
@@ -172,17 +177,21 @@ function generateTabTitle(prompt: string): string {
 
   return titleWords.slice(0, 3).join(' ');
 }
+*/
 
+/*
 /**
  * Set Kitty terminal tab title
  */
+/*
 function setKittyTabTitle(title: string): void {
   // Use OSC escape sequence to set tab/window title
   process.stdout.write(`\x1b]0;${title}\x07`);
 }
+*/
 
 /**
- * Generate greeting phrase for when assistant starts working
+ * Generate greeting phrase for when Kai starts working
  */
 function generateVoiceGreeting(): string {
   const greetings = [
@@ -202,7 +211,7 @@ function generateVoiceGreeting(): string {
 }
 
 /**
- * Send notification to the notification server
+ * Send notification to the Kai notification server
  */
 async function sendNotification(payload: NotificationPayload): Promise<void> {
   try {
@@ -211,7 +220,7 @@ async function sendNotification(payload: NotificationPayload): Promise<void> {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-
+    
     if (!response.ok) {
       console.error('Notification server error:', response.statusText);
     }
@@ -229,16 +238,16 @@ async function readStdinWithTimeout(timeout: number = 5000): Promise<string> {
     const timer = setTimeout(() => {
       reject(new Error('Timeout reading from stdin'));
     }, timeout);
-
+    
     process.stdin.on('data', (chunk) => {
       data += chunk.toString();
     });
-
+    
     process.stdin.on('end', () => {
       clearTimeout(timer);
       resolve(data);
     });
-
+    
     process.stdin.on('error', (err) => {
       clearTimeout(timer);
       reject(err);
@@ -251,9 +260,10 @@ async function main() {
     const input = await readStdinWithTimeout();
     const data: HookInput = JSON.parse(input);
 
-    // Generate 3-word tab title and set it in Kitty
-    const tabTitle = generateTabTitle(data.prompt);
-    setKittyTabTitle(tabTitle);
+    // DISABLED: Tab title setting moved to stop-hook.ts only
+    // This prevents conflicts with stop-hook and ensures titles reflect completed work
+    // const tabTitle = generateTabTitle(data.prompt);
+    // setKittyTabTitle(tabTitle);
 
     // DISABLED: Immediate voice notification causes janky experience
     // Voice feedback should come from completion hooks instead
@@ -264,13 +274,13 @@ async function main() {
     // const taskSummary = generateTaskSummary(data.prompt);
     // const fullMessage = `${greeting}, ${taskSummary}`;
 
-    // COMMENTED OUT: Send notification with assistant's voice
+    // COMMENTED OUT: Send notification with Kai's voice
     // const payload: NotificationPayload = {
-    //   title: 'Assistant',
+    //   title: 'Kai',
     //   message: fullMessage,
     //   voice_enabled: true,
     //   priority: 'low',
-    //   voice_id: 'YOUR_VOICE_ID_HERE'  // Replace with your assistant's voice ID
+    //   voice_id: 'jqcCZkN6Knx8BJ5TBdYR'  // Kai's main voice ID
     // };
 
     // await sendNotification(payload);

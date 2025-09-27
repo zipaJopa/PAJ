@@ -51,7 +51,7 @@ async function main() {
     const paiDir = process.env.PAI_DIR || `${process.env.HOME}/.claude`;
     const mdPath = `${paiDir}/commands/load-dynamic-requirements.md`;
     const mdContent = readFileSync(mdPath, 'utf-8');
-    
+
     // Output the markdown content to stdout
     // This will be passed to Claude as instructions
     console.log(mdContent);
