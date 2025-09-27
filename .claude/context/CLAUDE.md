@@ -142,7 +142,7 @@ The voice notification system depends on this exact structure. If you don't foll
 
 ### REQUIRED FORMAT FOR EVERY RESPONSE:
 
-📅 `YYYY-MM-DD HH:MM:SS` (24-hour military time format)
+📅 Use actual current date/time from system (run `date` command if needed) in format: YYYY-MM-DD HH:MM:SS
 **📋 SUMMARY:** Brief overview of request and accomplishment
 **🔍 ANALYSIS:** Key findings and context
 **⚡ ACTIONS:** Steps taken with tools used
