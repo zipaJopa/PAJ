@@ -35,6 +35,9 @@
 
 ## 🚀 **Recent Updates**
 
+> [!WARNING]
+> **Configuration Required:** You MUST set the `PAI_DIR` environment variable to point to your PAI installation's `.claude` directory. See [Quick Start](#-quick-start) for details. This makes PAI completely installation-agnostic.
+
 > [!TIP]
 > **[🎉 v0.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2)** - Enhanced documentation and Human 3.0 integration
 
@@ -462,7 +465,28 @@ cd PAI
 ls -la  # See all files including .claude
 ```
 
-#### **Step 3: Configure Environment**
+#### **Step 3: Configure PAI Directory Variable** ⚠️ **IMPORTANT**
+
+> [!IMPORTANT]
+> **You MUST configure the PAI_DIR variable to point to your PAI installation directory.**
+> This makes the PAI system completely agnostic to your installation location.
+
+```bash
+# Add to your shell config (~/.zshrc or ~/.bashrc)
+# Replace /path/to/PAI with YOUR actual PAI installation path
+export PAI_DIR="/path/to/PAI/.claude"  # Point to the .claude directory in your PAI installation
+export PAI_HOME="$HOME"  # Your home directory
+
+# Example (adjust to YOUR installation path):
+# export PAI_DIR="$HOME/Projects/PAI/.claude"
+# export PAI_DIR="$HOME/Documents/PAI/.claude"
+# export PAI_DIR="/Users/yourname/PAI/.claude"
+
+# Reload your shell configuration
+source ~/.zshrc  # or source ~/.bashrc
+```
+
+#### **Step 4: Configure Environment**
 
 ```bash
 # Copy environment template
@@ -472,16 +496,6 @@ cp .env.example ~/.env
 vim ~/.env
 # Add: ELEVENLABS_API_KEY="your_key_here"
 # Add: OPENAI_API_KEY="your_key_here"
-```
-
-#### **Step 4: Set PAI_HOME Variable**
-
-```bash
-# Add to your shell config (~/.zshrc or ~/.bashrc)
-export PAI_HOME="$HOME"
-
-# Reload your shell configuration
-source ~/.zshrc  # or source ~/.bashrc
 ```
 
 #### **Step 5: Launch PAI**
@@ -500,14 +514,22 @@ cd voice-server && ./install.sh && ./start.sh
 ### **⚙️ Environment Variables**
 
 ```bash
-# Required
-PAI_HOME="/path/to/pai"           # PAI installation directory
+# Required - MUST be configured for PAI to work properly
+PAI_DIR="/path/to/PAI/.claude"    # PAI's .claude directory (system agnostic)
+PAI_HOME="$HOME"                  # Your home directory
 
-# Optional
+# Optional API Keys
 ELEVENLABS_API_KEY="your_key"     # Voice synthesis
 OPENAI_API_KEY="your_key"         # GPT integration
 PORT="8888"                        # Voice server port
+
+# Digital Assistant Customization
+DA="YourAssistantName"            # Your AI assistant's name (default: "Assistant")
+DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, etc.)
 ```
+
+> [!TIP]
+> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.claude` directory, everything will work seamlessly.
 
 ---
 

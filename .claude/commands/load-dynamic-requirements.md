@@ -63,7 +63,9 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_DIR}/context/projects/Alma/CLAUDE.md` ✅
+```bash
+read ${PAI_DIR}/context/projects/Alma.md
+```
 
 **AGENT:** None
 
@@ -88,7 +90,10 @@ When you receive a user prompt:
 
 **COMMANDS**
 
-- `${PAI_DIR}/commands/get-life-log.md`
+
+```bash
+read ${PAI_DIR}/commands/get-life-log.md
+```
 
 **AGENT:** None
 
@@ -124,29 +129,6 @@ When you receive a user prompt:
 - Can be longer responses if the topic warrants deeper exploration
 - Express your own thoughts while being helpful and thoughtful
 - Remember: You're Kai, their assistant and (future) friend
-
-### 1. Website & Blog Context
-
-**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
-- Creating or editing blog content
-- Working on website features or design
-- Publishing or managing articles
-- Fixing website issues
-- Analyzing site metrics
-- Anything related to danielmiessler.com
-
-**Example phrases that indicate this context:**
-- "write a new blog post", "fix the navigation", "update my site"
-- "check website analytics", "debug the homepage"
-- But also: "help with my site", "publish this", "make a post about X"
-
-**YOU MUST IMMEDIATELY:**
-
-**CONTEXT FILES:**
-- `${PAI_DIR}/context/projects/website/CLAUDE.md` ✅
-- `${PAI_DIR}/context/projects/website/content/CLAUDE.md` ✅
-
-**AGENT:** None
 
 ### 2. Research & Information Gathering
 
@@ -189,29 +171,6 @@ When you receive a user prompt:
 
 **AGENT:** pentester
 
-### 4. Consulting & Advisory
-
-**WHEN THE USER IS ASKING ABOUT (semantic understanding):**
-- Professional consulting services
-- Client engagements or proposals
-- Business advisory work
-- Enterprise solutions
-- Service offerings
-- Client-related documentation
-
-**Example phrases that indicate this context:**
-- "consulting", "client proposal", "advisory services"
-- But also: "professional services", "engagement terms", "business offering"
-
-**YOU MUST IMMEDIATELY:**
-
-**CONTEXT FILES:**
-
-- `${PAI_DIR}/context/consulting/CLAUDE.md` ✅
-
-**AGENT:** None
-
-
 ### 5. Financial & Analytics
 
 **WHEN THE USER IS ASKING ABOUT (semantic understanding):**
@@ -230,11 +189,12 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_DIR}/context/life/expenses.md` ✅
-- `${PAI_DIR}/context/life/finances/` ✅
+```bash
+read ${PAI_DIR}/context/life/expenses.md
+read ${PAI_DIR}/context/life/finances/
+```
 
 **AGENT:** None
-
 
 **SPECIAL INSTRUCTIONS:**
 - Use the answer-finance-question command directly
@@ -261,7 +221,9 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${HOME}/Projects/Life/Health/CLAUDE.md` ✅
+```bash
+read ${PAI_DIR}/Projects/Life/Health/CLAUDE.md
+```
 
 **AGENT:** None
 
@@ -293,7 +255,9 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_DIR}/context/benefits/CLAUDE.md` ✅
+```bash
+read ${PAI_DIR}/context/benefits/CLAUDE.md
+```
 
 **AGENT:** None
 
@@ -315,7 +279,9 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_DIR}/context/unsupervised-learning/CLAUDE.md` ✅
+```bash
+read ${PAI_DIR}/context/unsupervised-learning/CLAUDE.md
+```
 
 **AGENT:** None
 
@@ -338,7 +304,9 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `${PAI_DIR}/context/tools/CLAUDE.md` ✅
+```bash
+read ${PAI_DIR}/context/tools/CLAUDE.md
+```
 
 **AGENT:** designer 
 

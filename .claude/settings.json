@@ -4,7 +4,7 @@
     "MCP_API_KEY": "REDACTED",
     "DISABLE_INTERLEAVED_THINKING": "true",
     "DA": "Kai",
-    "PAI_DIR": "~/.claude"
+    "PAI_DIR": "/Users/daniel/.claude"
   },
   "permissions": {
     "allow": [
