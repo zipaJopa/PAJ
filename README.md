@@ -512,7 +512,7 @@ source ~/.zshrc  # or source ~/.bashrc
 
 ```bash
 # Copy environment template to PAI_DIRECTORY
-cp ${PAI_DIR}/.env-example ${PAI_DIR}/.env
+cp ${PAI_DIR}/env-example ${PAI_DIR}/.env
 
 # Add your API keys (optional but recommended)
 vim ${PAI_DIR}/.env

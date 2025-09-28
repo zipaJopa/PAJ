@@ -115,7 +115,7 @@ cd PAI_DIRECTORY/voice-server
 ./install.sh
 
 # Configure environment
-cp ${PAI_DIR}/.env-example ${PAI_DIR}/.env
+cp ${PAI_DIR}/env-example ${PAI_DIR}/.env
 # Edit ${PAI_DIR}/.env with your settings
 ```
 

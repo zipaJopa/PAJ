@@ -63,7 +63,7 @@ When copying from PAI_DIRECTORY to PAI:
 - PAI should be the generic, public template
 - Use environment variables for all sensitive config
 - Document what needs to be configured by users
-- Provide example .env.example files, never real .env
+- Provide example env-example files, never real .env
 
 ---
 
