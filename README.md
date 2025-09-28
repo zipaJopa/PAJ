@@ -36,17 +36,20 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.2.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.2)** - Directory Visibility Update
+> **[🎉 v0.2.3 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.3)** - Complete Visibility & Portability Update
 
 <details open>
-<summary><strong>📅 September 28, 2025 - Directory Visibility Update</strong></summary>
+<summary><strong>📅 September 28, 2025 - Complete Visibility & Portability Update (v0.2.3)</strong></summary>
 
-- 📁 **Directory Renamed**: Renamed `.claude` to `PAI_DIRECTORY` for better visibility
-- 🌍 **Vendor Agnostic**: PAI is designed to work with any AI vendor (Claude, GPT, Gemini, etc.), not just Claude
-- 🎯 **Accessibility**: Many systems have issues with dot-prefixed directories
-- 📊 **Compatibility**: Better support for tools like Obsidian and other file managers
-- 🔧 **Path Updates**: All references updated to use `PAI_DIRECTORY`
-- ✅ **Platform Independent**: Emphasizes PAI's vendor-neutral architecture
+- 📁 **Directory Renamed**: `.claude` → `PAI_DIRECTORY` for better visibility
+- 🌍 **Vendor Agnostic**: Works with any AI vendor (Claude, GPT, Gemini, etc.)
+- 👁️ **No More Hidden Files**:
+  - `.zshrc` → `zshrc-aliases`
+  - `.env-example` → `env-example`
+- 🔧 **Dynamic Paths**: All hardcoded paths replaced with `${PAI_DIR}`
+- 📍 **Consistent Config**: `.env` now lives in `${PAI_DIR}/.env`
+- 🐛 **Issues Fixed**: #20 (env location) and #21 (hardcoded paths)
+- ✅ **Full Portability**: Install PAI anywhere, everything just works
 
 </details>
 
