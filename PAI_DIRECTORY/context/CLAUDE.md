@@ -7,7 +7,7 @@
 **This is the PUBLIC version of PAI - a template for others to build their own personal AI infrastructure.**
 
 All sensitive data, personal information, and API keys have been removed. Users should:
-1. Add their own API keys to ~/.env
+1. Add their own API keys to ${PAI_DIR}/.env
 2. Customize context files for their needs
 3. Add their own personal commands and workflows
 

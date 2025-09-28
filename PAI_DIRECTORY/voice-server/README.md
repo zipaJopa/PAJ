@@ -27,10 +27,10 @@ curl -fsSL https://bun.sh/install | bash
 ```
 
 ### 2. Configure API Key (Optional but Recommended)
-Add your ElevenLabs API key to `~/.env`:
+Add your ElevenLabs API key to `${PAI_DIR}/.env`:
 ```bash
-echo "ELEVENLABS_API_KEY=your_api_key_here" >> ~/.env
-echo "ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR" >> ~/.env
+echo "ELEVENLABS_API_KEY=your_api_key_here" >> ${PAI_DIR}/.env
+echo "ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR" >> ${PAI_DIR}/.env
 ```
 
 > Get your free API key at [elevenlabs.io](https://elevenlabs.io) (10,000 characters/month free)
@@ -146,7 +146,7 @@ If you prefer manual installation:
 ## 🔧 Configuration
 
 ### Environment Variables
-Create or edit `~/.env` in your home directory:
+Create or edit `${PAI_DIR}/.env`:
 
 ```bash
 # Required for ElevenLabs voices (optional)
@@ -163,7 +163,7 @@ PORT=8888
 1. Go to [ElevenLabs Voice Library](https://elevenlabs.io/voice-library)
 2. Select a voice you like
 3. Click "Use" and copy the Voice ID
-4. Update `ELEVENLABS_VOICE_ID` in your `~/.env`
+4. Update `ELEVENLABS_VOICE_ID` in your `${PAI_DIR}/.env`
 
 ## 🐛 Troubleshooting
 
@@ -182,7 +182,7 @@ lsof -ti :8888 | xargs kill -9
 ### No voice output
 ```bash
 # Check if ElevenLabs key is configured
-grep ELEVENLABS_API_KEY ~/.env
+grep ELEVENLABS_API_KEY ${PAI_DIR}/.env
 
 # Test with fallback (macOS say)
 curl -X POST http://localhost:8888/notify \
@@ -230,7 +230,7 @@ ${PAI_DIR}/voice-server/
 
 ## 🔐 Security Notes
 
-- **No hardcoded API keys**: All sensitive data is read from `~/.env`
+- **No hardcoded API keys**: All sensitive data is read from `${PAI_DIR}/.env`
 - **Local only**: Server only listens on localhost (127.0.0.1)
 - **User-specific**: Each user maintains their own API keys
 - **Safe for public repos**: No sensitive data in the codebase

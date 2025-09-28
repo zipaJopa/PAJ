@@ -48,7 +48,7 @@ mkdir -p "$HOME/Documentation"
 
 ### 4. Configure Environment File
 
-Create `~/.env` with your settings:
+Create `${PAI_DIR}/.env` with your settings:
 
 ```bash
 # Essential Configuration

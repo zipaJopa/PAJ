@@ -68,7 +68,7 @@ The PAI Voice System provides text-to-speech capabilities for Kai and all agents
 
 ## Server Configuration
 
-### Environment Variables (in ~/.env)
+### Environment Variables (in ${PAI_DIR}/.env)
 ```bash
 ELEVENLABS_API_KEY="your_api_key_here"
 ELEVENLABS_VOICE_ID="jqcCZkN6Knx8BJ5TBdYR"  # Default voice ID (Kai)
@@ -212,7 +212,7 @@ Every response from Kai and agents MUST include:
    ```
 
 2. **API Key Issues**
-   - Verify ELEVENLABS_API_KEY in ~/.env
+   - Verify ELEVENLABS_API_KEY in ${PAI_DIR}/.env
    - Check API key is valid and has credits
    - Server falls back to 'say' command if API fails
 

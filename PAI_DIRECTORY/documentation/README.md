@@ -115,14 +115,14 @@ cd PAI_DIRECTORY/voice-server
 ./install.sh
 
 # Configure environment
-cp .env.example ~/.env
-# Edit ~/.env with your settings
+cp .env.example ${PAI_DIR}/.env
+# Edit ${PAI_DIR}/.env with your settings
 ```
 
 ## Configuration
 
 PAI is configured through:
-1. Environment variables in `~/.env`
+1. Environment variables in `${PAI_DIR}/.env`
 2. Context files in `${PAI_DIR}/context/`
 3. Hook scripts in `${PAI_DIR}/hooks/`
 4. Project-specific configurations
@@ -156,9 +156,9 @@ Common issues and solutions:
 | Issue | Solution |
 |-------|----------|
 | Context not loading | Check `${PAI_DIR}/context/` |
-| Voice not working | Verify ElevenLabs API key in `~/.env` |
+| Voice not working | Verify ElevenLabs API key in `${PAI_DIR}/.env` |
 | Hooks not triggering | Ensure hook scripts are executable |
-| Port conflicts | Change PORT in `~/.env` |
+| Port conflicts | Change PORT in `${PAI_DIR}/.env` |
 
 ## Contributing
 

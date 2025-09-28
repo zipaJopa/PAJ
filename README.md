@@ -511,11 +511,11 @@ source ~/.zshrc  # or source ~/.bashrc
 #### **Step 4: Configure Environment**
 
 ```bash
-# Copy environment template
-cp .env.example ~/.env
+# Copy environment template to PAI_DIRECTORY
+cp .env.example ${PAI_DIR}/.env
 
 # Add your API keys (optional but recommended)
-vim ~/.env
+vim ${PAI_DIR}/.env
 # Add: ELEVENLABS_API_KEY="your_key_here"
 # Add: OPENAI_API_KEY="your_key_here"
 ```
