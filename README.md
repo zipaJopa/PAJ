@@ -36,9 +36,21 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.2.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.1)** - Hooks System Update with portable installation support
+> **[🎉 v0.2.2 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.2)** - Directory Visibility Update
 
 <details open>
+<summary><strong>📅 September 28, 2025 - Directory Visibility Update</strong></summary>
+
+- 📁 **Directory Renamed**: Renamed `.claude` to `PAI_DIRECTORY` for better visibility
+- 🌍 **Vendor Agnostic**: PAI is designed to work with any AI vendor (Claude, GPT, Gemini, etc.), not just Claude
+- 🎯 **Accessibility**: Many systems have issues with dot-prefixed directories
+- 📊 **Compatibility**: Better support for tools like Obsidian and other file managers
+- 🔧 **Path Updates**: All references updated to use `PAI_DIRECTORY`
+- ✅ **Platform Independent**: Emphasizes PAI's vendor-neutral architecture
+
+</details>
+
+<details>
 <summary><strong>📅 September 26, 2025 - Hooks System Update</strong></summary>
 
 - 🪝 **Hooks Sanitized**: Updated all hook files to be public-ready with no sensitive data
@@ -471,8 +483,8 @@ brew install oven-sh/bun/bun
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI
 
-# Note: .claude directory is hidden by default
-ls -la  # See all files including .claude
+# Note: PAI_DIRECTORY is now visible by default
+ls -la  # See all files including PAI_DIRECTORY
 ```
 
 #### **Step 3: Configure PAI Directory Variable** ⚠️ **IMPORTANT**
@@ -484,13 +496,13 @@ ls -la  # See all files including .claude
 ```bash
 # Add to your shell config (~/.zshrc or ~/.bashrc)
 # Replace /path/to/PAI with YOUR actual PAI installation path
-export PAI_DIR="/path/to/PAI/.claude"  # Point to the .claude directory in your PAI installation
+export PAI_DIR="/path/to/PAI/PAI_DIRECTORY"  # Point to the PAI_DIRECTORY in your PAI installation
 export PAI_HOME="$HOME"  # Your home directory
 
 # Example (adjust to YOUR installation path):
-# export PAI_DIR="$HOME/Projects/PAI/.claude"
-# export PAI_DIR="$HOME/Documents/PAI/.claude"
-# export PAI_DIR="/Users/yourname/PAI/.claude"
+# export PAI_DIR="$HOME/Projects/PAI/PAI_DIRECTORY"
+# export PAI_DIR="$HOME/Documents/PAI/PAI_DIRECTORY"
+# export PAI_DIR="/Users/yourname/PAI/PAI_DIRECTORY"
 
 # Reload your shell configuration
 source ~/.zshrc  # or source ~/.bashrc
@@ -525,7 +537,7 @@ cd voice-server && ./install.sh && ./start.sh
 
 ```bash
 # Required - MUST be configured for PAI to work properly
-PAI_DIR="/path/to/PAI/.claude"    # PAI's .claude directory (system agnostic)
+PAI_DIR="/path/to/PAI/PAI_DIRECTORY"    # PAI's PAI_DIRECTORY (system agnostic)
 PAI_HOME="$HOME"                  # Your home directory
 
 # Optional API Keys
@@ -539,7 +551,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 ```
 
 > [!TIP]
-> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.claude` directory, everything will work seamlessly.
+> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `PAI_DIRECTORY`, everything will work seamlessly.
 
 ---
 
@@ -552,8 +564,8 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 | [Quick Start](#-quick-start) | Get up and running | 5 min |
 | [Architecture](#-architecture) | Understand the system | 10 min |
 | [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
-| [Voice Server](./.claude/voice-server/README.md) | Enable voice interaction | 10 min |
-| [Commands Directory](./.claude/commands/) | Browse all commands | 15 min |
+| [Voice Server](./PAI_DIRECTORY/voice-server/README.md) | Enable voice interaction | 10 min |
+| [Commands Directory](./PAI_DIRECTORY/commands/) | Browse all commands | 15 min |
 
 </div>
 

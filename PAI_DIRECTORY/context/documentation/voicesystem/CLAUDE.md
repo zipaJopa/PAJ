@@ -37,12 +37,12 @@ When updating any agent voice ID, you MUST update ALL of these locations:
    - Update `voiceId: [new-voice-id]` in frontmatter
    - Update voice ID reference in completion rules section
 
-2. **Subagent Stop Hook**: `.claude/hooks/subagent-stop-hook.ts`
+2. **Subagent Stop Hook**: `${PAI_DIR}/hooks/subagent-stop-hook.ts`
    - Update `AGENT_VOICE_IDS` mapping with new voice ID
    - Ensure agent name exists in `AGENT_NAMES` mapping
    - Verify agent type included in regex patterns for completion parsing
 
-3. **Main Context Documentation**: `.claude/context/CLAUDE.md`
+3. **Main Context Documentation**: `${PAI_DIR}/context/CLAUDE.md`
    - Update voice ID in "Agent Voice Architecture" section
    - Keep this checklist current with any new locations
 
@@ -51,7 +51,7 @@ When updating any agent voice ID, you MUST update ALL of these locations:
    - Check notification server configuration files
    - Restart voice server if needed to reload configurations
 
-5. **Test Scripts**: `.claude/hooks/tests/` (if they exist)
+5. **Test Scripts**: `${PAI_DIR}/hooks/tests/` (if they exist)
    - Update any test cases that reference specific voice IDs
    - Verify test suite passes with new voice configuration
 

@@ -5,7 +5,7 @@ Get your Personal AI Infrastructure up and running in minutes!
 ## Prerequisites
 
 - **macOS** 11+ (primary platform)
-- **Claude Desktop** or Claude API access
+- **AI Assistant** (Claude, GPT, Gemini, etc.)
 - **Bun runtime** (for voice server)
 - **Git** (for version control)
 
@@ -27,7 +27,7 @@ cd ~/PAI
 
 ```bash
 # Add to your shell profile (~/.zshrc or ~/.bashrc)
-export PAI_DIR="$HOME/.claude"  # PAI infrastructure directory
+export PAI_DIR="$HOME/PAI/PAI_DIRECTORY"  # PAI infrastructure directory
 export PATH="$HOME/bin:$PATH"
 
 # Reload shell
@@ -52,7 +52,7 @@ Create `~/.env` with your settings:
 
 ```bash
 # Essential Configuration
-PAI_DIR=$HOME/.claude
+PAI_DIR=$HOME/PAI/PAI_DIRECTORY
 
 # Optional: Voice Server
 ELEVENLABS_API_KEY=your_api_key_here
@@ -100,7 +100,7 @@ Create the main hook file `${PAI_DIR}/hooks/user-prompt-submit-hook`:
 # UFC Dynamic Context Loader
 
 PROMPT="$1"
-PAI_DIR="${PAI_DIR:-$HOME/.claude}"
+PAI_DIR="${PAI_DIR:-$HOME/PAI/PAI_DIRECTORY}"
 
 # Simple intent matching for demonstration
 case "$PROMPT" in
@@ -404,7 +404,7 @@ tail -f "${HOME}/Library/Logs/"*.log
 
 | Variable | Purpose | Default |
 |----------|---------|---------|
-| `PAI_DIR` | PAI configuration directory | `$HOME/.claude` |
+| `PAI_DIR` | PAI configuration directory | `$HOME/PAI/PAI_DIRECTORY` |
 | `ELEVENLABS_API_KEY` | Voice synthesis API | None |
 | `PORT` | Voice server port | 8888 |
 | `HOOK_DEBUG` | Enable hook debugging | false |

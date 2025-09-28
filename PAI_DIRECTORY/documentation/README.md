@@ -66,7 +66,7 @@ PAI (Personal AI Infrastructure) is a powerful framework that enhances AI assist
 
 ```
 PAI/
-├── .claude/                 # Claude-specific configuration
+├── PAI_DIRECTORY/          # PAI system configuration
 │   ├── context/            # UFC context files
 │   ├── hooks/              # Event hooks
 │   ├── commands/           # Custom commands
@@ -81,7 +81,6 @@ PAI/
 PAI uses environment variables for configuration:
 
 - `PAI_DIR`: PAI configuration directory
-- `CLAUDE_CONFIG_DIR`: Claude configuration directory
 - `ELEVENLABS_API_KEY`: API key for voice synthesis
 - `PORT`: Voice server port (default: 8888)
 
@@ -97,7 +96,7 @@ PAI uses environment variables for configuration:
 
 - macOS 11+ (primary support)
 - Bun runtime
-- Claude Desktop or API access
+- AI assistant access (Claude, GPT, Gemini, etc.)
 - Optional: ElevenLabs API key
 - Optional: SwiftBar for menu indicators
 
@@ -109,10 +108,10 @@ git clone https://github.com/yourusername/PAI.git
 cd PAI
 
 # Set PAI_DIR
-export PAI_DIR="$HOME/.claude"
+export PAI_DIR="$HOME/PAI/PAI_DIRECTORY"
 
 # Install voice server (optional)
-cd .claude/voice-server
+cd PAI_DIRECTORY/voice-server
 ./install.sh
 
 # Configure environment
@@ -124,8 +123,8 @@ cp .env.example ~/.env
 
 PAI is configured through:
 1. Environment variables in `~/.env`
-2. Context files in `.claude/context/`
-3. Hook scripts in `.claude/hooks/`
+2. Context files in `${PAI_DIR}/context/`
+3. Hook scripts in `${PAI_DIR}/hooks/`
 4. Project-specific configurations
 
 ## Usage Examples
@@ -146,7 +145,7 @@ curl -X POST http://localhost:8888/notify \
 
 ### Hook System
 ```yaml
-# .claude/hooks/user-prompt-submit.sh
+# ${PAI_DIR}/hooks/user-prompt-submit.sh
 # Automatically loads context before processing prompts
 ```
 
