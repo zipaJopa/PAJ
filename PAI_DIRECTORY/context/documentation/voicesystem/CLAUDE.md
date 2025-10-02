@@ -1,15 +1,22 @@
 #### Agent Voice Architecture
 
-Each agent has a unique voice ID for the notification system, creating distinct personalities:
+Each agent has a unique macOS Premium or Enhanced voice for the notification system, creating distinct personalities through natural-sounding neural TTS voices.
 
-**Voice ID Mappings:**
-- **Main Agent**: Configure your own voice ID - The primary orchestrator voice
-- **Researcher Agent**: Configure your own voice ID - Information discovery voice
-- **Designer Agent**: Configure your own voice ID - Designer voice
-- **Engineer Agent**: Configure your own voice ID - Development voice
-- **Writer Agent**: Configure your own voice ID - Content creation voice
-- **Pentester Agent**: Configure your own voice ID - Security testing voice
-- **Architect Agent**: Configure your own voice ID - Architecture and planning voice
+**Voice Mappings (macOS Native):**
+- **Kai (Main Agent)**: Jamie (Premium) - UK Male - Professional, conversational
+- **Researcher Agent**: Ava (Premium) - US Female - Analytical, highest quality
+- **Designer Agent**: Isha (Premium) - Indian Female - Creative, distinct
+- **Engineer Agent**: Tom (Enhanced) - US Male - Steady, professional
+- **Writer Agent**: Samantha (Enhanced) - US Female - Articulate, warm
+- **Pentester Agent**: Oliver (Enhanced) - UK Male - Technical, sharp
+- **Architect Agent**: Serena (Premium) - UK Female - Strategic, sophisticated
+
+**Voice Configuration:**
+- All voices configured in `${PAI_DIR}/voice-server/voices.json`
+- Uses macOS native Premium and Enhanced neural voices
+- Zero API costs, complete privacy, 100% offline
+- Customizable speech rates per agent (configured via rate_multiplier)
+- Default speeds: Kai at 228 wpm (1.3x), agents at 236 wpm (1.35x)
 
 **Voice Completion Format:**
 
@@ -29,40 +36,42 @@ All agents speak in first person: "Completed [task in 5-6 words]"
   - "What time?" → CUSTOM COMPLETED: "Three fifteen PM"
 - Fallback: Standard COMPLETED line used if CUSTOM is missing/too long
 
-**🚨 VOICE ID UPDATE CHECKLIST - CRITICAL REFERENCE**
+**🚨 VOICE UPDATE CHECKLIST - CRITICAL REFERENCE**
 
-When updating any agent voice ID, you MUST update ALL of these locations:
+When updating any agent voice, you MUST update ALL of these locations:
 
-1. **Agent Configuration File**: `agents/[agent-name].md`
-   - Update `voiceId: [new-voice-id]` in frontmatter
-   - Update voice ID reference in completion rules section
+1. **Voice Configuration File**: `${PAI_DIR}/voice-server/voices.json`
+   - Update `voice_name`: macOS voice (e.g., "Jamie (Premium)", "Ava (Premium)")
+   - Adjust `rate_multiplier`: Speed multiplier (1.0 = normal, 1.3 = 30% faster)
+   - Update `description`: Voice characteristics and personality match
+   - Set `type`: "Premium" or "Enhanced"
 
-2. **Subagent Stop Hook**: `${PAI_DIR}/hooks/subagent-stop-hook.ts`
-   - Update `AGENT_VOICE_IDS` mapping with new voice ID
-   - Ensure agent name exists in `AGENT_NAMES` mapping
-   - Verify agent type included in regex patterns for completion parsing
+2. **Agent Configuration File**: `${PAI_DIR}/agents/[agent-name].md`
+   - Update `voiceId:` in frontmatter to match macOS voice name
+   - Example: `voiceId: Ava (Premium)` or `voiceId: Tom (Enhanced)`
 
-3. **Main Context Documentation**: `${PAI_DIR}/context/CLAUDE.md`
-   - Update voice ID in "Agent Voice Architecture" section
-   - Keep this checklist current with any new locations
+3. **Stop Hook**: `${PAI_DIR}/hooks/stop-hook.ts`
+   - Update `VOICES` mapping to reference correct voice names from voices.json
+   - Ensure agent name exists in voice mappings
+   - Hook loads configuration from voices.json automatically
 
-4. **Voice Server Configuration**: (Location varies)
-   - Voice notification server may cache voice mappings
-   - Check notification server configuration files
-   - Restart voice server if needed to reload configurations
+4. **Documentation**: `${PAI_DIR}/context/documentation/voice-system.md`
+   - Update voice mappings table
+   - Keep this documentation current with voice changes
 
-5. **Test Scripts**: `${PAI_DIR}/hooks/tests/` (if they exist)
-   - Update any test cases that reference specific voice IDs
-   - Verify test suite passes with new voice configuration
+**BEFORE CHANGING VOICES:**
+1. Download the new voice from System Settings → Voice (Live Speech) → Manage Voices
+2. Verify it's a Premium or Enhanced voice (not legacy/compact)
+3. Test voice directly: `say -v "Voice Name (Premium)" "Test message"`
 
 **VERIFICATION STEPS:**
 1. Test agent with simple task to verify voice system works
-2. Check voice server logs for any errors with new voice ID
-3. Confirm voice sounds correct and matches intended agent personality
-4. Update this documentation if new locations are discovered
+2. Confirm voice sounds correct and matches intended agent personality
+3. Verify speech rate is appropriate (not too fast/slow)
+4. Check no errors in voice server output
 
 **COMMON MISTAKES TO AVOID:**
-- Forgetting to update agent regex patterns in hook parsing
-- Missing voice ID updates in agent configuration frontmatter
-- Not restarting voice server after configuration changes
-- Updating hook but not agent config (or vice versa)
+- Using legacy voices instead of Premium/Enhanced (sounds robotic!)
+- Forgetting to download the voice from System Settings first
+- Not matching voice name exactly in voices.json (case-sensitive!)
+- Setting rate_multiplier too high (>1.5x can be hard to understand)
