@@ -39,6 +39,18 @@
 > **[🎉 v0.2.3 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.3)** - Complete Visibility & Portability Update
 
 <details open>
+<summary><strong>📅 October 2, 2025 - Voice System Update</strong></summary>
+
+- 🎙️ **Zero-Cost Voice System**: Migrated from ElevenLabs API to macOS native Premium/Enhanced voices
+- 💰 **No API Costs**: 100% offline voice synthesis using built-in macOS neural TTS
+- 🔊 **High-Quality Voices**: Uses Premium voices (Jamie, Ava, Serena, Isha) and Enhanced voices (Tom, Oliver, Samantha)
+- 🔒 **Complete Privacy**: All voice processing happens locally, no cloud services
+- ⚙️ **Centralized Config**: Voice settings managed via `voices.json` configuration file
+- 🚀 **Browser Tools Update**: Switched from Playwright to Chrome DevTools MCP for web automation
+
+</details>
+
+<details>
 <summary><strong>📅 September 28, 2025 - Complete Visibility & Portability Update (v0.2.3)</strong></summary>
 
 - 📁 **Directory Renamed**: `.claude` → `PAI_DIRECTORY` for better visibility
