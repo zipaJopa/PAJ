@@ -14,24 +14,24 @@ This guide will walk you through setting up high-quality, natural-sounding voice
 
 1. Click the **Apple menu** () in the top-left corner of your screen
 2. Click **System Settings** (it has a gear icon ⚙️)
-3. In the sidebar on the left, scroll down until you see **Accessibility**
-4. Click **Accessibility**
+3. In the sidebar on the left, scroll down until you see **Voice (Live Speech)**
+4. Click **Voice (Live Speech)**
 
 **What you'll see:**
-A window with a sidebar containing many categories. Accessibility should be near the bottom of the list.
+A window with voice and speech-related settings including spoken content options.
 
-### Step 2: Navigate to Spoken Content
+### Step 2: Access Voice Management
 
-1. In the Accessibility section, look for **Spoken Content** in the right panel
-   - It might be under a "Hearing" or "Speech" category depending on your macOS version
-   - On some versions, you might need to scroll down the right panel to find it
+1. Look for the **System voice** dropdown menu
+   - It should be near the top of the Voice settings panel
+   - Shows the currently selected system voice
 
-2. Click **Spoken Content**
+2. Click on the **System voice** dropdown
 
 **What you'll see:**
-A panel with options like "Speak selection", "Speak screen", and **"System voice"** dropdown menu.
+A dropdown menu showing currently installed voices.
 
-### Step 3: Access Voice Management
+### Step 3: Download Premium Voices
 
 1. Find the **System voice** dropdown (it's usually near the top)
 2. Click on the dropdown - you'll see a list of currently installed voices
@@ -293,7 +293,7 @@ When you use Kai or ask an agent to do something:
 **Cause:** You downloaded the wrong voice (Compact/Legacy instead of Premium/Enhanced)
 
 **Solution:**
-1. Go back to System Settings → Accessibility → Spoken Content → Manage Voices
+1. Go back to System Settings → Voice (Live Speech) → Manage Voices
 2. Make sure you're downloading voices labeled **(Premium)** or **(Enhanced)**
 3. Voices without these labels are old and robotic - don't use them!
 

@@ -5,12 +5,29 @@
  */
 
 import { readFileSync } from 'fs';
+import { join } from 'path';
+import { homedir } from 'os';
 
 interface NotificationPayload {
   title: string;
   message: string;
   voice_enabled: boolean;
+  voice_name?: string;
+  rate?: number;
   priority?: 'low' | 'normal' | 'high';
+}
+
+interface VoiceConfig {
+  voice_name: string;
+  rate_wpm: number;
+  rate_multiplier: number;
+  description: string;
+  type: string;
+}
+
+interface VoicesConfig {
+  default_rate: number;
+  voices: Record<string, VoiceConfig>;
 }
 
 interface HookInput {
@@ -82,6 +99,23 @@ function getTranscriptStats(transcriptPath: string): { messageCount: number; isL
   }
 }
 
+// Load voice configuration
+let kaiVoiceConfig: VoiceConfig;
+try {
+  const voicesPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Claude/voice-server/voices.json');
+  const config: VoicesConfig = JSON.parse(readFileSync(voicesPath, 'utf-8'));
+  kaiVoiceConfig = config.voices.kai;
+} catch (e) {
+  // Fallback to hardcoded Kai voice config
+  kaiVoiceConfig = {
+    voice_name: "Jamie (Premium)",
+    rate_wpm: 263,
+    rate_multiplier: 1.5,
+    description: "UK Male",
+    type: "Premium"
+  };
+}
+
 async function main() {
   let hookInput: HookInput | null = null;
   
@@ -130,11 +164,13 @@ async function main() {
     }
   }
   
-  // Send notification with voice
+  // Send notification with voice (using Kai's voice from config)
   await sendNotification({
     title: 'Kai Context',
     message: message,
     voice_enabled: true,
+    voice_name: kaiVoiceConfig.voice_name,
+    rate: kaiVoiceConfig.rate_wpm,
     priority: 'low',
   });
   

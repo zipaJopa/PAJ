@@ -1,258 +1,326 @@
 # PAI Voice Server
 
-A voice notification server for the Personal AI Infrastructure (PAI) system that provides text-to-speech notifications using ElevenLabs API or macOS's built-in `say` command as fallback.
+A zero-cost voice notification server for the Personal AI Infrastructure (PAI) system that provides text-to-speech notifications using macOS Premium and Enhanced neural voices.
 
-> **Quick Start**: See [QUICKSTART.md](QUICKSTART.md) for a 5-minute setup guide.
+> **Quick Start**: See [documentation/VOICE-SETUP-GUIDE.md](../documentation/VOICE-SETUP-GUIDE.md) for detailed setup guide.
 
 ## 🎯 Features
 
-- **ElevenLabs Integration**: High-quality AI voices for notifications
-- **Fallback Support**: Uses macOS `say` command when ElevenLabs is not configured
-- **Multiple Voice Support**: Different voices for different AI agents
-- **macOS Service**: Runs automatically in the background
-- **Menu Bar Indicator**: Visual status indicator in macOS menu bar
-- **Simple HTTP API**: Easy integration with any tool or script
+- **Native macOS Voices**: Uses Premium and Enhanced neural TTS voices (no API costs)
+- **Distinct Voice Personalities**: Different Premium voices for Kai and each agent
+- **100% Offline**: No cloud APIs, complete privacy
+- **Customizable Speed**: Configurable speech rates for each entity
+- **Simple HTTP API**: Easy integration via REST endpoints
+- **JSON Configuration**: Centralized voice and speed settings in voices.json
 
 ## 📋 Prerequisites
 
-- macOS (tested on macOS 11+)
+- macOS 13.0 (Ventura) or later (for Premium/Enhanced voices)
 - [Bun](https://bun.sh) runtime installed
-- ElevenLabs API key (optional, for AI voices)
+- Premium/Enhanced voices downloaded from System Settings
 
 ## 🚀 Quick Start
 
-### 1. Install Bun (if not already installed)
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
+### 1. Download Premium Voices
 
-### 2. Configure API Key (Optional but Recommended)
-Add your ElevenLabs API key to `${PAI_DIR}/.env`:
-```bash
-echo "ELEVENLABS_API_KEY=your_api_key_here" >> ${PAI_DIR}/.env
-echo "ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR" >> ${PAI_DIR}/.env
-```
+1. Open **System Settings**
+2. Navigate to **Voice (Live Speech)**
+3. Click **System Voice** dropdown → **Manage Voices...**
+4. Download these voices:
+   - **Jamie (Premium)** - English (UK) - For Kai
+   - **Ava (Premium)** - English (US) - For Researcher (highest quality)
+   - **Serena (Premium)** - English (UK) - For Architect
+   - **Isha (Premium)** - English (India) - For Designer
+   - **Tom (Enhanced)** - English (US) - For Engineer
+   - **Oliver (Enhanced)** - English (UK) - For Pentester
 
-> Get your free API key at [elevenlabs.io](https://elevenlabs.io) (10,000 characters/month free)
+See [VOICE-SETUP-GUIDE.md](../documentation/VOICE-SETUP-GUIDE.md) for detailed download instructions.
 
-### 3. Install Voice Server
+### 2. Start the Voice Server
+
 ```bash
 cd ${PAI_DIR}/voice-server
-./install.sh
+bun server.ts &
 ```
 
-This will:
-- Install dependencies
-- Create a macOS LaunchAgent for auto-start
-- Start the voice server on port 8888
-- Verify the installation
-- Optionally install menu bar indicator (requires SwiftBar/BitBar)
-
-## 🛠️ Service Management
-
-### Start Server
-```bash
-./start.sh
-# or
-launchctl load ~/Library/LaunchAgents/com.pai.voice-server.plist
+**Expected output:**
+```
+🚀 PAIVoice Server running on port 8888
+🎙️  Using macOS native voices (default: Jamie (Premium))
+📡 POST to http://localhost:8888/notify
+🔒 Security: CORS restricted to localhost, rate limiting enabled
 ```
 
-### Stop Server
-```bash
-./stop.sh
-# or
-launchctl unload ~/Library/LaunchAgents/com.pai.voice-server.plist
-```
+### 3. Test Voice Output
 
-### Restart Server
-```bash
-./restart.sh
-```
-
-### Check Status
-```bash
-./status.sh
-```
-
-### Uninstall
-```bash
-./uninstall.sh
-```
-This will stop the service and remove the LaunchAgent.
-
-## 📡 API Usage
-
-### Send a Voice Notification
 ```bash
 curl -X POST http://localhost:8888/notify \
   -H "Content-Type: application/json" \
-  -d '{
-    "message": "Task completed successfully",
-    "voice_id": "jqcCZkN6Knx8BJ5TBdYR",
-    "voice_enabled": true
-  }'
+  -d '{"message":"Voice system working perfectly","voice_name":"Jamie (Premium)","rate":228}'
 ```
-
-### Parameters
-- `message` (required): The text to speak
-- `voice_id` (optional): ElevenLabs voice ID to use
-- `voice_enabled` (optional): Whether to speak the notification (default: true)
-- `title` (optional): Notification title (default: "PAI Notification")
-
-### Available Voice IDs
-```javascript
-// PAI System Agents
-Kai:        jqcCZkN6Knx8BJ5TBdYR  // Main assistant
-Researcher: AXdMgz6evoL7OPd7eU12  // Research agent
-Engineer:   kmSVBPu7loj4ayNinwWM  // Engineering agent
-Designer:   ZF6FPAbjXT4488VcRRnw  // Design agent
-Pentester:  hmMWXCj9K7N5mCPcRkfC  // Security agent
-Architect:  muZKMsIDGYtIkjjiUS82  // Architecture agent
-Writer:     gfRt6Z3Z8aTbpLfexQ7N  // Content agent
-```
-
-## 🖥️ Menu Bar Indicator
-
-The voice server includes an optional menu bar indicator that shows the server status.
-
-### Installing the Menu Bar
-
-1. **Install SwiftBar** (recommended) or BitBar:
-```bash
-brew install --cask swiftbar
-# OR
-brew install --cask bitbar
-```
-
-2. **Run the menu bar installer**:
-```bash
-cd ${PAI_DIR}/voice-server/menubar
-./install-menubar.sh
-```
-
-### Menu Bar Features
-- **Visual Status**: 🎙️ (running) or 🎙️⚫ (stopped)
-- **Quick Controls**: Start/Stop/Restart server from menu
-- **Status Info**: Shows voice type (ElevenLabs/macOS Say)
-- **Quick Test**: Test voice with one click
-- **View Logs**: Access server logs directly
-
-### Manual Installation
-If you prefer manual installation:
-1. Copy `menubar/pai-voice.5s.sh` to your SwiftBar/BitBar plugins folder
-2. Make it executable: `chmod +x pai-voice.5s.sh`
-3. Refresh SwiftBar/BitBar
 
 ## 🔧 Configuration
 
+### Voice Configuration (voices.json)
+
+All voice and speed settings are centralized in `voices.json`:
+
+```json
+{
+  "default_rate": 175,
+  "voices": {
+    "kai": {
+      "voice_name": "Jamie (Premium)",
+      "rate_multiplier": 1.3,
+      "rate_wpm": 228,
+      "description": "UK Male - Professional, conversational",
+      "type": "Premium"
+    },
+    "researcher": {
+      "voice_name": "Ava (Premium)",
+      "rate_multiplier": 1.35,
+      "rate_wpm": 236,
+      "description": "US Female - Analytical, highest quality",
+      "type": "Premium"
+    }
+  }
+}
+```
+
+**Customizing Voices and Speeds:**
+Edit `voices.json` to change:
+- `voice_name`: Any Premium or Enhanced macOS voice
+- `rate_multiplier`: Speed (1.0 = normal, 1.3 = 30% faster, 1.5 = 50% faster)
+- `rate_wpm`: Words per minute (auto-calculated or set manually)
+
+Changes take effect immediately (hooks reload config on each use).
+
 ### Environment Variables
-Create or edit `${PAI_DIR}/.env`:
+
+Optional configuration in `${PAI_DIR}/.env`:
 
 ```bash
-# Required for ElevenLabs voices (optional)
-ELEVENLABS_API_KEY=your_api_key_here
-
-# Default voice ID (optional, defaults to Kai)
-ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR
-
 # Server port (optional, defaults to 8888)
 PORT=8888
 ```
 
-### Finding Your Voice ID
-1. Go to [ElevenLabs Voice Library](https://elevenlabs.io/voice-library)
-2. Select a voice you like
-3. Click "Use" and copy the Voice ID
-4. Update `ELEVENLABS_VOICE_ID` in your `${PAI_DIR}/.env`
+**No API keys required** - voice system is 100% free and offline.
+
+## 📡 API Reference
+
+### POST /notify
+
+Main endpoint for voice notifications.
+
+**Request:**
+```json
+{
+  "message": "Text to speak",
+  "voice_name": "Jamie (Premium)",
+  "rate": 228,
+  "title": "Optional notification title",
+  "voice_enabled": true
+}
+```
+
+**Parameters:**
+- `message` (required): Text to be spoken
+- `voice_name` (optional): macOS voice name (e.g., "Jamie (Premium)")
+- `rate` (optional): Speech rate in words per minute (default: 175)
+- `title` (optional): Visual notification title
+- `voice_enabled` (optional): Set to false to skip voice output
+
+**Response:**
+```json
+{
+  "status": "success",
+  "message": "Notification sent"
+}
+```
+
+### POST /pai
+
+Simplified endpoint using Kai's default voice.
+
+**Request:**
+```json
+{
+  "title": "PAI System",
+  "message": "System message"
+}
+```
+
+### GET /health
+
+Health check endpoint.
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "port": 8888,
+  "voice_system": "macOS Native",
+  "default_voice": "Jamie (Premium)"
+}
+```
+
+## 🎙️ Voice Mappings
+
+| Entity | Voice | Type | Speed | Accent | Description |
+|--------|-------|------|-------|--------|-------------|
+| Kai | Jamie (Premium) | Premium | 1.3x | UK Male | Professional, conversational |
+| Researcher | Ava (Premium) | Premium | 1.35x | US Female | Analytical, highest quality |
+| Engineer | Tom (Enhanced) | Enhanced | 1.35x | US Male | Steady, professional |
+| Architect | Serena (Premium) | Premium | 1.35x | UK Female | Strategic, sophisticated |
+| Designer | Isha (Premium) | Premium | 1.35x | Indian Female | Creative, distinct |
+| Pentester | Oliver (Enhanced) | Enhanced | 1.35x | UK Male | Technical, sharp |
+| Writer | Samantha (Enhanced) | Enhanced | 1.35x | US Female | Articulate, warm |
 
 ## 🐛 Troubleshooting
 
-### Server won't start
+### Server Won't Start
+
 ```bash
-# Check if port 8888 is already in use
+# Check if port 8888 is in use
 lsof -i :8888
 
 # Kill any existing process
 lsof -ti :8888 | xargs kill -9
 
-# Restart the server
-./restart.sh
+# Restart server
+cd ${PAI_DIR}/voice-server && bun server.ts &
 ```
 
-### No voice output
+### Voice Sounds Robotic
+
+**Problem:** Downloaded wrong voice type (Compact/Legacy instead of Premium/Enhanced)
+
+**Solution:**
+1. Go to System Settings → Voice (Live Speech) → Manage Voices
+2. Ensure you're downloading voices labeled **(Premium)** or **(Enhanced)**
+3. Voices without these labels are old robotic voices - don't use them!
+
+### Voice Not Found
+
 ```bash
-# Check if ElevenLabs key is configured
-grep ELEVENLABS_API_KEY ${PAI_DIR}/.env
+# Verify voice is downloaded
+say -v '?' | grep "Jamie (Premium)"
 
-# Test with fallback (macOS say)
-curl -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Testing voice output"}'
-
-# Check server logs
-tail -f ~/Library/Logs/pai-voice-server.log
+# If not found, download from System Settings
+# System Settings → Voice (Live Speech) → Manage Voices
 ```
 
-### Service not auto-starting
+### No Sound Output
+
+**Checklist:**
+1. System volume not muted
+2. Voice server running: `curl http://localhost:8888/health`
+3. Voice downloaded: `say -v "Jamie (Premium)" "test"`
+4. Correct output device selected (System Settings → Sound)
+
+### Wrong Voice Playing
+
 ```bash
-# Check LaunchAgent status
-launchctl list | grep pai.voice
+# Check voices.json configuration
+cat ${PAI_DIR}/voice-server/voices.json
 
-# Reload LaunchAgent
-launchctl unload ~/Library/LaunchAgents/com.pai.voice-server.plist
-launchctl load ~/Library/LaunchAgents/com.pai.voice-server.plist
-
-# Check for errors
-tail -f ~/Library/Logs/pai-voice-server.log
+# Check stop-hook is loading config
+grep "VOICE_CONFIG" ~/.claude/hooks/stop-hook.ts
 ```
+
+## 🔐 Security & Privacy
+
+- **100% Local Processing**: All voice generation happens on your Mac
+- **Zero Cost**: No cloud APIs, no subscriptions
+- **Complete Privacy**: No data sent to external services
+- **CORS Protected**: Server only accepts requests from localhost
+- **Rate Limited**: 10 requests per minute to prevent abuse
 
 ## 📁 File Structure
+
 ```
 ${PAI_DIR}/voice-server/
-├── server.ts              # Main server code
-├── install.sh             # Installation script
-├── start.sh              # Start server
-├── stop.sh               # Stop server
-├── restart.sh            # Restart server
-├── status.sh             # Check server status
-├── uninstall.sh          # Uninstall service
-├── README.md             # This file
-└── menubar/
-    ├── pai-voice.5s.sh   # Menu bar status script
-    └── install-menubar.sh # Menu bar installer
+├── server.ts          # Main voice server
+├── voices.json        # Voice configuration (edit this for customization)
+└── README.md          # This file
 
-~/Library/LaunchAgents/
-└── com.pai.voice-server.plist  # macOS service definition
+~/.claude/hooks/
+├── stop-hook.ts       # Triggers voice notifications on completion
+└── context-compression-hook.ts  # Notification for context compression
 
-~/Library/Logs/
-└── pai-voice-server.log        # Server logs
+~/Library/Mobile Documents/com~apple~CloudDocs/Claude/voice-server/
+└── Same structure (if using cloud sync)
 ```
 
-## 🔐 Security Notes
+## 🎬 Usage Examples
 
-- **No hardcoded API keys**: All sensitive data is read from `${PAI_DIR}/.env`
-- **Local only**: Server only listens on localhost (127.0.0.1)
-- **User-specific**: Each user maintains their own API keys
-- **Safe for public repos**: No sensitive data in the codebase
+### Test Individual Voices
+
+```bash
+# Test Kai's voice
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Testing Kai voice","voice_name":"Jamie (Premium)","rate":228}'
+
+# Test Researcher voice
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Testing Researcher voice","voice_name":"Ava (Premium)","rate":236}'
+
+# Test Engineer voice
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Testing Engineer voice","voice_name":"Tom (Enhanced)","rate":236}'
+```
+
+### Custom Voice Speeds
+
+```bash
+# Slow speed (0.8x = 140 wpm)
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Slow speed test","voice_name":"Jamie (Premium)","rate":140}'
+
+# Fast speed (1.5x = 263 wpm)
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Fast speed test","voice_name":"Jamie (Premium)","rate":263}'
+```
 
 ## 🤝 Integration with PAI System
 
-This voice server integrates with the PAI (Personal AI Infrastructure) system to provide voice notifications when:
-- Tasks are completed
-- Agents finish their work
-- Important events occur
-- User notifications are needed
+The voice server automatically integrates with PAI hooks:
 
-The PAI hooks automatically send notifications to this server when configured.
+- **stop-hook.ts**: Sends voice notification when Kai or agents complete tasks
+- **context-compression-hook.ts**: Announces when conversation context is compacted
+- Both hooks load voice configuration from `voices.json`
 
-## 📝 License
+No manual integration needed - just start the server and hooks will use it automatically.
 
-Part of the PAI (Personal AI Infrastructure) system.
+## 📖 Documentation
+
+- **[VOICE-SETUP-GUIDE.md](../documentation/VOICE-SETUP-GUIDE.md)** - Complete setup guide
+- **[voice-system.md](../documentation/voice-system.md)** - Technical documentation
+- **[voices.json](./voices.json)** - Voice configuration file
+
+## 💡 Tips
+
+1. **Choose Premium voices first** - They have the highest quality
+2. **Use Enhanced when Premium unavailable** - Still excellent quality
+3. **Avoid voices without labels** - These are legacy robotic voices
+4. **Customize speech rates** - Edit `voices.json` to adjust speeds
+5. **Test voices before committing** - Use the curl commands above
+6. **Different accents for clarity** - Mix of US, UK, and Indian helps distinguish speakers
 
 ## 🆘 Support
 
-For issues or questions:
-1. Check the troubleshooting section above
-2. Review logs at `~/Library/Logs/pai-voice-server.log`
-3. Ensure your ElevenLabs API key is valid
-4. Try the fallback mode (without API key) to isolate issues
+For issues:
+1. Check [Troubleshooting](#-troubleshooting) section
+2. Verify voices are downloaded (System Settings → Voice (Live Speech))
+3. Test voice directly: `say -v "Jamie (Premium)" "test"`
+4. Check server is running: `curl http://localhost:8888/health`
+5. See [voice-system.md](../documentation/voice-system.md) for detailed documentation
+
+---
+
+**Zero cost. Complete privacy. Natural voices. That's the PAI way.** 🎙️

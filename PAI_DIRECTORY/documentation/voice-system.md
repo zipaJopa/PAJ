@@ -83,6 +83,51 @@ All entities use high-quality macOS Premium or Enhanced neural voices for natura
 
 ## Server Configuration
 
+### Voice Configuration (voices.json)
+
+The voice system uses a centralized JSON configuration file for all voice and speed settings:
+
+**Location:** `~/.claude/voice-server/voices.json`
+
+**Structure:**
+```json
+{
+  "default_rate": 175,
+  "voices": {
+    "kai": {
+      "voice_name": "Jamie (Premium)",
+      "rate_multiplier": 1.3,
+      "rate_wpm": 228,
+      "description": "UK Male - Professional, conversational",
+      "type": "Premium"
+    },
+    "researcher": {
+      "voice_name": "Ava (Premium)",
+      "rate_multiplier": 1.35,
+      "rate_wpm": 236,
+      "description": "US Female - Analytical, highest quality",
+      "type": "Premium"
+    }
+  }
+}
+```
+
+**Configuration Fields:**
+- `voice_name`: macOS voice name (e.g., "Jamie (Premium)", "Ava (Premium)")
+- `rate_multiplier`: Speed multiplier (1.0 = normal, 1.3 = 30% faster)
+- `rate_wpm`: Words per minute (calculated as default_rate × rate_multiplier)
+- `description`: Human-readable description of the voice
+- `type`: Voice quality level (Premium or Enhanced)
+
+**Customizing Voice Speeds:**
+To change speech rates, edit the `rate_multiplier` or `rate_wpm` values in voices.json:
+- Kai (default): 1.3x = 228 wpm
+- Agents (default): 1.35x = 236 wpm
+- Normal speed: 1.0x = 175 wpm
+- Fast speed: 1.5x = 263 wpm
+
+Changes take effect immediately (no server restart required for hook-initiated voices).
+
 ### Environment Variables (in ~/.env)
 ```bash
 PORT="8888"  # Optional, defaults to 8888
@@ -176,7 +221,7 @@ Voices are selected based on:
 ### How to Add More Premium/Enhanced Voices
 
 1. Open **System Settings**
-2. Navigate to **Accessibility** → **Spoken Content**
+2. Navigate to **Voice (Live Speech)**
 3. Click **System Voice** dropdown
 4. Select **Manage Voices...**
 5. Download desired Premium or Enhanced voices
@@ -315,14 +360,20 @@ curl -X POST http://localhost:8888/notify \
 
 ### Adding New Voices
 
-1. Download voice via System Settings
-2. Update stop-hook.ts VOICES mapping:
-   ```typescript
-   const VOICES = {
-     kai: "Jamie (Premium)",
-     researcher: "Ava (Premium)",
-     newagent: "NewVoice (Premium)"  // Add here
-   };
+1. Download voice via System Settings → Voice (Live Speech) → Manage Voices
+2. Update voices.json configuration:
+   ```json
+   {
+     "voices": {
+       "newagent": {
+         "voice_name": "NewVoice (Premium)",
+         "rate_multiplier": 1.35,
+         "rate_wpm": 236,
+         "description": "Description of voice",
+         "type": "Premium"
+       }
+     }
+   }
    ```
 
 3. Update agent frontmatter:

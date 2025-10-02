@@ -517,10 +517,9 @@ source ~/.zshrc  # or source ~/.bashrc
 # Copy environment template to PAI_DIRECTORY
 cp ${PAI_DIR}/env-example ${PAI_DIR}/.env
 
-# Add your API keys (optional but recommended)
+# Add your API keys (optional)
 vim ${PAI_DIR}/.env
-# Add: ELEVENLABS_API_KEY="your_key_here"
-# Add: OPENAI_API_KEY="your_key_here"
+# Add: OPENAI_API_KEY="your_key_here" (if using GPT integration)
 ```
 
 #### **Step 5: Launch PAI**
@@ -529,8 +528,11 @@ vim ${PAI_DIR}/.env
 # Navigate to PAI directory
 cd ${PAI_DIR}
 
-# Optional: Start voice server for audio notifications
-cd voice-server && ./install.sh && ./start.sh
+# Optional: Set up voice notifications (macOS only)
+# Download Premium/Enhanced voices from System Settings → Voice (Live Speech)
+# Then start the voice server:
+cd voice-server && bun server.ts &
+# See documentation/VOICE-SETUP-GUIDE.md for detailed setup instructions
 
 # Open Claude Code and start using PAI!
 # Your personal AI infrastructure is ready 🚀
@@ -544,9 +546,8 @@ PAI_DIR="/path/to/PAI/PAI_DIRECTORY"    # PAI's PAI_DIRECTORY (system agnostic)
 PAI_HOME="$HOME"                  # Your home directory
 
 # Optional API Keys
-ELEVENLABS_API_KEY="your_key"     # Voice synthesis
-OPENAI_API_KEY="your_key"         # GPT integration
-PORT="8888"                        # Voice server port
+OPENAI_API_KEY="your_key"         # GPT integration (optional)
+PORT="8888"                        # Voice server port (default: 8888)
 
 # Digital Assistant Customization
 DA="YourAssistantName"            # Your AI assistant's name (default: "Assistant")

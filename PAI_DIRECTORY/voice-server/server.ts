@@ -24,8 +24,8 @@ if (existsSync(envPath)) {
 const PORT = parseInt(process.env.PORT || "8888");
 
 // macOS Voice configuration
-// When null, uses system default (highest quality neural voice)
-const DEFAULT_VOICE = null;
+// Jamie (Premium) is Kai's voice - UK Male, professional and conversational
+const DEFAULT_VOICE = "Jamie (Premium)";
 
 // Sanitize input for shell commands
 function sanitizeForShell(input: string): string {
