@@ -61,3 +61,11 @@ out/
 private/
 secrets/
 credentials/
+
+# Agent artifacts (specify framework)
+.claude/chats/
+.claude/cache/
+.claude/credentials/
+.claude/*.token
+.claude/*.secret
+# Keep: .claude/CLAUDE.md and .claude/commands/
